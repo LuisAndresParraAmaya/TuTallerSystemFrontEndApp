@@ -1,9 +1,7 @@
 <template>
   <Page>
     <ActionBar title="Crear cuenta">
-      <ActionItem @tap='goToPreviousPage'>
-        <Label text="Volver" textWrap="true" />
-      </ActionItem>
+      <NavigationButton @tap='goToPreviousPage' android.systemIcon='@drawable/ic_menu_back'/>
     </ActionBar>
     <StackLayout>
 

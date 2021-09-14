@@ -1,10 +1,7 @@
 <template>
   <Page>
     <ActionBar title="Iniciar sesión">
-      <ActionItem @tap='goToPreviousPage'>
-        <Label text="Volver" textWrap="true" />
-      </ActionItem>
-      <!-- <ActionItem @tap='goToPreviousPage' android.systemIcon='@drawable/ic_back'/> -->
+      <NavigationButton @tap='goToPreviousPage' android.systemIcon='@drawable/ic_menu_back'/>
     </ActionBar>
     <StackLayout>
 
