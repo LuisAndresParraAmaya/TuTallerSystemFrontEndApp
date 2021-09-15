@@ -9,11 +9,13 @@ export default {
 
     methods: {
         modifyPassword(){
-          const userPasswordData = {'user_rut':sessionStorage.getItem('user'), 'user_actual_password':this.actualPasswordInput, 'user_new_password':this.newPasswordInput}
-
-          fetch('http://localhost:3306/ChangePassword', {
+          fetch('http://10.0.2.2:8080/ChangePassword', {
             method: 'POST',
-            body: JSON.stringify(userPasswordData),
+            body: JSON.stringify({
+              user_rut: sessionStorage.getItem('user'), 
+              user_actual_password: this.actualPasswordInput, 
+              user_new_password: this.newPasswordInput
+            }),
             headers:{
               'Content-Type': 'application/json'
             }
@@ -21,7 +23,7 @@ export default {
           .catch(error => console.error('Error:', error))
           .then(response => console.log('Success:', response));
 
-          this.$navigator.navigate('/home')
+          this.$navigator.navigate('/Home')
         },
 
         goToPreviousPage(){

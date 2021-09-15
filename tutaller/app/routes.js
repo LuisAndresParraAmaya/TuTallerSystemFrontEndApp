@@ -9,31 +9,31 @@ import DeleteAccount from './components/DeleteAccount/Template.vue'
 import ChangePassword from './components/ChangePassword/Template.vue'
 
 export const routes = {
-    '/home': {
+    '/Home': {
         component: Home,
     },
-    '/login': {
+    '/Login': {
         component: Login,
     },
-    '/recoverypassword': {
+    '/RecoveryPassword': {
         component: RecoveryPassword,
     },
-    '/recoverypasswordverifyidentity': {
+    '/RecoveryPasswordVerifyIdentity': {
         component: RecoveryPasswordVerifyIdentity,
     },
-    '/recoverypasswordchangepassword': {
+    '/RecoveryPasswordChangePassword': {
         component: RecoveryPasswordChangePassword,
     },
-    '/createaccount': {
+    '/CreateAccount': {
         component: CreateAccount,
     },
-    '/modifyprofile': {
+    '/ModifyProfile': {
         component: ModifyProfile,
     },
-    '/deleteaccount': {
+    '/DeleteAccount': {
         component: DeleteAccount,
     },
-    '/changepassword': {
+    '/ChangePassword': {
         component: ChangePassword,
     },
 }

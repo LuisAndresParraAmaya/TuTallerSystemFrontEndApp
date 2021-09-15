@@ -7,11 +7,11 @@ export default {
 
     methods: {
         verifyCorrectCode(){
-          const userSentCodeInput = {'user_sent_code':this.sentCodeInput}
-
-          fetch('http://localhost:3306/RecoveryPasswordVerifyIdentity', {
+          fetch('http://10.0.2.2:8080/RecoveryPasswordVerifyIdentity', {
             method: 'POST',
-            body: JSON.stringify(userSentCodeInput),
+            body: JSON.stringify({
+              user_sent_code: this.sentCodeInput
+            }),
             headers:{
               'Content-Type': 'application/json'
             }
@@ -19,7 +19,7 @@ export default {
           .catch(error => console.error('Error:', error))
           .then(response => console.log('Success:', response));
 
-          this.$navigator.navigate('/recoverypasswordchangepassword')
+          this.$navigator.navigate('/RecoveryPasswordChangePassword')
         },
 
         goToPreviousPage(){

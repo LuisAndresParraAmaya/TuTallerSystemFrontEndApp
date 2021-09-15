@@ -4,8 +4,7 @@
       <NavigationButton @tap='goToPreviousPage' android.systemIcon='@drawable/ic_menu_back'/>
     </ActionBar>
     <StackLayout>
-
-      <TextField v-model='rutInput' hint='Rut'/>
+      <TextField id='txtRut' v-model='rutInput' hint='Rut'/>
       <TextField v-model='nameInput' hint='Nombre' maxLength='45'/>
       <TextField v-model='lastNameInput' hint='Apellido' maxLength='45'/>
       <TextField v-model='emailInput' keyboardType='email' hint='Correo electrónico' maxLength='45'/>

@@ -1,3 +1,3 @@
 <template>
-    <Navigator defaultRoute='/home'/>
+    <Navigator defaultRoute='/Home'/>
 </template>

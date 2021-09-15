@@ -21,11 +21,17 @@ export default {
             })
             .then(result => {
               if (result.result){
-                const userModifyData = {'user_actual_rut':sessionStorage.getItem('user'), 'user_new_rut':this.rutInput, 'user_name':this.nameInput, 'user_last_name':this.lastNameInput, 'user_email':this.emailInput, 'user_phone':this.phoneInput, 'user_password':result.text}
-                
-                fetch('http://localhost:3306/ModifyProfile', {
+                fetch('http://10.0.2.2:8080/ModifyProfile', {
                   method: 'POST',
-                  body: JSON.stringify(userModifyData),
+                  body: JSON.stringify({
+                    user_actual_rut: sessionStorage.getItem('user'), 
+                    user_new_rut: this.rutInput, 
+                    user_name: this.nameInput, 
+                    user_last_name: this.lastNameInput, 
+                    user_email: this.emailInput, 
+                    user_phone: this.phoneInput, 
+                    user_password: result.text
+                  }),
                   headers:{
                     'Content-Type': 'application/json'
                   }
@@ -33,16 +39,16 @@ export default {
                 .catch(error => console.error('Error:', error))
                 .then(response => console.log('Success:', response));
                 
-                this.$navigator.navigate('/home')
+                this.$navigator.navigate('/Home')
               }
             })
           },
 
           goToChangePasswordPage() {
-            this.$navigator.navigate('/changepassword')
+            this.$navigator.navigate('/ChangePassword')
           },
           goToDeleteAccountPage() {
-            this.$navigator.navigate('/deleteaccount')
+            this.$navigator.navigate('/DeleteAccount')
           },
           goToPreviousPage() {
             this.$navigateBack()

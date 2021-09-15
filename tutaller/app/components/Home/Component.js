@@ -5,13 +5,13 @@ export default {
         },
 
         goToCreateAccountPage(){
-            this.$navigator.navigate('/createaccount')
+            this.$navigator.navigate('/CreateAccount')
         },
         goToLoginPage(){
-            this.$navigator.navigate('/login')
+            this.$navigator.navigate('/Login')
         },
         goToModifyProfilePage() {
-            this.$navigator.navigate('/modifyprofile')
+            this.$navigator.navigate('/ModifyProfile')
         }
     }
 }

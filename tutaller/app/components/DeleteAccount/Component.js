@@ -8,11 +8,12 @@ export default {
 
     methods: {
         deleteAccount(){
-            const userPasswordData = {'user_rut':sessionStorage.getItem('user'), 'user_password':this.actualPasswordInput}
-
-            fetch('http://localhost:3306/DeleteAccount', {
+            fetch('http://10.0.2.2:8080/DeleteAccount', {
               method: 'POST',
-              body: JSON.stringify(userPasswordData),
+              body: JSON.stringify({
+                user_rut: sessionStorage.getItem('user'),
+                user_password:this.actualPasswordInput
+              }),
               headers:{
                 'Content-Type': 'application/json'
               }
@@ -20,7 +21,7 @@ export default {
             .catch(error => console.error('Error:', error))
             .then(response => console.log('Success:', response));
             
-            this.$navigator.navigate('/home')
+            this.$navigator.navigate('/Home')
         },
 
         goToPreviousPage(){

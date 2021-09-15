@@ -2,6 +2,11 @@
   "name": "tutaller",
   "main": "app/app.js",
   "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
   "private": true,
   "dependencies": {
     "@nativescript-community/ui-material-bottomnavigationbar": "^5.3.21",
@@ -12,6 +17,9 @@
     "nativescript-vue": "~2.9.0",
     "nativescript-vue-navigator": "^1.2.0",
     "node-polyfill-webpack-plugin": "^1.1.4",
+    "serve": "^12.0.1",
+    "vite": "^2.5.7",
+    "vite-plugin-components": "^0.13.3",
     "vue": "^3.2.11"
   },
   "devDependencies": {

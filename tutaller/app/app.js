@@ -6,6 +6,10 @@ import BottomNavigationBar from '@nativescript-community/ui-material-bottomnavig
 
 Vue.use(Navigator, {routes})
 Vue.use(BottomNavigationBar)
+Vue.registerElement(
+  'Fab',
+  () => require('@nstudio/nativescript-floatingactionbutton').Fab
+)
 
 new Vue ({
   render: h => h('frame', App),

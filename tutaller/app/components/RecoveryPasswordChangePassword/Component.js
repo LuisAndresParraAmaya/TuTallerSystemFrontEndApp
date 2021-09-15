@@ -8,14 +8,12 @@ export default {
 
     methods: {
         changePassword(){
-          //Cambiar
-          const userrut = 1;
-
-          const userPasswordData = {'user_rut':userrut, 'user_new_password':this.newPasswordInput}
-
-          fetch('http://localhost:3306/RecoveryPasswordChangePassword', {
+          fetch('http://10.0.2.2:8080/RecoveryPasswordChangePassword', {
             method: 'POST',
-            body: JSON.stringify(userPasswordData),
+            body: JSON.stringify({
+              user_rut: 1, 
+              user_new_password: this.newPasswordInput
+            }),
             headers:{
               'Content-Type': 'application/json'
             }
@@ -23,7 +21,7 @@ export default {
           .catch(error => console.error('Error:', error))
           .then(response => console.log('Success:', response));
 
-          this.$navigator.navigate('/login')
+          this.$navigator.navigate('/Login')
         },
 
         goToPreviousPage(){

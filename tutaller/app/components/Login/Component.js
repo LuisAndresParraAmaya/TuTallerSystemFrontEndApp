@@ -9,11 +9,12 @@ export default {
 
     methods: {
       login() {
-        const userLoginDetail = { user_email: this.emailInput, user_password: this.passwordInput }
-
-        fetch('http://localhost:3306/Login', {
+        fetch('http://10.0.2.2:8080/Login', {
           method: 'POST',
-          body: JSON.stringify(userLoginDetail),
+          body: JSON.stringify({
+            user_email: this.emailInput, 
+            user_password: this.passwordInput
+          }),
           headers:{
             'Content-Type': 'application/json'
           },
@@ -21,17 +22,17 @@ export default {
         .catch(error => console.error('Error:', error))
         .then(response => console.log('Success:', response));
         
-        this.$navigator.navigate('/home')
+        this.$navigator.navigate('/Home')
         },
 
       goToPreviousPage() {
         this.$navigateBack()
       },
       goToRecoveryPasswordPage() {
-        this.$navigator.navigate('/recoverypassword')
+        this.$navigator.navigate('/RecoveryPassword')
       },
       goToCreateAccountPage() {
-        this.$navigator.navigate('/createaccount')
+        this.$navigator.navigate('/CreateAccount')
       }
     }
   }
