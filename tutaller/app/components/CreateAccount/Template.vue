@@ -12,7 +12,7 @@
       <TextField v-model='phoneInput' keyboardType='phone' hint='Teléfono' />
       <TextField v-model='passwordInput' secure='true' hint='Contraseña' maxLength='45'/>
       <TextField v-model='confirmPasswordInput' secure='true' hint='Confirmar contraseña' maxLength='45'/>
-      <Button text='Crear cuenta' @tap='createAccount' />
+      <Button text='Crear cuenta' @tap='createAccount' class="btn"/>
     </StackLayout>
   </Page>
 </template>

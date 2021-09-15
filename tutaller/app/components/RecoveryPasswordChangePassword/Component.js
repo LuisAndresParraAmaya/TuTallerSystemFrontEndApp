@@ -1,17 +1,21 @@
 export default {
     data() {
       return {
-        emailInput: ''
+        newPasswordInput: '',
+        confirmNewPasswordInput: ''
       }
     },
 
     methods: {
-        sendCodeToUser(){
-          const userEmailData = {'user_email':this.emailInput}
+        changePassword(){
+          //Cambiar
+          const userrut = 1;
 
-          fetch('http://localhost:3306/RecoveryPassword', {
+          const userPasswordData = {'user_rut':userrut, 'user_new_password':this.newPasswordInput}
+
+          fetch('http://localhost:3306/RecoveryPasswordChangePassword', {
             method: 'POST',
-            body: JSON.stringify(userEmailData),
+            body: JSON.stringify(userPasswordData),
             headers:{
               'Content-Type': 'application/json'
             }
@@ -19,7 +23,7 @@ export default {
           .catch(error => console.error('Error:', error))
           .then(response => console.log('Success:', response));
 
-          this.$navigator.navigate('/recoverypasswordverifyidentity')
+          this.$navigator.navigate('/login')
         },
 
         goToPreviousPage(){

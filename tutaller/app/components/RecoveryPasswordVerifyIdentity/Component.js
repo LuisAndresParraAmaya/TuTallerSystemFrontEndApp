@@ -1,17 +1,17 @@
 export default {
     data() {
       return {
-        emailInput: ''
+        sentCodeInput: ''
       }
     },
 
     methods: {
-        sendCodeToUser(){
-          const userEmailData = {'user_email':this.emailInput}
+        verifyCorrectCode(){
+          const userSentCodeInput = {'user_sent_code':this.sentCodeInput}
 
-          fetch('http://localhost:3306/RecoveryPassword', {
+          fetch('http://localhost:3306/RecoveryPasswordVerifyIdentity', {
             method: 'POST',
-            body: JSON.stringify(userEmailData),
+            body: JSON.stringify(userSentCodeInput),
             headers:{
               'Content-Type': 'application/json'
             }
@@ -19,7 +19,7 @@ export default {
           .catch(error => console.error('Error:', error))
           .then(response => console.log('Success:', response));
 
-          this.$navigator.navigate('/recoverypasswordverifyidentity')
+          this.$navigator.navigate('/recoverypasswordchangepassword')
         },
 
         goToPreviousPage(){
