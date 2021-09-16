@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "nativescript-vue-navigator": "^1.2.0"
+  }
+}
