@@ -9,12 +9,11 @@ export default {
 
     methods: {
       login() {
+        const data = {user_email: this.emailInput, user_password: this.passwordInput}
+
         fetch('http://10.0.2.2:8080/Login', {
           method: 'POST',
-          body: JSON.stringify({
-            user_email: this.emailInput, 
-            user_password: this.passwordInput
-          }),
+          body: JSON.stringify({data}),
           headers:{
             'Content-Type': 'application/json'
           },
