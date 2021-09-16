@@ -1,9 +1,10 @@
 import { Dialogs, inputType } from '@nativescript/core'
+const appSettings = require('@nativescript/core/application-settings')
 
 export default {
     data() {
         return {
-          rutInput: '',
+          rutInput: appSettings.getNumber('user'),
           nameInput: '',
           lastNameInput: '',
           emailInput: '',
@@ -13,8 +14,6 @@ export default {
   
       methods: {
           modifyProfile() {
-            const data = {user_actual_rut: sessionStorage.getItem('user'), user_new_rut: this.rutInput, user_name: this.nameInput, user_last_name: this.lastNameInput, user_email: this.emailInput, user_phone: this.phoneInput, user_password: result.text}
-
             prompt({
               title: 'Confirma tu contraseña actual para modificar tu perfil',
               inputType: inputType.password,
@@ -23,6 +22,8 @@ export default {
             })
             .then(result => {
               if (result.result){
+                const data = {user_rut: appSettings.getNumber('user'), user_new_rut: this.rutInput, user_name: this.nameInput, user_last_name: this.lastNameInput, user_email: this.emailInput, user_phone: this.phoneInput, user_password: result.text}
+
                 fetch('http://10.0.2.2:8080/ModifyProfile', {
                   method: 'POST',
                   body: JSON.stringify({data}),

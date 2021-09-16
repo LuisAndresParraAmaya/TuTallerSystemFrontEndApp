@@ -1,3 +1,4 @@
+const appSettings = require('@nativescript/core/application-settings')
 
 export default {
     data() {
@@ -19,8 +20,11 @@ export default {
           },
         }).then(res => res.json())
         .catch(error => console.error('Error:', error))
-        .then(response => console.log('Success:', response));
-        
+        .then(function (response){
+          console.log('Success:', response)
+          appSettings.setNumber('user', response)
+        })
+
         this.$navigator.navigate('/Home')
         },
 
