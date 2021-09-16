@@ -7,11 +7,11 @@ export default {
 
     methods: {
         verifyCorrectCode(){
+          const data = {user_sent_code: this.sentCodeInput}
+
           fetch('http://10.0.2.2:8080/RecoveryPasswordVerifyIdentity', {
             method: 'POST',
-            body: JSON.stringify({
-              user_sent_code: this.sentCodeInput
-            }),
+            body: JSON.stringify({data}),
             headers:{
               'Content-Type': 'application/json'
             }

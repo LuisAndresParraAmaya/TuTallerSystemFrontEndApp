@@ -9,13 +9,11 @@ export default {
 
     methods: {
         modifyPassword(){
+          const data = {user_rut: sessionStorage.getItem('user'), user_actual_password: this.actualPasswordInput, user_new_password: this.newPasswordInput}
+
           fetch('http://10.0.2.2:8080/ChangePassword', {
             method: 'POST',
-            body: JSON.stringify({
-              user_rut: sessionStorage.getItem('user'), 
-              user_actual_password: this.actualPasswordInput, 
-              user_new_password: this.newPasswordInput
-            }),
+            body: JSON.stringify({data}),
             headers:{
               'Content-Type': 'application/json'
             }

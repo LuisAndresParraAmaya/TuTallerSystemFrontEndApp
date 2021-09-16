@@ -8,12 +8,11 @@ export default {
 
     methods: {
         deleteAccount(){
+            const data = {user_rut: sessionStorage.getItem('user'), user_password:this.actualPasswordInput}
+
             fetch('http://10.0.2.2:8080/DeleteAccount', {
               method: 'POST',
-              body: JSON.stringify({
-                user_rut: sessionStorage.getItem('user'),
-                user_password:this.actualPasswordInput
-              }),
+              body: JSON.stringify({data}),
               headers:{
                 'Content-Type': 'application/json'
               }

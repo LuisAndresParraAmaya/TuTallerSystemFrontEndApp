@@ -8,12 +8,11 @@ export default {
 
     methods: {
         changePassword(){
+          data = {user_rut: 1, user_new_password: this.newPasswordInput}
+
           fetch('http://10.0.2.2:8080/RecoveryPasswordChangePassword', {
             method: 'POST',
-            body: JSON.stringify({
-              user_rut: 1, 
-              user_new_password: this.newPasswordInput
-            }),
+            body: JSON.stringify({data}),
             headers:{
               'Content-Type': 'application/json'
             }

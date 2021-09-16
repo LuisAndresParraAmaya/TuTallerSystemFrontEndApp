@@ -13,6 +13,8 @@ export default {
   
       methods: {
           modifyProfile() {
+            const data = {user_actual_rut: sessionStorage.getItem('user'), user_new_rut: this.rutInput, user_name: this.nameInput, user_last_name: this.lastNameInput, user_email: this.emailInput, user_phone: this.phoneInput, user_password: result.text}
+
             prompt({
               title: 'Confirma tu contraseña actual para modificar tu perfil',
               inputType: inputType.password,
@@ -23,15 +25,7 @@ export default {
               if (result.result){
                 fetch('http://10.0.2.2:8080/ModifyProfile', {
                   method: 'POST',
-                  body: JSON.stringify({
-                    user_actual_rut: sessionStorage.getItem('user'), 
-                    user_new_rut: this.rutInput, 
-                    user_name: this.nameInput, 
-                    user_last_name: this.lastNameInput, 
-                    user_email: this.emailInput, 
-                    user_phone: this.phoneInput, 
-                    user_password: result.text
-                  }),
+                  body: JSON.stringify({data}),
                   headers:{
                     'Content-Type': 'application/json'
                   }
