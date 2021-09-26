@@ -3,11 +3,12 @@
     <ActionBar title="Reestablecer contraseña">
       <NavigationButton @tap='goToPreviousPage' android.systemIcon='@drawable/ic_menu_back'/>
     </ActionBar>
-    <StackLayout>
-      <TextField v-model='emailInput' secure='true' hint='Correo electrónico'/>
-      <Button text='Enviar código' @tap='sendCodeToUser' class='btn'/>
-      <Label text="La eliminación será realizada al transcurrir 30 días desde la desactivación, para reactivar tu cuenta solo debes volver a iniciar sesión." textWrap="true" />
-    </StackLayout>
+    <ScrollView>
+      <StackLayout>
+        <MDTextField ref='txtEmail' v-model='emailInput' keyboardType='email' hint='Correo electrónico' :error='emailInputErr' @textChange='onEmailTxtChange'/>
+        <MDButton text='Enviar código' @tap='sendCodeToUser' :isEnabled='isSendCodeBtnTappable'/>
+      </StackLayout>
+    </ScrollView>
   </Page>
 </template>
 

@@ -20,26 +20,46 @@
   font-weight: 400;
 }
 
-.btn {
-  background-color: black;
-  color: white;
+.lbl {
+  margin-left: 222;
 }
 
-.btndanger {
-  background-color: maroon;
-  color: white;
-}
-
-.linkbtn {
-  horizontal-align: center;
-  font-weight: bold;
-}
-
-.fab-btn {
-  height: 70;
-  width: 70; // this is required on iOS - Android does not require width so you might need to adjust styles
+mdtextfield {
+  stroke-color: #577348; //the border color when active
+  floating-color: #577348; //the floating placeholder color when active
   margin: 15;
-  background-color: #ff4081;
+}
+
+mdtextview {
+  stroke-color: #577348; //the border color when active
+  floating-color: #577348; //the floating placeholder color when active
+  margin: 15;
+}
+
+mdbutton {
+  background-color: #577348;
+  color: white;
+  font-weight: 500;
+}
+
+.text-btn {
+  horizontal-align: center;
+  background-color: transparent;
+  color: #577348;
+  elevation: 0; //adds border shadow
+}
+
+.danger {
+  background-color: #734857;
+}
+
+.fab {
+  width: 70;
+  height: 70;
+  margin: 15;
+  background-color: #734857;
+  color: white;
+  padding-left: 22%;
   horizontal-align: right;
   vertical-align: bottom;
 }

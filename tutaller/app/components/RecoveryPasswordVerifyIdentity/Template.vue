@@ -3,11 +3,13 @@
     <ActionBar title="Verifica tu identidad">
       <NavigationButton @tap='goToPreviousPage' android.systemIcon='@drawable/ic_menu_back'/>
     </ActionBar>
-    <StackLayout>
-      <Label text="Si coincide con la dirección de correo electrónico de tu cuenta, te enviaremos un código." textWrap="true" />
-      <TextField v-model='sentCodeInput' secure='true' hint='Escribe el código'/>
-      <Button text='Verificar' @tap='verifyCorrectCode' class='btn'/>
-    </StackLayout>
+    <ScrollView>
+      <StackLayout>
+        <Label :text="'Si '+email+' coincide con la dirección de correo electrónico de tu cuenta, te enviaremos un código. '" textWrap="true" />
+        <MDTextField v-model='sentCodeInput' secure='true' hint='Escribe el código' :error='codeInputErr' @textChange='onCodeTxtChange'/>
+        <MDButton text='Verificar' @tap='verifyCorrectCode' :isEnabled='isVerifyCodeBtnTappable'/>
+      </StackLayout>
+    </ScrollView>
 </Page>
 </template>
 

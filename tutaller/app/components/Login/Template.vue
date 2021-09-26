@@ -4,13 +4,12 @@
       <NavigationButton @tap='goToPreviousPage' android.systemIcon='@drawable/ic_menu_back'/>
     </ActionBar>
     <StackLayout>
-      
-      <TextField v-model='emailInput' keyboardType='email' hint='Correo electrónico'/>
-      <TextField v-model='passwordInput' secure='true' hint='Contraseña'/>
-      <Button text="Iniciar sesión" @tap="login" class="btn"/>
+      <MDTextField v-model='emailInput' keyboardType='email' hint='Correo electrónico'/>
+      <MDTextField v-model='passwordInput' secure='true' hint='Contraseña'/>
+      <MDButton text="Iniciar sesión" @tap="login" :isEnabled='isLoginBtnTappable'/>
 
-      <Label text="¿Olvidaste tu contraseña?" textWrap="true" class="linkbtn" @tap='goToRecoveryPasswordPage'/>
-      <Label text="Regístrate en TuTaller" textWrap="true" class="linkbtn" @tap='goToCreateAccountPage'/>
+      <MDButton text="¿Olvidaste tu contraseña?" class="text-btn" @tap='goToRecoveryPasswordPage'/>
+      <MDButton text="Regístrate en TuTaller" class="text-btn" @tap='goToCreateAccountPage'/>
     </StackLayout>
   </Page>
 </template>
