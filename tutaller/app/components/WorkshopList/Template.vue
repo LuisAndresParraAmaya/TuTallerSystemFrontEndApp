@@ -10,7 +10,7 @@
                 </StackLayout>
               </v-template>
             </ListView>
-            <MDFloatingActionButton src='res://baseline_filter_list_white_36' class='fab'/>
+            <MDFloatingActionButton src='res://baseline_filter_list_white_36' class='fab-btn'/>
         </StackLayout>
   </Page>
 </template>
