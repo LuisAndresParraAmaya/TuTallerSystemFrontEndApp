@@ -33,7 +33,7 @@ export default {
           })
         })
         .then(response => {
-          appSettings.setString('user', response.toString())
+          appSettings.setString('user', response.user_rut.toString())
           this.$navigator.navigate('/AccountOptions', {clearHistory: true})
         })
       },
