@@ -1,4 +1,5 @@
 import WorkshopList from './components/WorkshopList/Template.vue'
+import WorkshopManagement from './components/WorkshopManagement/Template.vue'
 import PostulateWorkshop from './components/PostulateWorkshop/Template.vue'
 import WorkshopPostulationList from './components/WorkshopPostulationList/Template.vue'
 import WorkshopPostulation from './components/WorkshopPostulation/Template.vue'
@@ -24,6 +25,9 @@ import WorkshopService from './components/WorkshopService/Template.vue'
 export const routes = {
     '/WorkshopList': {
         component: WorkshopList,
+    },
+    '/WorkshopManagement': {
+        component: WorkshopManagement,
     },
     '/PostulateWorkshop': {
         component: PostulateWorkshop,
