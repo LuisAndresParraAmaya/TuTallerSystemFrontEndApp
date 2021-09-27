@@ -9,8 +9,8 @@ export default {
         goToLoginPage() {
             this.$navigator.navigate('/Login')
         },
-        goToPostulateWorkshopPage() {
-            this.$navigator.navigate('/PostulateWorkshop')
+        goToWorkshopManagementPage() {
+            this.$navigator.navigate('/WorkshopManagement')
         },
         goToModifyProfilePage() {
             this.$navigator.navigate('/ModifyProfile')
