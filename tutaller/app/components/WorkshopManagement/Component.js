@@ -1,13 +1,29 @@
+import { ApplicationSettings } from '@nativescript/core'
+
 export default {
-    name: 'WorkshopManagement',
+    props: ['snackBarMessage'],
+    data() {
+        return {
+            userType: ApplicationSettings.getString('userType')
+        }
+    },
     methods: {
-        goToPostulateWorkshopPage() {
-            this.$navigator.navigate('/PostulateWorkshop')
+        onPageLoaded() {
+            if (this.snackBarMessage !== undefined) {
+                console.log(this.snackBarMessage)
+            }
+        },
+
+        goToMyWorkshopList() {
+            this.$navigator.navigate('/MyWorkshopList', { frame: 'accountNav' })
+        },
+        goToAddWorkshopPostulationPage() {
+            this.$navigator.navigate('/AddWorkshopPostulation', { frame: 'accountNav' })
         },
         goToWorkshopPostulationListPage() {
-            this.$navigator.navigate('/WorkshopPostulationList')
+            this.$navigator.navigate('/WorkshopPostulationList', { frame: 'accountNav' })
         },
-        goToPreviousPage(){
+        goToPreviousPage() {
             this.$navigateBack()
         }
     }

@@ -1,21 +1,32 @@
-const appSettings = require('@nativescript/core/application-settings')
+import { ApplicationSettings } from '@nativescript/core'
+import { logOut } from '~/utils/session'
 
 export default {
-    name: 'Account',
+    data() {
+        return {
+            active: false,
+            isLoggedIn: this.checkifLoggedIn()
+        }
+    },
     methods: {
-        goToCreateAccountPage() {
-            this.$navigator.navigate('/CreateAccount')
-        },
         goToLoginPage() {
-            this.$navigator.navigate('/Login')
+            this.$navigator.modal('/Login', { props: {rootFrame: 'accountNav'}, id: 'modalLogin', frame: 'accountNav', fullscreen: true })
         },
         goToWorkshopManagementPage() {
-            this.$navigator.navigate('/WorkshopManagement')
+            this.$navigator.navigate('/WorkshopManagement', { frame: 'accountNav' })
         },
-        goToModifyProfilePage() {
-            this.$navigator.navigate('/ModifyProfile')
+        goToAccountManagementPage() {
+            this.$navigator.navigate('/AccountManagement', { frame: 'accountNav' })
         },
-        
+
+        checkifLoggedIn() {
+            if (ApplicationSettings.getString('user') !== undefined) {
+                this.isLoggedIn = true
+            }else {
+                this.isLoggedIn = false
+            }
+        },
+
         logOut() {
             confirm({
                 title: '¿Quieres cerrar sesión en TuTaller?',
@@ -24,8 +35,7 @@ export default {
                 cancelButtonText: 'Cancelar'
             }).then(result => {
                 if (result) {
-                    appSettings.remove('user')
-                    this.$navigator.navigate('/AccountOptions', {clearHistory: true})
+                    logOut(this)
                 }
             })
         }

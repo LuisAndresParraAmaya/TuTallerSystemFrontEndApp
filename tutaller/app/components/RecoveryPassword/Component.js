@@ -1,27 +1,28 @@
-const appSettings = require('@nativescript/core/application-settings')
+import { ApplicationSettings } from '@nativescript/core'
+import { validateEmail } from '~/utils/validator'
 
 export default {
-    name: 'RecoveryPassword',
-    data() {
-      return {
-        emailInput: '',
-        emailInputErr: '',
-        isSendCodeBtnTappable: true
-      }
-    },
+  data() {
+    return {
+      emailInput: '',
+      emailInputErr: '',
+      isSendCodeBtnTappable: true
+    }
+  },
 
-    methods: {
-        sendCodeToUser(){
-          this.isSendCodeBtnTappable = false
-          const data = {user_email: this.emailInput}
+  methods: {
+    sendCodeToUser() {
+      if (this.validateFormSendCodeToUser()) {
+        this.isSendCodeBtnTappable = false
+        const data = { user_email: this.emailInput.trim() }
 
-          fetch('http://10.0.2.2:8080/RecoveryPassword', {
-            method: 'POST',
-            body: JSON.stringify({data}),
-            headers:{
-              'Content-Type': 'application/json'
-            }
-          }).then(res => res.json())
+        fetch('http://10.0.2.2:8080/RecoveryPassword', {
+          method: 'POST',
+          body: JSON.stringify({ data }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(res => res.json())
           .catch(error => {
             console.error('Error:', error)
             alert({
@@ -35,22 +36,39 @@ export default {
           .then(response => {
             switch (response.Response) {
               case 'Recovery Password Sended':
-                appSettings.setString('user_email', data.user_email)
-                this.$navigator.navigate('/RecoveryPasswordVerifyIdentity', {props: {email: data.user_email}})
+                ApplicationSettings.setString('user_email', data.user_email)
+                this.$navigator.navigate('/RecoveryPasswordVerifyIdentity', { props: { email: data.user_email }, frame: 'modalLogin', backstackVisible: false })
                 break
               case 'Operation Failed':
-                this.emailInputErr = 'El correo electrónico ingresado no corresponde a ningún usuario registrado'
+                this.emailInputErr = 'El correo electrónico ingresado no corresponde a ningún usuario registrado. Inténtalo de nuevo.'
                 this.isSendCodeBtnTappable = true
             }
           })
-        },
-
-        onEmailTxtChange() {
-          this.emailInputErr = ''
-        },
-
-        goToPreviousPage(){
-          this.$navigateBack();
-        }
+      }
     },
+
+    validateFormSendCodeToUser() {
+      let isValidationOK = true
+      //E-mail validation
+      let emailValidationRes = validateEmail(this.emailInput.trim())
+      if (emailValidationRes !== null) {
+        this.emailInputErr = emailValidationRes
+        isValidationOK = false
+      }
+      //Check if validation is OK
+      if (isValidationOK) {
+        return true
+      } else {
+        return false
+      }
+    },
+
+    onEmailTxtChange() {
+      this.emailInputErr = ''
+    },
+
+    goToPreviousPage() {
+      this.$navigateBack()
+    }
+  },
 }

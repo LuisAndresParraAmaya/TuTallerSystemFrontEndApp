@@ -1,0 +1,1 @@
+export const postulationStatusList = ['Cualquiera', 'Pendiente', 'Aceptado', 'Rechazado']

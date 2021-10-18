@@ -1,5 +1,4 @@
 export default {
-    name: 'WorkshopServicePaymentReceipt',
     data() {
         return {
         }
@@ -7,10 +6,10 @@ export default {
 
     methods: {
         downloadServiceReceipt() {
-            
+
         },
         continueServiceProcess() {
-            
+
         },
 
         goToPreviousPage() {

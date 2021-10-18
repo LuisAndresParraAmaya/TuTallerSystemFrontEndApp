@@ -5,6 +5,10 @@
 // This is where the vast majority of your CSS code goes.
 
 // Texts
+Label {
+  font-size: 14sp;
+}
+
 .fab {
   font-family: 'Font Awesome 5 Brands', 'fa-brands-400';
   font-weight: 400;
@@ -20,32 +24,82 @@
   font-weight: 400;
 }
 
-.lbl {
-  margin-left: 222;
-}
-
 .title-text {
   font-size: 16;
   font-weight: 500;
+  vertical-align: middle;
+  padding-bottom: 0%;
 }
 
 .caption-text {
   font-size: 12;
   font-weight: 500;
   color: gray;
+  vertical-align: middle;
+  padding-top: 0%;
+  padding-bottom: 0%;
+}
+
+.trailing-icon {
+  font-size: 7%;
+  color: gray;
+  vertical-align: middle;
+  horizontal-align: center;
+  margin-right: 5%;
+  margin-top: 20%;
+}
+
+.paragraph {
+  margin-left: 15em;
+  margin-right: 15em;
+  margin-top: 10em;
+  vertical-align: middle;
+}
+
+.regular-text {
+  margin-left: 15em;
+  margin-right: 15em;
+}
+
+.font-bold {
+  font-weight: bold;
 }
 
 // Text fields
 mdtextfield {
   stroke-color: #577348; //the border color when active
   floating-color: #577348; //the floating placeholder color when active
+  font-size: 14sp;
   margin: 15;
 }
 
 mdtextview {
   stroke-color: #577348; //the border color when active
   floating-color: #577348; //the floating placeholder color when active
+  font-size: 14sp;
   margin: 15;
+}
+
+DatePickerField {
+  background-color: #E0E0E0;
+  border-color: #8C8C8C;
+  placeholder-color: #8C8C8C;
+  border-bottom-width: 1.5em;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  font-size: 14sp;
+  padding: 15em;
+}
+
+TimePickerField {
+  background-color: #E0E0E0;
+  border-color: #8C8C8C;
+  placeholder-color: #8C8C8C;
+  border-bottom-width: 1.5em;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  font-size: 14sp;
+  padding: 15em;
 }
 
 // Buttons
@@ -59,16 +113,24 @@ mdbutton {
   horizontal-align: center;
   background-color: transparent;
   color: #577348;
-  elevation: 0; //adds border shadow
+  elevation: 0; //removes border shadow
+}
+
+.outline-btn {
+  background-color: white;
+  color: black;
+  border-color: black;
+  ripple-color: gray;
+  border-width: 1px;
 }
 
 .fab-btn {
-  width: 70;
-  height: 70;
+  width: 55;
+  height: 55;
   margin: 15;
   background-color: #734857;
   color: white;
-  padding-left: 22%;
+  padding-left: 15em;
   horizontal-align: right;
   vertical-align: bottom;
 }
@@ -78,8 +140,35 @@ mdbutton {
   background-color: #734857;
 }
 
+.error-color {
+  color: #B81B39;
+}
+
+// Text align
+.text-center {
+  text-align: center;
+}
+
 //Action bar
 ActionBar {
   background-color: #3D4451;
   color: white;
+}
+
+//Image
+.item-icon {
+  vertical-align: middle;
+  horizontal-align: center;
+  color: gray;
+}
+
+.image-container {
+  height: 150em;
+  width: 150em;
+  horizontal-alignment: center;
+  background-color: #8C8C8C;
+}
+
+.ad-image {
+  height: 80em;
 }
