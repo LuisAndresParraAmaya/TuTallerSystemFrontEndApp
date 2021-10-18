@@ -47,6 +47,10 @@ export default {
               case 'Rut not exist':
                 this.rutInputErr = 'El rut ingresado no corresponde a ningún usuario registrado. Inténtalo nuevamente.'
                 this.isAddEmployeeBtnTappable = true
+                break
+              case 'Type user is not allowed':
+                this.rutInputErr = 'No se permite ingresar a ese usuario.'
+                this.isAddEmployeeBtnTappable = true
             }
           })
       }

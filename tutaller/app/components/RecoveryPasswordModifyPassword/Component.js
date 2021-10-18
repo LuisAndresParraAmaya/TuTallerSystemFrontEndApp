@@ -17,7 +17,7 @@ export default {
     changePassword() {
       if (this.validateFormChangePassword()) {
         this.isChangePassBtnTappable = false
-        const data = { user_rut: ApplicationSettings.getString('user_rut'), user_password: this.newPasswordInput }
+        const data = { user_rut: ApplicationSettings.getString('user_rut'), user_new_password: this.newPasswordInput }
 
         fetch('http://10.0.2.2:8080/ModifyPassword', {
           method: 'POST',

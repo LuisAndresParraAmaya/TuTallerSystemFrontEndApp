@@ -1,5 +1,6 @@
 import { action } from "@nativescript/core"
 const validator = require('~/utils/validator')
+import { SnackBar } from "@nativescript-community/ui-material-snackbar"
 
 export default {
   props: ['myWorkshop'],
@@ -118,34 +119,40 @@ export default {
           workshopOfficeAttentionData.push({ workshop_office_attention_day: 'sunday', workshop_office_attention_aperture_time: sundayApertureTime, workshop_office_attention_departure_time: sundayDepartureTime })
         }
 
-        const data = { workshop_id: this.myWorkshop.workshop_id, commune_id: this.communeIdInput, workshop_suscription_id: 1, workshop_office_address: this.addressInput.trim(), workshop_office_phone: this.phoneInput.trim(), workshop_office_attention: workshopOfficeAttentionData }
+        if (workshopOfficeAttentionData.length !== 0) {
+          const data = { workshop_id: this.myWorkshop.workshop_id, commune_id: this.communeIdInput, workshop_suscription_id: 1, workshop_office_address: this.addressInput.trim(), workshop_office_phone: this.phoneInput.trim(), workshop_office_attention: workshopOfficeAttentionData }
 
-        fetch('http://10.0.2.2:8080/AddWorkshopOffice', {
-          method: 'POST',
-          body: JSON.stringify({ data }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }).then(res => res.json())
-          .catch(error => {
-            console.error('Error:', error)
-            alert({
-              title: 'Error',
-              message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
-              okButtonText: 'OK'
-            }).then(() => {
-              this.isAddWorkshopOfficeBtnTappable = true
-            })
-          })
-          .then(response => {
-            switch (response.Response) {
-              case 'Office Attention Success':
-                this.$navigateBack()
-                break
-              default:
-                this.isAddWorkshopOfficeBtnTappable = true
+          fetch('http://10.0.2.2:8080/AddWorkshopOffice', {
+            method: 'POST',
+            body: JSON.stringify({ data }),
+            headers: {
+              'Content-Type': 'application/json'
             }
-          })
+          }).then(res => res.json())
+            .catch(error => {
+              console.error('Error:', error)
+              alert({
+                title: 'Error',
+                message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
+                okButtonText: 'OK'
+              }).then(() => {
+                this.isAddWorkshopOfficeBtnTappable = true
+              })
+            })
+            .then(response => {
+              switch (response.Response) {
+                case 'Office Attention Success':
+                  this.$navigateBack()
+                  break
+                default:
+                  this.isAddWorkshopOfficeBtnTappable = true
+              }
+            })
+        } else {
+          const snackBar = new SnackBar()
+          snackBar.simple('Debes ingresar al menos un día para el horario de atención')
+          this.isAddWorkshopOfficeBtnTappable = true
+        }
       }
     },
 
