@@ -22,7 +22,8 @@
 		android:label="@string/app_name"
 		android:theme="@style/AppTheme"
 		android:hardwareAccelerated="true"
-		android:usesCleartextTraffic="true">
+		android:usesCleartextTraffic="true"
+		android:requestLegacyExternalStorage="true"> <!-- This attribute is "false" by default on apps targeting Android 10 or higher. -->
 
 		<activity
 			android:name="com.tns.NativeScriptActivity"

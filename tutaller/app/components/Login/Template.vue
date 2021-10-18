@@ -1,19 +1,17 @@
 <template>
   <Page>
     <ActionBar title="Iniciar sesión">
-      <NavigationButton @tap='goToPreviousPage' android.systemIcon='@drawable/ic_menu_back'/>
+      <NavigationButton @tap='closeModal' android.systemIcon='@drawable/ic_menu_back'/>
     </ActionBar>
     <StackLayout>
-      
-      <TextField v-model='emailInput' keyboardType='email' hint='Correo electrónico'/>
-      <TextField v-model='passwordInput' secure='true' hint='Contraseña'/>
-      <Button text="Iniciar sesión" @tap="login" class="btn"/>
+      <MDTextField v-model='emailInput' keyboardType='email' hint='Correo electrónico' :error='emailInputErr' @textChange='onEmailTxtChange'/>
+      <MDTextField v-model='passwordInput' secure='true' hint='Contraseña' :error='passwordInputErr' @textChange='onPasswordTxtChange'/>
+      <MDButton text="Iniciar sesión" @tap="login" :isEnabled='isLoginBtnTappable'/>
 
-      <Label text="¿Olvidaste tu contraseña?" textWrap="true" class="linkbtn" @tap='goToRecoveryPasswordPage'/>
-      <Label text="Regístrate en TuTaller" textWrap="true" class="linkbtn" @tap='goToCreateAccountPage'/>
+      <MDButton text="¿Olvidaste tu contraseña?" class="text-btn" @tap='goToRecoveryPasswordPage' :isEnabled="isRecoveryBtnTappable"/>
+      <MDButton text="Regístrate en TuTaller" class="text-btn" @tap='goToAddAccountPage' :isEnabled="isCreateBtnTappable"/>
     </StackLayout>
   </Page>
 </template>
 
 <script src='./Component.js'></script>
-<style src='./Style.css'></style>
