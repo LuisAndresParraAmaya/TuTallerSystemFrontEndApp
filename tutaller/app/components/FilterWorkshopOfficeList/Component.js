@@ -4,7 +4,6 @@ export default {
     props: ['workshopOfficeList'],
     data() {
         return {
-            filteredWorkshopOfficeList: [],
             regionObject: [],
             regionList: ['Cualquiera'],
             communeObject: [],
@@ -23,7 +22,7 @@ export default {
 
     methods: {
         filterWorkshopList() {
-            console.log('BEFORE: ', this.workshopOfficeList)
+            const filteredWorkshopOfficeList = []
             //this.isFilterBtnTappable = false
             let qualification = this.qualificationNumber(this.qualificationInput)
             let region = this.regionInput.trim()
@@ -42,8 +41,11 @@ export default {
                     promise = db.all('SELECT * FROM workshop_office_list WHERE workshop_office_average_rating >= ? AND workshop_office_region = ? AND workshop_office_commune = ?', [qualification, region, commune])
                 }
                 promise.then((resultSet) => {
-                    console.log('AFTER: ', resultSet[0])
+                    for (let i = 0; i < resultSet.length; i++) {
+                        filteredWorkshopOfficeList.push({ workshop_id: resultSet[i][0], workshop_office_id: resultSet[i][1], workshop_name: resultSet[i][2], workshop_number: resultSet[i][3], workshop_description: resultSet[i][4], commune_id: resultSet[i][5], workshop_office_commune: resultSet[i][6], region_id: resultSet[i][7], workshop_office_region: resultSet[i][8], workshop_office_address: resultSet[i][9], workshop_suscription_id: resultSet[i][10], workshop_office_phone: resultSet[i][11], workshop_office_average_rating: resultSet[i][12], workshop_office_total_evaluations: resultSet[i][13] })
+                    }
                 })
+                this.$navigator.navigate('/WorkshopOfficeList', { props: { filteredWorkshopOfficeList: filteredWorkshopOfficeList } })
             })
         },
 

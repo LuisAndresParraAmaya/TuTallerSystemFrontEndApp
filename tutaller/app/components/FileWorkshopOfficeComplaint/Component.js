@@ -39,7 +39,7 @@ export default {
                                 console.log('Success:', response)
                                 this.$navigateBack()
                                 break
-                            case 'Operation Failed':
+                            default:
                                 this.isFileWorkshopOfficeComplaintTappable = true
                         }
                     })
