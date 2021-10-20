@@ -24,6 +24,7 @@ export default {
                     switch (response.Response) {
                         default:
                             this.workshopOfficeList = response.response
+                            console.log('FILTER: ', this.filteredWorkshopOfficeList)
                             break
                         case 'Offices not found':
                             console.log('fail')
@@ -31,15 +32,21 @@ export default {
                 })
         },
 
+        onPageLoaded(event) {
+            this.getWorkshopList()
+            //refresh ad image
+            event.object.getViewById('imgWorkshopOfficeAd').src = 'http://10.0.2.2:8080/img?t' + new Date().getTime()
+        },
+
         showWorkshopOffice(event) {
             this.$navigator.navigate('/WorkshopOffice', { props: { workshopOffice: event.item } })
         },
 
         showWorkshopOfficeFromAd() {
-            console.log('hola')
+            console.log('TODO')
         },
 
-        goToFilterWorkshopOfficeListPage() {
+        goToFilterWorkshopOfficeListPage(event) {
             this.$navigator.navigate('/FilterWorkshopOfficeList', { props: { workshopOfficeList: this.workshopOfficeList }, backstackVisible: false })
         }
     }
