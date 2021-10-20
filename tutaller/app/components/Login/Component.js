@@ -53,8 +53,8 @@ export default {
                   message: 'Has iniciado sesión dentro del periodo de los 30 días, por lo que tu cuenta ha sido reactivada.',
                   okButtonText: 'OK'
                 }).then(() => {
-                  this.setSessionData(response)
-                  this.closeModal()
+                  // this.setSessionData(response)
+                  // this.closeModal()
                 })
                 break
               case 'Account deleted':
