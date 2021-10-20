@@ -1,8 +1,8 @@
 <template>
-  <Page @loaded="getWorkshopList">
+  <Page @loaded="onPageLoaded">
     <ActionBar title="Talleres automotrices" />
     <StackLayout>
-      <Image src="http://10.0.2.2:8080/img" @tap="showWorkshopOfficeFromAd" stretch="fill" class="ad-image" />
+      <Image id='imgWorkshopOfficeAd' @tap="showWorkshopOfficeFromAd" stretch="fill" class="ad-image" />
       <GridLayout rows="auto, *">
         <ListView
           for="workshopOffice in workshopOfficeList"
