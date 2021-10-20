@@ -4,6 +4,7 @@ export default {
     props: ['filteredWorkshopOfficeList'],
     data() {
         return {
+            actualWorkshopOfficeList: '',
             workshopOfficeList: '',
             formatEvaluation: formatEvaluation
         }
@@ -23,8 +24,12 @@ export default {
                 .then(response => {
                     switch (response.Response) {
                         default:
-                            this.workshopOfficeList = response.response
-                            console.log('FILTER: ', this.filteredWorkshopOfficeList)
+                            this.actualWorkshopOfficeList = response.response
+                            if (this.filteredWorkshopOfficeList) {
+                                this.workshopOfficeList = this.filteredWorkshopOfficeList
+                            } else {
+                                this.workshopOfficeList = response.response
+                            }
                             break
                         case 'Offices not found':
                             console.log('fail')
@@ -47,7 +52,7 @@ export default {
         },
 
         goToFilterWorkshopOfficeListPage(event) {
-            this.$navigator.navigate('/FilterWorkshopOfficeList', { props: { workshopOfficeList: this.workshopOfficeList }, backstackVisible: false })
+            this.$navigator.navigate('/FilterWorkshopOfficeList', { props: { workshopOfficeList: this.actualWorkshopOfficeList }, backstackVisible: false })
         }
     }
 }
