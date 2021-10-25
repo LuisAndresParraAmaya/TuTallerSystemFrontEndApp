@@ -1,5 +1,6 @@
 import { action } from "@nativescript/core"
 import { VueMaskFilter } from 'v-mask'
+import { deformatRut } from "~/utils/formatter"
 const validator = require('~/utils/validator')
 
 export default {
@@ -33,7 +34,7 @@ export default {
     createAccount() {
       if (this.validateFormCreateAccount()) {
         this.isCreateAccountBtnTappable = false
-        const data = { user_rut: this.rutInput.trim().replace('-', ''), user_name: this.nameInput.trim(), user_last_name: this.lastNameInput.trim(), user_email: this.emailInput.trim(), user_phone: this.phoneInput.trim(), user_password: this.passwordInput, user_status: 'enabled' }
+        const data = { user_rut: deformatRut(this.rutInput.trim()), user_name: this.nameInput.trim(), user_last_name: this.lastNameInput.trim(), user_email: this.emailInput.trim(), user_phone: this.phoneInput.trim(), user_password: this.passwordInput, user_status: 'enabled' }
 
         fetch('http://10.0.2.2:8080/CreateAccount', {
           method: 'POST',
