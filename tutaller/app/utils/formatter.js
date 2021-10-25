@@ -64,3 +64,8 @@ export function formatAdStatus(status) {
 export function formatRut(rut) {
     return [rut.slice(0, 8), '-', rut.slice(8)].join('')
 }
+
+//Only returns the numbers that pertains to the Rut
+export function deformatRut(rut) {
+    return rut.replace('-', '').replace("-", "").replace(/k/gi, '0')
+}

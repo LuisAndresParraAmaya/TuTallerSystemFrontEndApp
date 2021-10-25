@@ -11,10 +11,8 @@
         <MDTextField
           v-model="rutInput"
           hint="Rut"
-          helper="Solo debe contener el guíon. Ej: 12345678-K"
           maxLength="10"
-          :error="rutInputErr"
-          @textChange="onRutTxtChange"
+          isEnabled="false"
         />
         <MDTextField
           v-model="nameInput"

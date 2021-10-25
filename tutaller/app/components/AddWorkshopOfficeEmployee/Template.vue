@@ -31,7 +31,7 @@
           @textChange="onExperienceTxtChange"
           maxLength="45"
         />
-        <MDButton text="Añadir empleados" @tap="addWorkshopOfficeEmployees" :isEnabled='isAddEmployeeBtnTappable' />
+        <MDButton text="Añadir empleado" @tap="addWorkshopOfficeEmployees" :isEnabled='isAddEmployeeBtnTappable' />
       </StackLayout>
     </ScrollView>
   </Page>
