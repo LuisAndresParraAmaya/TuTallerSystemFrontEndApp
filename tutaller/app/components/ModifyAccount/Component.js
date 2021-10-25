@@ -16,7 +16,6 @@ export default {
       phoneInput: ApplicationSettings.getString('userPhone'),
       phoneCountryCodeInput: '+56 Chile',
 
-      rutInputErr: '',
       nameInputErr: '',
       lastNameInputErr: '',
       emailInputErr: '',
@@ -31,7 +30,7 @@ export default {
     modifyProfile() {
       if (this.validateFormModifyProfile()) {
         this.isModifyBtnTappable = false
-        let data = { user_rut: ApplicationSettings.getString('user'), user_new_rut: this.rutInput.trim().replace('-', ''), user_name: this.nameInput.trim(), user_last_name: this.lastNameInput.trim(), user_email: this.emailInput.trim(), user_phone: this.phoneInput.trim() }
+        let data = { user_rut: ApplicationSettings.getString('user'), user_name: this.nameInput.trim(), user_last_name: this.lastNameInput.trim(), user_email: this.emailInput.trim(), user_phone: this.phoneInput.trim() }
         //If the user changes the email, then the system will redirect them to a e-mail verification view
         if (this.emailInput.trim() !== ApplicationSettings.getString('userEmail')) {
           this.goToModifyEmailVerifyIdentityPage(data)
@@ -64,8 +63,7 @@ export default {
                   })
                   .then(response => {
                     switch (response.Response) {
-                      default:
-                        ApplicationSettings.setString('user', response.user_new_rut.toString())
+                      case 'Operation Success':
                         ApplicationSettings.setString('userName', data.user_name)
                         ApplicationSettings.setString('userLastName', data.user_last_name)
                         ApplicationSettings.setString('userPhone', data.user_phone.toString())
@@ -91,12 +89,6 @@ export default {
 
     validateFormModifyProfile() {
       let isValidationOK = true
-      //Rut validation
-      let rutValidationRes = validator.validateRut(this.rutInput.trim())
-      if (rutValidationRes !== null) {
-        this.rutInputErr = rutValidationRes
-        isValidationOK = false
-      }
       //Name validation
       let nameValidationRes = validator.validateName(this.nameInput.trim())
       if (nameValidationRes !== null) {
@@ -139,10 +131,7 @@ export default {
           }
         })
     },
-
-    onRutTxtChange() {
-      this.rutInputErr = ''
-    },
+    
     onNameTxtChange() {
       this.nameInputErr = ''
     },
