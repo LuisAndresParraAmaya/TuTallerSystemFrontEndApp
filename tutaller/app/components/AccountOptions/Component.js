@@ -12,11 +12,17 @@ export default {
         goToLoginPage() {
             this.$navigator.modal('/Login', { props: {rootFrame: 'accountNav'}, id: 'modalLogin', frame: 'accountNav', fullscreen: true })
         },
+        goToAccountManagementPage() {
+            this.$navigator.navigate('/AccountManagement', { frame: 'accountNav' })
+        },
         goToWorkshopManagementPage() {
             this.$navigator.navigate('/WorkshopManagement', { frame: 'accountNav' })
         },
-        goToAccountManagementPage() {
-            this.$navigator.navigate('/AccountManagement', { frame: 'accountNav' })
+        goToSubscriptionManagementPage() {
+            this.$navigator.navigate('/SubscriptionManagement', { frame: 'accountNav' })
+        },
+        goToFileSupportTicketPage() {
+            this.$navigator.navigate('/FileSupportTicket', { frame: 'accountNav' })
         },
 
         checkifLoggedIn() {
