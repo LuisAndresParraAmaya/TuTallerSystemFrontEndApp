@@ -20,6 +20,12 @@
         />
         <MDButton
           v-show="isLoggedIn"
+          text="Gestionar suscripciones"
+          @tap="goToSubscriptionManagementPage"
+        />
+        <MDButton text="Soporte de TuTaller" @tap="goToFileSupportTicketPage" />
+        <MDButton
+          v-show="isLoggedIn"
           text="Cerrar sesión"
           @tap="logOut"
           class="danger"

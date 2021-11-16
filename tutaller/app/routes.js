@@ -7,14 +7,20 @@ import FilterWorkshopPostulationList from './components/FilterWorkshopPostulatio
 import WorkshopPostulation from './components/WorkshopPostulation/Template.vue'
 import RejectWorkshopPostulation from './components/RejectWorkshopPostulation/Template.vue'
 import SubscriptionList from './components/SubscriptionList/Template.vue'
+import Subscription from './components/Subscription/Template.vue'
+import SubscriptionManagement from './components/SubscriptionManagement/Template.vue'
+import OfferList from './components/OfferList/Template.vue'
 import MyWorkshopList from './components/MyWorkshopList/Template.vue'
 import MyWorkshop from './components/MyWorkshop/Template.vue'
 import ModifyMyWorkshop from './components/ModifyMyWorkshop/Template.vue'
 import MyWorkshopOfficeList from './components/MyWorkshopOfficeList/Template.vue'
 import MyWorkshopOffice from './components/MyWorkshopOffice/Template.vue'
+import MyWorkshopOfficeSubscription from './components/MyWorkshopOfficeSubscription/Template.vue'
 import AddWorkshopOffice from './components/AddWorkshopOffice/Template.vue'
 import ModifyWorkshopOffice from './components/ModifyWorkshopOffice/Template.vue'
 import AddWorkshopOfficeService from './components/AddWorkshopOfficeService/Template.vue'
+import AddOffer from './components/AddOffer/Template.vue'
+import ActivateOffer from './components/ActivateOffer/Template.vue'
 import WorkshopOfficeEmployeeList from './components/WorkshopOfficeEmployeeList/Template.vue'
 import AddWorkshopOfficeEmployee from './components/AddWorkshopOfficeEmployee/Template.vue'
 import MyWorkshopOfficeAdList from './components/MyWorkshopOfficeAdList/Template.vue'
@@ -39,6 +45,7 @@ import ModifyAccount from './components/ModifyAccount/Template.vue'
 import ModifyEmailVerifyIdentity from './components/ModifyEmailVerifyIdentity/Template.vue'
 import DeleteAccount from './components/DeleteAccount/Template.vue'
 import ModifyPassword from './components/ModifyPassword/Template.vue'
+import FileSupportTicket from './components/FileSupportTicket/Template.vue'
 import WorkshopService from './components/WorkshopService/Template.vue'
 
 export const routes = {
@@ -69,6 +76,15 @@ export const routes = {
     '/SubscriptionList': {
         component: SubscriptionList,
     },
+    '/Subscription': {
+        component: Subscription,
+    },
+    '/SubscriptionManagement': {
+        component: SubscriptionManagement,
+    },
+    '/OfferList': {
+        component: OfferList,
+    },
     '/MyWorkshopList': {
         component: MyWorkshopList,
     },
@@ -84,6 +100,9 @@ export const routes = {
     '/MyWorkshopOffice': {
         component: MyWorkshopOffice,
     },
+    '/MyWorkshopOfficeSubscription': {
+        component: MyWorkshopOfficeSubscription,
+    },
     '/AddWorkshopOffice': {
         component: AddWorkshopOffice,
     },
@@ -92,6 +111,12 @@ export const routes = {
     },
     '/AddWorkshopOfficeService': {
         component: AddWorkshopOfficeService,
+    },
+    '/AddOffer': {
+        component: AddOffer,
+    },
+    '/ActivateOffer': {
+        component: ActivateOffer,
     },
     '/WorkshopOfficeEmployeeList': {
         component: WorkshopOfficeEmployeeList,
@@ -164,6 +189,9 @@ export const routes = {
     },
     '/ModifyPassword': {
         component: ModifyPassword,
+    },
+    '/FileSupportTicket': {
+        component: FileSupportTicket,
     },
     '/WorkshopService': {
         component: WorkshopService,
