@@ -51,7 +51,7 @@ export default {
             console.log('TODO')
         },
 
-        goToFilterWorkshopOfficeListPage(event) {
+        goToFilterWorkshopOfficeListPage() {
             this.$navigator.navigate('/FilterWorkshopOfficeList', { props: { workshopOfficeList: this.actualWorkshopOfficeList }, backstackVisible: false })
         }
     }
