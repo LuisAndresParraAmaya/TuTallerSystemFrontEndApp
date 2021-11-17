@@ -1,6 +1,6 @@
 <template>
   <Page>
-    <ActionBar title="Gestión de talleres" @loaded="onPageLoaded">
+    <ActionBar title="Gestionar talleres" @loaded="onPageLoaded">
       <NavigationButton
         @tap="goToPreviousPage"
         android.systemIcon="@drawable/ic_menu_back"
