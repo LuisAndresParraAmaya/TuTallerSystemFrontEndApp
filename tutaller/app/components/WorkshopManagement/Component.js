@@ -1,19 +1,13 @@
 import { ApplicationSettings } from '@nativescript/core'
 
 export default {
-    props: ['snackBarMessage'],
     data() {
         return {
             userType: ApplicationSettings.getString('userType')
         }
     },
+    
     methods: {
-        onPageLoaded() {
-            if (this.snackBarMessage !== undefined) {
-                console.log(this.snackBarMessage)
-            }
-        },
-
         goToMyWorkshopList() {
             this.$navigator.navigate('/MyWorkshopList', { frame: 'accountNav' })
         },
