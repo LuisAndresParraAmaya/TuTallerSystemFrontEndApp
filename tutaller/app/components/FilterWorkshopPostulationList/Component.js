@@ -1,6 +1,7 @@
-import { postulationStatusList } from "~/utils/lists"
+const sqlite = require('nativescript-sqlite')
 
 export default {
+    props: ['workshopPostulationList'],
     data() {
         return {
             workshopNameInput: '',
@@ -19,39 +20,11 @@ export default {
                 this.isFilterBtnTappable = false
                 const data = { workshop_name: this.workshopNameInput.trim(), postulation_status: postulationStatusInput.trim(), from_postulation_date: this.fromPostulationDateInput, to_postulation_date: this.toPostulationDateInput }
 
-                fetch('http://10.0.2.2:8080/FilterWorkshopPostulationList', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ data })
-                }).then(res => res.json())
-                    .catch(error => {
-                        console.error('Error:', error)
-                        alert({
-                            title: 'Error',
-                            message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
-                            okButtonText: 'OK'
-                        }).then(() => {
-                            this.isFilterBtnTappable = true
-                        })
-                    })
-                    .then(response => {
-                        switch (response.Response) {
-                            case 'Operation Success':
-                                this.$navigateBack()
-                                break
-                            case 'Operation Failed':
-                                alert({
-                                    title: 'Error',
-                                    message: 'Se ha producido un error. Inténtalo de nuevo.',
-                                    okButtonText: 'OK'
-                                }).then(() => {
-                                    this.isFilterBtnTappable = true
-                                })
-                        }
-                    })
             }
+            new sqlite('tutaller.db', (err, db) => {
+                db.execSQL('DROP TABLE IF EXISTS workshop_postulation_list;')
+                db.execSQL('CREATE TABLE IF NOT EXISTS workshop_postulation_list (id INTEGER, postulation_current_status TEXT, postulation_message TEXT, workshop_id INTEGER')
+            })
         },
 
         validateFormFilterWorkshopPostulationList() {
