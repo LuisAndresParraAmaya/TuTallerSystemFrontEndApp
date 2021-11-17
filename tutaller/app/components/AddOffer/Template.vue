@@ -23,7 +23,7 @@
           @textChange="onDiscountTxtChange"
         />
         <Label
-          text="Fecha y hora en la que la oferta ya no será valida"
+          text="Fecha y hora en que la oferta ya no será valida"
           textWrap="true"
           class="regular-text"
         />
