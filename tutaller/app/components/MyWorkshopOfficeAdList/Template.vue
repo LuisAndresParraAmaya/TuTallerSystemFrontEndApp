@@ -35,7 +35,7 @@
             />
             <Label
               :text="
-                formatAdStatus(myWorkshopOfficeAd.workshop_office_ad_status)
+                translateAdStatus(myWorkshopOfficeAd.workshop_office_ad_status)
               "
               row="0"
               col="2"
