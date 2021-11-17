@@ -1,11 +1,11 @@
-import { formatAdStatus } from "~/utils/formatter"
+import { translateAdStatus } from "~/utils/translators"
 
 export default {
     props: ['myWorkshop', 'workshopOfficeId'],
     data() {
         return {
             myWorkshopOfficeAdList: '',
-            formatAdStatus: formatAdStatus
+            translateAdStatus: translateAdStatus
         }
     },
 

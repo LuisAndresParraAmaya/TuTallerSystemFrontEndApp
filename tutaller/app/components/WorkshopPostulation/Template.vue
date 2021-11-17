@@ -44,7 +44,7 @@
           class="paragraph font-bold"
         />
         <Label textWrap="true" class="paragraph">{{
-          formatPostulationStatus(
+          translatePostulationStatus(
             workshopPostulation.postulation_current_status
           )
         }}</Label>

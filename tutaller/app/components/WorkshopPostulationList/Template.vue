@@ -31,7 +31,7 @@
               >{{ formatDateTime(workshopPostulation.postulation_date_time) }}
             </Label>
             <Label row="0" col="2" rowSpan="2" class="caption-text">{{
-              formatPostulationStatus(
+              translatePostulationStatus(
                 workshopPostulation.postulation_current_status
               )
             }}</Label>

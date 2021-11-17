@@ -1,6 +1,6 @@
 <template>
   <Page>
-    <ActionBar title="Gestionar talleres" @loaded="onPageLoaded">
+    <ActionBar title="Gestionar suscripciones" @loaded="onPageLoaded">
       <NavigationButton
         @tap="goToPreviousPage"
         android.systemIcon="@drawable/ic_menu_back"
@@ -12,15 +12,10 @@
           v-if="
             userType == 1 //1 = admin
           "
-          text="Listar talleres postulados"
-          @tap="goToWorkshopPostulationListPage"
+          text="Ofertas"
+          @tap="goToOfferListPage"
         />
         <template v-else>
-          <MDButton text="Mis talleres" @tap="goToMyWorkshopList" />
-          <MDButton
-            text="Postular taller"
-            @tap="goToAddWorkshopPostulationPage"
-          />
         </template>
       </StackLayout>
     </ScrollView>

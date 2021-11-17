@@ -40,6 +40,16 @@ Label {
   padding-bottom: 0%;
 }
 
+.meta-text {
+  font-size: 12;
+  font-weight: 500;
+  color: gray;
+  vertical-align: middle;
+  horizontal-align: center;
+  padding-top: 0%;
+  padding-bottom: 0%;
+}
+
 .trailing-icon {
   font-size: 7%;
   color: gray;
@@ -171,4 +181,15 @@ ActionBar {
 
 .ad-image {
   height: 80em;
+}
+
+//Text decoration
+.text-line-through {
+  text-decoration: line-through;
+  color: gray;
+}
+
+//Align
+.h-middle {
+  horizontal-align: center;
 }

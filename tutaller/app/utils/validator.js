@@ -68,3 +68,26 @@ export function validateMoney(money) {
     if (money <= 0) return 'Ingresa un monto mayor a 0.'
     return null
 }
+
+export function validateDatetime(date, time, minDatetime) {
+    if (date == '') {
+        return 'Ingresa la fecha.'
+    } else {
+        if (time == '') {
+            return 'Ingresa la hora.'
+        } else {
+            //If the date is the same as the min date (without considering the time)
+            if (date.toDateString() == minDatetime.toDateString()) {
+                if (time < minDatetime) return 'La hora seleccionada debe ser superior a la de hoy.'
+            }
+        }
+    }
+    return null
+}
+
+export function validateDiscount(discount) {
+    if (discount == '') return 'Ingresa el descuento.'
+    else if (discount < 1) return 'Ingresa un descuento mayor o igual a 1.'
+    else if (discount > 100) return 'Ingresa un descuento menor o igual a 100.'
+    return null
+}

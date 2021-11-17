@@ -1,5 +1,5 @@
 import { formatDateTime } from "~/utils/formatter"
-import { formatPostulationStatus } from "~/utils/formatter"
+import { translatePostulationStatus } from "~/utils/translators"
 
 export default {
     props: ['workshopPostulation'],
@@ -9,7 +9,7 @@ export default {
             isAcceptPostulationTappable: true,
             isRejectPostulationTappable: true,
             formatDateTime: formatDateTime,
-            formatPostulationStatus: formatPostulationStatus
+            translatePostulationStatus: translatePostulationStatus
         }
     },
 

@@ -114,7 +114,38 @@
             col="0"
             class="fas item-icon"
           />
-          <Label text="Anuncios Publicitarios" class="title-text" row="0" col="1" />
+          <Label
+            text="Anuncios Publicitarios"
+            class="title-text"
+            row="0"
+            col="1"
+          />
+          <Image
+            src.decode="font://&#xf105;"
+            stretch="none"
+            row="0"
+            col="2"
+            class="fas caption-text"
+          />
+        </GridLayout>
+        <GridLayout
+          rows="60%"
+          columns="73%, *, 30%"
+          @tap="goToOfferListPage"
+        >
+          <Image
+            src.decode="font://&#xf007;"
+            stretch="none"
+            row="0"
+            col="0"
+            class="fas item-icon"
+          />
+          <Label
+            text="Ofertas"
+            class="title-text"
+            row="0"
+            col="1"
+          />
           <Image
             src.decode="font://&#xf105;"
             stretch="none"

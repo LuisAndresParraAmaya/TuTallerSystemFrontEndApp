@@ -1,12 +1,12 @@
 import { formatDateTime } from "~/utils/formatter"
-import { formatPostulationStatus } from "~/utils/formatter"
+import { translatePostulationStatus } from "~/utils/translators"
 
 export default {
   data() {
     return {
       workshopPostulationList: '',
       formatDateTime: formatDateTime,
-      formatPostulationStatus: formatPostulationStatus
+      translatePostulationStatus: translatePostulationStatus
     }
   },
 
@@ -43,10 +43,11 @@ export default {
     },
 
     goToFilterWorkshopPostulationListPage() {
-      this.$navigator.navigate('/FilterWorkshopPostulationList', { frame: 'accountNav' })
+      console.log(this.workshopPostulationList)
+      this.$navigator.navigate('/FilterWorkshopPostulationList', { props: { workshopPostulationList: this.workshopPostulationList }, frame: 'accountNav' })
     },
     goToPreviousPage() {
-      this.$navigateBack();
+      this.$navigateBack()
     }
   }
 }
