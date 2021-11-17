@@ -1,14 +1,15 @@
 <template>
   <Page>
     <ActionBar title="Servicios automotrices" />
-    <ScrollView>
-      <StackLayout>
-        <Label
-          text="Página en construcción"
-          textWrap="true"
-        />
-      </StackLayout>
-    </ScrollView>
+    <GridLayout rows="*" cols="*">
+      <Label
+        text="Cuando se te conceda la prestación de un servicio automotriz, podrás interactuar con el desde aquí y ver todos los avances respectivos."
+        textWrap="true"
+        class="paragraph text-center h-middle"
+        row="0"
+        col="0"
+      />
+    </GridLayout>
   </Page>
 </template>
 
