@@ -76,11 +76,8 @@ export default {
                 isValidationOK = false
             }
             //Check if validation is OK
-            if (isValidationOK) {
-                return true
-            } else {
-                return false
-            }
+            if (isValidationOK) return true
+            else return false
         },
 
         selectPhoneCountryCode(event) {
