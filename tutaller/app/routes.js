@@ -10,6 +10,7 @@ import SubscriptionList from './components/SubscriptionList/Template.vue'
 import Subscription from './components/Subscription/Template.vue'
 import SubscriptionManagement from './components/SubscriptionManagement/Template.vue'
 import OfferList from './components/OfferList/Template.vue'
+import Offer from './components/Offer/Template.vue'
 import MyWorkshopList from './components/MyWorkshopList/Template.vue'
 import MyWorkshop from './components/MyWorkshop/Template.vue'
 import ModifyMyWorkshop from './components/ModifyMyWorkshop/Template.vue'
@@ -84,6 +85,9 @@ export const routes = {
     },
     '/OfferList': {
         component: OfferList,
+    },
+    '/Offer': {
+        component: Offer,
     },
     '/MyWorkshopList': {
         component: MyWorkshopList,
