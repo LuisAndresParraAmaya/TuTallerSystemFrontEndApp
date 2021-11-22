@@ -37,7 +37,7 @@
         <GridLayout
           rows="60%"
           columns="73%, *, 30%"
-          @tap="goToWorkshopOfficeServiceList"
+          @tap="goToWorkshopOfficeServiceListPage"
         >
           <Image
             src.decode="font://&#xf007;"
@@ -63,7 +63,7 @@
         <GridLayout
           rows="60%"
           columns="73%, *, 30%"
-          @tap="goToWorkshopOfficeEmployeeList"
+          @tap="goToWorkshopOfficeEmployeeListPage"
         >
           <Image
             src.decode="font://&#xf007;"
