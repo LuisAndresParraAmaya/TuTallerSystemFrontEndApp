@@ -57,7 +57,7 @@ export default {
             let isValidationOK = true
             //Null reject reason input
             if (this.rejectReasonInput.trim() == '') {
-                this.rejectReasonInputErr = 'Ingresa una razón de rechazo'
+                this.rejectReasonInputErr = 'Ingresa una razón de rechazo.'
                 isValidationOK = false
             }
             //Check if validation is OK
