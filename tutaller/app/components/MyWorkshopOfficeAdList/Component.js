@@ -12,6 +12,7 @@ export default {
     methods: {
         getMyWorkshopOfficeAdList() {
             const data = { workshop_office_id: this.workshopOfficeId }
+            
             fetch('http://10.0.2.2:8080/WorkshopOfficeAdList', {
                 method: 'POST',
                 body: JSON.stringify({ data }),
