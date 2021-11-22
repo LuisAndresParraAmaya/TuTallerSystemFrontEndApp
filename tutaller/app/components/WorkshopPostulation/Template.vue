@@ -69,7 +69,7 @@
             :isEnabled="isRejectPostulationTappable"
             col="0"
             row="0"
-            class="danger"
+            class="danger-color"
           />
           <MDButton
             text="Aceptar"
