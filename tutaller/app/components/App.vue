@@ -5,7 +5,7 @@
                 <Navigator defaultRoute='/WorkshopOfficeList'/>
             </TabViewItem>
             <TabViewItem title='Servicios' iconSource='res://outline_construction_white_36'>
-                <Navigator id='serviceNav' defaultRoute='/WorkshopService'/>
+                <Navigator id='serviceNav' defaultRoute='/WorkshopOfficeWorkList'/>
             </TabViewItem>
             <TabViewItem title='Cuenta' iconSource='res://outline_person_white_36'>
                 <Navigator id='accountNav' defaultRoute='/AccountOptions'/>
