@@ -7,7 +7,7 @@
         <StackLayout>
             <Label text="Ingresa la razón por la cual el taller no es apto para TuTaller" textWrap="true" class="paragraph"/>
             <MDTextView v-model='rejectReasonInput' hint='Razón de rechazo' :error='rejectReasonInputErr' @textChange='onRejectReasonTxtChange'/>
-            <MDButton text="Rechazar" @tap="rejectWorkshopPostulation" :isEnabled='isRejectPostulationTappable' class='danger'/>
+            <MDButton text="Rechazar" @tap="rejectWorkshopPostulation" :isEnabled='isRejectPostulationTappable' class='danger-color'/>
         </StackLayout>
       </ScrollView>
   </Page>

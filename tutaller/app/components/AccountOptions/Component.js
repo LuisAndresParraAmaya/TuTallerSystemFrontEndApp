@@ -26,11 +26,8 @@ export default {
         },
 
         checkifLoggedIn() {
-            if (ApplicationSettings.getString('user') !== undefined) {
-                this.isLoggedIn = true
-            }else {
-                this.isLoggedIn = false
-            }
+            if (ApplicationSettings.getString('user') !== undefined) this.isLoggedIn = true
+            else this.isLoggedIn = false
         },
 
         logOut() {

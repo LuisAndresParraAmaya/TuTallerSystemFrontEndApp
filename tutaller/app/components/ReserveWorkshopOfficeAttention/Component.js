@@ -13,7 +13,8 @@ export default {
     methods: {
         reserveAttention() {
             if (this.validateFormReserveAttention()) {
-                this.$navigator.navigate('/PayWorkshopOfficeService')
+                const reservedDatetime = { reserved_date: this.reservedDateInput, reserved_time: this.reservedTimeInput }
+                this.$navigator.navigate('/PayWorkshopOfficeService', { props: { workshopOfficeService: this.workshopOfficeService, reservedDatetime: reservedDatetime } })
             }
         },
 

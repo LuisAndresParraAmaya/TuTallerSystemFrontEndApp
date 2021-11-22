@@ -1,21 +1,16 @@
-import { ApplicationSettings } from "@nativescript/core"
-
 export default {
-    props: ['workshopOfficeService', 'reservedDatetime'],
+    props: ['workshopOfficeWorkId'],
     data() {
         return {
+            workshopOfficeWorkTechnicalReport: ''
         }
     },
 
     methods: {
-        payWorkshopService() {
-            this.addWorkshopOfficeWork()
-        },
+        getWorkshopOfficeWorkTechnicalReport() {
+            const data = { workshop_office_work_id: this.workshopOfficeWorkId }
 
-        addWorkshopOfficeWork() {
-            const data = { workshop_office_service_id: this.workshopOfficeService.id, user_user_rut: ApplicationSettings.getString('user') }
-
-            fetch('http://10.0.2.2:8080/AddWorkshopOfficeWork', {
+            fetch('http://10.0.2.2:8080/WorkshopOfficeWorkTechnicalReport', {
                 method: 'POST',
                 body: JSON.stringify({ data }),
                 headers: {
@@ -33,13 +28,11 @@ export default {
                 .then(response => {
                     switch (response.Response) {
                         case 'Operation Success':
-                            this.$navigator.navigate('/PaymentReceipt')
+                            this.workshopOfficeWorkTechnicalReport = response.WorkshopOfficeWorkTechnicalReport[0]
+                            console.log(this.workshopOfficeWorkTechnicalReport)
                             break
-                        case 'Invalid user rut or service':
-                            console.log('Invalid user rut or service')
-                            break
-                        case 'Milestone adding failed':
-                            console.log('Milestone adding failed')
+                        case 'Technical report not found':
+                            console.log('Technical report not found')
                     }
                 })
         },

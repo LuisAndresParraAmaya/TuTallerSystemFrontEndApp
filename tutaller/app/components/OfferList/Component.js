@@ -14,12 +14,14 @@ export default {
     },
 
     methods: {
+        //Navigates to the view that show the offer detail, sending the offer itself according to the selected item and the offer type (suscriptionPlan or workshopOfficeService)
         showOffer(event) {
             this.$navigator.navigate('/Offer', { props: { offer: event.item, offerType: this.offerType }, frame: 'accountNav', backstackVisible: false })
         },
 
+        //Gets the offer list, depending on the offer type, to call the functions to get the correspondent list
         getOfferList() {
-            //Empty the offer list first
+            //Empty the current offer list first
             this.offerList = []
             //Change the GUI title and get the offer list depending on the requested item (subscription plan or workshop office service)
             if (this.offerType == 'subscriptionPlan') {
@@ -32,6 +34,7 @@ export default {
             }
         },
 
+        //Gets the suscription plan list. If it succeds, it proceds to call the function to add the offer and its suscriptions locally in SQLite
         getSubscriptionList() {
             fetch('http://10.0.2.2:8080/SubscriptionList', {
                 method: 'GET',
@@ -58,6 +61,7 @@ export default {
                 })
         },
 
+        //Gets the workshop office service list. If it succeds, it proceds to call the function to add the offer and its workshop office services locally in SQLite
         getWorkshopOfficeServiceList() {
             const data = { workshop_office_id: this.workshopOfficeId }
             fetch('http://10.0.2.2:8080/WorkshopOfficeServiceList', {
@@ -86,6 +90,7 @@ export default {
                 })
         },
 
+        //Adds the offer, including its items (suscription or service), locally in SQLite
         addOfferItemListTemp(itemList) {
             new sqlite('tutaller.db', (err, db) => {
                 db.execSQL('DROP TABLE IF EXISTS offer_item;')
@@ -106,6 +111,7 @@ export default {
             })
         },
 
+        //Go to the Add offer page, sending the offer type (suscription plan or workshop office service) and the workshop office id (if the offer type is workshop office service)
         goToAddOfferPage() {
             this.$navigator.navigate('/AddOffer', { props: { offerType: this.offerType, workshopOfficeId: this.workshopOfficeId }, frame: 'accountNav', backstackVisible: false })
         },

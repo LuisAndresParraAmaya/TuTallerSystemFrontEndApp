@@ -1,4 +1,4 @@
-import { formatEvaluation } from "~/utils/formatter"
+import { formatQualification } from "~/utils/formatter"
 
 export default {
     props: ['filteredWorkshopOfficeList'],
@@ -6,7 +6,7 @@ export default {
         return {
             actualWorkshopOfficeList: '',
             workshopOfficeList: '',
-            formatEvaluation: formatEvaluation
+            formatQualification: formatQualification
         }
     },
 

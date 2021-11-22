@@ -1,4 +1,4 @@
-//Returns the translated subscription name
+//Returns the translated subscription name. If nothing applies, just return it untranslated.
 export function translateSubscriptionName(suscriptionName) {
     switch (suscriptionName) {
         case 'unsubscribed':
@@ -9,7 +9,7 @@ export function translateSubscriptionName(suscriptionName) {
     return suscriptionName
 }
 
-//Returns the translated periodicity
+//Returns the translated periodicity. If nothing applies, just return it untranslated.
 export function translatePeriodicity(periodicity) {
     switch (periodicity) {
         case 'none':
@@ -21,10 +21,10 @@ export function translatePeriodicity(periodicity) {
         case 'yearly':
             return 'Anual'
     }
-    return null
+    return periodicity
 }
 
-//Returns the translated postulation status
+//Returns the translated postulation status. If nothing applies, just return it untranslated.
 export function translatePostulationStatus(status) {
     switch (status) {
         case 'pending':
@@ -34,10 +34,10 @@ export function translatePostulationStatus(status) {
         case 'rejected':
             return 'Rechazado'
     }
-    return null
+    return status
 }
 
-//Returns the translated ad status
+//Returns the translated ad status. If nothing applies, just return it untranslated.
 export function translateAdStatus(status) {
     switch (status) {
         case 'active':
@@ -45,5 +45,18 @@ export function translateAdStatus(status) {
         case 'inactive':
             return 'Inactivo'
     }
-    return null
+    return status
+}
+
+//Returns the translated work status. If nothing applies, just return it untranslated.
+export function translateWorkStatus(status) {
+    switch (status) {
+        case 'working':
+            return 'En progreso'
+        case 'confirmcompletion':
+            return 'Esperando termino'
+        case 'complete':
+            return 'Terminado'
+    }
+    return status
 }

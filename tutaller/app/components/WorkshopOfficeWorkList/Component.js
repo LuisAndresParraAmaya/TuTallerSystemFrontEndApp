@@ -1,21 +1,23 @@
 import { ApplicationSettings } from "@nativescript/core"
+import { translateWorkStatus } from "~/utils/translators"
 
 export default {
-    props: ['workshopOfficeService', 'reservedDatetime'],
     data() {
         return {
+            workshopOfficeWorkList: '',
+            translateWorkStatus: translateWorkStatus
         }
     },
 
     methods: {
-        payWorkshopService() {
-            this.addWorkshopOfficeWork()
+        showWorkshopOfficeWork(event) {
+            this.$navigator.navigate('/WorkshopOfficeWork', { props: { workshopOfficeWork: event.item }, frame: 'serviceNav' })
         },
 
-        addWorkshopOfficeWork() {
-            const data = { workshop_office_service_id: this.workshopOfficeService.id, user_user_rut: ApplicationSettings.getString('user') }
+        getWorkshopOfficeWorkList() {
+            const data = { user_rut: ApplicationSettings.getString('user') }
 
-            fetch('http://10.0.2.2:8080/AddWorkshopOfficeWork', {
+            fetch('http://10.0.2.2:8080/WorkshopOfficeWorkList', {
                 method: 'POST',
                 body: JSON.stringify({ data }),
                 headers: {
@@ -33,13 +35,10 @@ export default {
                 .then(response => {
                     switch (response.Response) {
                         case 'Operation Success':
-                            this.$navigator.navigate('/PaymentReceipt')
+                            this.workshopOfficeWorkList = response.WorkshopOfficeWorkList
                             break
-                        case 'Invalid user rut or service':
-                            console.log('Invalid user rut or service')
-                            break
-                        case 'Milestone adding failed':
-                            console.log('Milestone adding failed')
+                        case 'Workshop office works not found':
+                            console.log('Workshop office works not found')
                     }
                 })
         },

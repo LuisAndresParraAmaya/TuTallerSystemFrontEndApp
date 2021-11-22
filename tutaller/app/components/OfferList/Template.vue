@@ -1,6 +1,6 @@
 <template>
   <Page @loaded="getOfferList">
-    <ActionBar :title="'Ofertas de '+titleType">
+    <ActionBar :title="'Ofertas activas de '+titleType">
       <NavigationButton
         @tap="goToPreviousPage"
         android.systemIcon="@drawable/ic_menu_back"

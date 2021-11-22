@@ -27,5 +27,6 @@ Vue.registerElement(
         }
     }
 )
+Vue.registerElement('DropDown', () => require('nativescript-drop-down/drop-down').DropDown)
 
 new Vue({ render: h => h('frame', App), render: h => h(App), }).$start()

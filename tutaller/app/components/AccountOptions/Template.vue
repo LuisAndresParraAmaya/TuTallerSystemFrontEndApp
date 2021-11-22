@@ -28,7 +28,7 @@
           v-show="isLoggedIn"
           text="Cerrar sesión"
           @tap="logOut"
-          class="danger"
+          class="danger-color"
         />
       </StackLayout>
     </ScrollView>

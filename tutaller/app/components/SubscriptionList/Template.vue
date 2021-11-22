@@ -45,7 +45,6 @@
             :text="'$' + subscription.price + ' CLP'"
             row="0"
             col="2"
-            class="meta-text"
             :class="{ 'text-line-through': subscription.offer_discount !== 0 }"
           />
         </GridLayout>

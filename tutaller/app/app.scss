@@ -145,15 +145,6 @@ mdbutton {
   vertical-align: bottom;
 }
 
-// Colors
-.danger {
-  background-color: #734857;
-}
-
-.error-color {
-  color: #B81B39;
-}
-
 // Text align
 .text-center {
   text-align: center;
@@ -192,4 +183,40 @@ ActionBar {
 //Align
 .h-middle {
   horizontal-align: center;
+}
+
+// Colors
+.danger-color {
+  background-color: #734857;
+}
+
+.error-color {
+  color: #B81B39;
+}
+
+.ok-color {
+  color: #13824E;
+}
+
+.inactive-color {
+  color: #DCDCDC;
+}
+
+//Background colors
+.info-bg {
+  background-color: #DCF4F4;
+}
+
+.ok-bg {
+  background-color: #13824E;
+}
+
+.inactive-bg {
+  background-color: #DCDCDC;
+}
+
+//Progress
+.milestone-progress {
+  margin-right: 10em;
+  margin-top: 10em;
 }

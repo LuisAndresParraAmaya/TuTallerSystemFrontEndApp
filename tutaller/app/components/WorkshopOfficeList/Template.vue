@@ -25,7 +25,7 @@
                 class="title-text"
               />
               <Label row="1" col="1" class="caption-text fas">{{
-                formatEvaluation(
+                formatQualification(
                   workshopOffice.workshop_office_average_rating,
                   workshopOffice.workshop_office_total_evaluations
                 )

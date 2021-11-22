@@ -107,7 +107,7 @@ export default {
         goToPreviousPage() {
             const snackBar = new SnackBar()
             snackBar.simple('Su postulación fue enviada correctamente a los administradores de TuTaller')
-            this.$navigateBack({ props: { snackBarMessage: 1 } })
+            this.$navigateBack()
         }
     },
 }
