@@ -96,7 +96,6 @@
                 col="1"
                 class="caption-text"
               />
-              <!-- <Button text.decode="&#xf142;" @tap="aa" class="icon-btn fas" row="0" col="2" /> -->
               <DropDown
                 id="ddWorkshopOfficeEvaluationOptions"
                 v-show="
