@@ -12,6 +12,7 @@ export default {
     },
 
     methods: {
+        //Change the view content (msg, item list) according to the offer type (suscription plan or workshop office service)
         defineInformationByOfferType() {
             if (this.offerType == 'subscriptionPlan') {
                 this.activatedToMsg = 'Se encuentra activada en los siguientes planes'
@@ -22,6 +23,7 @@ export default {
             this.getOfferItemListTemp()
         },
 
+        //From SQLite, it gets the offer name list according to the previously selected offer
         getOfferItemListTemp() {
             new sqlite('tutaller.db', (err, db) => {
                 let promise = ''
