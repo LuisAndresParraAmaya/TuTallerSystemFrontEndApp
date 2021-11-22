@@ -1,7 +1,10 @@
 <template>
   <Page>
     <ActionBar title="Pagar servicio">
-      <NavigationButton @tap='goToPreviousPage' android.systemIcon='@drawable/ic_menu_back'/>
+      <NavigationButton
+        @tap="goToPreviousPage"
+        android.systemIcon="@drawable/ic_menu_back"
+      />
     </ActionBar>
     <ScrollView>
       <StackLayout>
