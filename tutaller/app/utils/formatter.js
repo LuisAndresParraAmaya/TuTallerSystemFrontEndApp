@@ -30,29 +30,30 @@ export function formatTimeToDB(time) {
     return time.getHours() + ':' + time.getMinutes()
 }
 
-//Returns the rating number, the rating number expressed in font awesome stars/half stars, and the number of total evaluations
-export function formatEvaluation(rating, totalEvaluations) {
+//Returns the rating number, the rating number expressed in font awesome stars/half stars, and the number of total evaluations (if required, else just send a -1)
+export function formatQualification(rating, totalEvaluations) {
+    let qualificationFormat = 'Sin valorizaciones'
     if (rating == 5) {
-        return he.decode(rating + ' &#xf005;&#xf005;&#xf005;&#xf005;&#xf005;' + ' (' + totalEvaluations + ')')
+        qualificationFormat = he.decode(rating + ' &#xf005;&#xf005;&#xf005;&#xf005;&#xf005;')
     } else if (rating >= 4.5) {
-        return he.decode(rating + ' &#xf005;&#xf005;&#xf005;&#xf005;&#xf089;' + ' (' + totalEvaluations + ')')
+        qualificationFormat = he.decode(rating + ' &#xf005;&#xf005;&#xf005;&#xf005;&#xf089;')
     } else if (rating >= 4) {
-        return he.decode(rating + ' &#xf005;&#xf005;&#xf005;&#xf005;' + ' (' + totalEvaluations + ')')
+        qualificationFormat = he.decode(rating + ' &#xf005;&#xf005;&#xf005;&#xf005;')
     } else if (rating >= 3.5) {
-        return he.decode(rating + ' &#xf005;&#xf005;&#xf005;&#xf089;' + ' (' + totalEvaluations + ')')
+        qualificationFormat = he.decode(rating + ' &#xf005;&#xf005;&#xf005;&#xf089;')
     } else if (rating >= 3) {
-        return he.decode(rating + ' &#xf005;&#xf005;&#xf005;' + ' (' + totalEvaluations + ')')
+        qualificationFormat = he.decode(rating + ' &#xf005;&#xf005;&#xf005;')
     } else if (rating >= 2.5) {
-        return he.decode(rating + ' &#xf005;&#xf005;&#xf089;' + ' (' + totalEvaluations + ')')
+        qualificationFormat = he.decode(rating + ' &#xf005;&#xf005;&#xf089;')
     } else if (rating >= 2) {
-        return he.decode(rating + ' &#xf005;&#xf005;' + ' (' + totalEvaluations + ')')
+        qualificationFormat = he.decode(rating + ' &#xf005;&#xf005;')
     } else if (rating >= 1.5) {
-        return he.decode(rating + ' &#xf005;&#xf089;' + ' (' + totalEvaluations + ')')
+        qualificationFormat = he.decode(rating + ' &#xf005;&#xf089;')
     } else if (rating == 1) {
-        return he.decode(rating + ' &#xf005;' + ' (' + totalEvaluations + ')')
-    } else {
-        return 'Sin valorizaciones'
+        qualificationFormat = he.decode(rating + ' &#xf005;')
     }
+    if (totalEvaluations !== -1) qualificationFormat += ' (' + totalEvaluations + ')'
+    return qualificationFormat
 }
 
 //Add the hyphen "-" to the Rut
