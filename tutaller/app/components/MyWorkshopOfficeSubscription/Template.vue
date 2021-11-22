@@ -18,17 +18,11 @@
           textWrap="true"
           class="paragraph"
         />
-        <template v-if="myWorkshopOffice.workshop_suscription_id !== 1">
-          <Label
-            text="Fecha de expiración"
-            textWrap="true"
-            class="paragraph font-bold"
-          />
-          <Label text="Expira el " textWrap="true" class="paragraph" />
-        </template>
-        <template v-else>
-          <MDButton text="Subscribirse" @tap="goToSubscriptionListPage" />
-        </template>
+        <MDButton
+          v-if="myWorkshopOffice.workshop_suscription_id == 1"
+          text="Subscribirse"
+          @tap="goToSubscriptionListPage"
+        />
       </StackLayout>
     </ScrollView>
   </Page>
