@@ -37,7 +37,7 @@ export default {
               this.workshopPostulationList = response.Postulations
               break
             case 'Operation Failed':
-              console.log('fail')
+              console.log('Postulations not found')
           }
         })
     },
