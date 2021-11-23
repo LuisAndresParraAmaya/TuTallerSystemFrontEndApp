@@ -5,14 +5,11 @@ export default {
     props: ['workshopOfficeWork'],
     data() {
         return {
-            workshopOfficeMilestoneList: [],
+            workshopOfficeMilestoneList: '',
             workshopOfficeCurrentMilestone: '',
             milestoneProgressCols: '',
 
-            workAdvanceList: [
-                { id: 1, image_name: '67banner-ads-examples-aws.jpg', workshop_office_work_id: 1, workshop_office_service_advance_description: 'Algo avance algo and fsd fsd f df we f wef wf wf we fe.' },
-                { id: 2, image_name: '67banner-ads-examples-aws.jpg', workshop_office_work_id: 1, workshop_office_service_advance_description: 'S das d qwe qe qe qe qe qe q.' }
-            ],
+            workshopOfficeWorkAdvanceList: '',
 
             workshopOfficeEmployeeList: '',
 
@@ -183,7 +180,32 @@ export default {
         },
 
         getWorkshopOfficeAdvanceList() {
+            const data = { workshop_office_work_id: this.workshopOfficeWork.workshop_office_work_id }
 
+            fetch('http://10.0.2.2:8080/WorkshopOfficeWorkAdvanceList', {
+                method: 'POST',
+                body: JSON.stringify({ data }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            }).then(res => res.json())
+                .catch(error => {
+                    console.error('Error:', error)
+                    alert({
+                        title: 'Error',
+                        message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
+                        okButtonText: 'OK'
+                    })
+                })
+                .then(response => {
+                    switch (response.Response) {
+                        case 'Operation Success':
+                            this.workshopOfficeWorkAdvanceList = response.WorkshopOfficeWorkAdvanceList
+                            break
+                        case 'Work advances not found':
+                            console.log('Work advances not found')
+                    }
+                })
         },
 
         goToWorkshopOfficeWorkTechnicalReport() {
