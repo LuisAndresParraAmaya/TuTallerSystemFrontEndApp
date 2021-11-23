@@ -12,9 +12,17 @@
         textWrap="true"
         class="paragraph font-bold"
       />
-      <Label text="nombre" textWrap="true" class="paragraph" />
+      <Label
+        :text="workshopOfficeService.workshop_office_service_name"
+        textWrap="true"
+        class="paragraph"
+      />
       <Label text="Monto pagado" textWrap="true" class="paragraph font-bold" />
-      <Label text="precio" textWrap="true" class="paragraph" />
+      <Label
+        :text="'$ ' + workshopOfficeService.offer_price + ' CLP'"
+        textWrap="true"
+        class="paragraph"
+      />
       <Label
         text="Método de pago"
         textWrap="true"
@@ -26,7 +34,7 @@
         textWrap="true"
         class="paragraph font-bold"
       />
-      <Label text="DD/MM/YYYY hh:mm" textWrap="true" class="paragraph" />
+      <Label :text="new Date()" textWrap="true" class="paragraph" />
       <Label
         text="Para su seguridad, el pago será retenido hasta obtener una confirmación de que el servicio automotriz sea realizado en su totalidad por parte del técnico y por parte suya."
         textWrap="true"
