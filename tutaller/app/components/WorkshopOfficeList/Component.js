@@ -41,6 +41,8 @@ export default {
             this.getWorkshopList()
             //refresh ad image
             event.object.getViewById('imgWorkshopOfficeAd').src = 'http://10.0.2.2:8080/img?t' + new Date().getTime()
+            //Temporal solution to make the service tab in bottom navigation to update the WorkshopOfficeWorkList view (TODO)
+            if (this.$navigator.paths.serviceNav == '/WorkshopOfficeWorkList') this.$navigator.navigate('/WorkshopOfficeWorkList', { frame: 'serviceNav' })
         },
 
         showWorkshopOffice(event) {
