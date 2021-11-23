@@ -2,12 +2,25 @@
   <Page @loaded="onPageLoaded">
     <ActionBar title="Talleres automotrices" />
     <StackLayout>
-      <Image id='imgWorkshopOfficeAd' @tap="showWorkshopOfficeFromAd" stretch="fill" class="ad-image" />
-      <GridLayout rows="auto, *">
+      <Image
+        id="imgWorkshopOfficeAd"
+        @tap="showWorkshopOfficeFromAd"
+        stretch="fill"
+        class="ad-image"
+      />
+      <GridLayout rows="*">
+        <Label
+          v-if="workshopOfficeList == ''"
+          text="Por el momento no se encuentran sucursales automotrices que dispongan de suscripciones activas. Vuelve más tarde."
+          textWrap="true"
+          class="paragraph text-center h-middle"
+          row="0"
+        />
         <ListView
+          v-else
           for="workshopOffice in workshopOfficeList"
           @itemTap="showWorkshopOffice"
-          row="1"
+          row="0"
         >
           <v-template>
             <GridLayout rows="*, *, *" columns="60%, *, auto">
@@ -49,7 +62,7 @@
         <MDFloatingActionButton
           src="res://baseline_filter_list_white_36"
           @tap="goToFilterWorkshopOfficeListPage"
-          row="1"
+          row="0"
           class="fab-btn"
         />
       </GridLayout>
