@@ -150,9 +150,10 @@ export default {
             else if (evaluationUserRut !== this.userRut && this.userType == 1) return this.workshopOfficeEvaluationOptionsAdmin
         },
 
-        //Go
+        //Go to moderate workshop office evaluation. It requires the evaluation id, its rating, review and the rut from the user that made it
         goToModerateWorkshopOfficeEvaluationPage(evaluationId, evaluationRating, evaluationReview, evaluationUserRut) {
             this.$navigator.navigate('/ModerateWorkshopOfficeEvaluation', { props: { evaluationId: evaluationId, evaluationRating: evaluationRating, evaluationReview: evaluationReview, evaluationUserRut: evaluationUserRut, workshopOffice: this.workshopOffice } })
+            this.workshopOfficeEvaluationList = ''
         },
         //Show the workshop office service list, requiring that office id. The actualframe allows to show content in that view according to the frame (navigator or accountNav)
         goToWorkshopOfficeServiceListPage() {
