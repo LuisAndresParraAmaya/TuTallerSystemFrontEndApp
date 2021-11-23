@@ -34,7 +34,8 @@ export default {
                 .then(response => {
                     switch (response.Response) {
                         case 'Operation Success':
-                            this.$navigator.navigate('/PaymentReceipt')
+                            console.log(new Date())
+                            this.$navigator.navigate('/PaymentReceipt', { props: { workshopOfficeService: this.workshopOfficeService } })
                             break
                         case 'Invalid user rut or service':
                             console.log('Invalid user rut or service')
