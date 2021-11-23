@@ -5,7 +5,8 @@ export default {
     data() {
         return {
             active: false,
-            isLoggedIn: this.checkifLoggedIn()
+            isLoggedIn: this.checkifLoggedIn(),
+            ApplicationSettings: ApplicationSettings
         }
     },
     methods: {

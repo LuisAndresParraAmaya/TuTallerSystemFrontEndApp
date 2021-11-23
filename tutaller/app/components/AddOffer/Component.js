@@ -24,7 +24,7 @@ export default {
     methods: {
         addOffer() {
             if (this.validateFormAddWorkshopOfficeServiceOffer()) {
-                const data = { offer_type: this.offerType, offer_name: this.nameInput, offer_discount: this.discountInput, offer_valid_until_date: formatDateToDB(this.validUntilDate), offer_valid_until_time: formatTimeToDB(this.validUntilTime) }
+                const data = { offer_type: this.offerType, offer_name: this.nameInput.trim(), offer_discount: this.discountInput, offer_valid_until_date: formatDateToDB(this.validUntilDate), offer_valid_until_time: formatTimeToDB(this.validUntilTime) }
                 this.$navigator.navigate('/ActivateOffer', { props: { addOfferData: data, offerType: this.offerType, workshopOfficeId: this.workshopOfficeId }, frame: 'accountNav', backstackVisible: false })
             }
         },

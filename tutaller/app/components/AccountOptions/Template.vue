@@ -19,7 +19,7 @@
           @tap="goToWorkshopManagementPage"
         />
         <MDButton
-          v-show="isLoggedIn"
+          v-show="isLoggedIn && ApplicationSettings.getString('userType') == 1"
           text="Gestionar suscripciones"
           @tap="goToSubscriptionManagementPage"
         />

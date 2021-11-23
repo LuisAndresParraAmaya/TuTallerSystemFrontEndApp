@@ -36,7 +36,12 @@
           class="paragraph font-bold"
         />
         <template v-for="offerItem in offerItemList">
-          <Label :key="offerItem" :text="offerItem" textWrap="true" class="paragraph" />
+          <Label
+            :key="offerItem"
+            :text="translateSubscriptionName(offerItem)"
+            textWrap="true"
+            class="paragraph"
+          />
         </template>
       </StackLayout>
     </ScrollView>

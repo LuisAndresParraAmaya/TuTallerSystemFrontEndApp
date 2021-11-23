@@ -1,13 +1,15 @@
 import { formatDate } from "~/utils/formatter"
 const sqlite = require('nativescript-sqlite')
+import { translateSubscriptionName } from "~/utils/translators"
 
 export default {
     props: ['offer', 'offerType'],
     data() {
         return {
-            formatDate: formatDate,
             activatedToMsg: '',
-            offerItemList: []
+            offerItemList: [],
+            formatDate: formatDate,
+            translateSubscriptionName
         }
     },
 
