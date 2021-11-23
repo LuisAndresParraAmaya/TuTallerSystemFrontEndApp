@@ -66,6 +66,7 @@
             text="Ver ficha técnica"
             @tap="goToWorkshopOfficeWorkTechnicalReport"
             class="outline-btn"
+            :hidden="isShowTechnicalReportBtnHidden"
           />
           <Label text="Avances" textWrap="true" class="paragraph font-bold" />
         </StackLayout>
