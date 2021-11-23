@@ -8,9 +8,15 @@
     </ActionBar>
     <ScrollView>
       <StackLayout>
-        <Image src="http://10.0.2.2:8080/img" stretch="aspectFit" />
+        <Image
+          :src="'http://10.0.2.2:8080/' + workshopOfficeWorkAdvance.image_name"
+          stretch="aspectFit"
+          class="paragraph"
+        />
         <Label
-          :text="workshopOfficeWorkAdvance.workshop_office_service_advance_description"
+          :text="
+            workshopOfficeWorkAdvance.workshop_office_service_advance_description
+          "
           textWrap="true"
           class="paragraph"
         />
