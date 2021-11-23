@@ -1,4 +1,5 @@
 export default {
+    props: ['workshopOfficeService'],
     data() {
         return {
             isContinueBtnTappable: true
