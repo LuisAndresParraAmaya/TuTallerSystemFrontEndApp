@@ -9,13 +9,27 @@
     <ScrollView>
       <StackLayout>
         <Label text="Precio" textWrap="true" class="paragraph font-bold" />
-        <Label
-          :text="
-            '$' + workshopOfficeService.workshop_office_service_price + ' CLP'
-          "
-          textWrap="true"
-          class="paragraph"
-        />
+        <Label class="paragraph">
+          <FormattedString>
+            <Span
+              :text="
+                '$' +
+                workshopOfficeService.workshop_office_service_price +
+                ' CLP '
+              "
+              :class="{
+                'text-line-through': workshopOfficeService.offer_discount !== 0,
+              }"
+            />
+            <!-- If the service has an active offer -->
+            <Span
+              v-if="workshopOfficeService.offer_discount !== 0"
+              :text="
+                '$' + workshopOfficeService.offer_price + ' CLP (en oferta)'
+              "
+            />
+          </FormattedString>
+        </Label>
         <Label
           text="Tiempo estimado"
           textWrap="true"

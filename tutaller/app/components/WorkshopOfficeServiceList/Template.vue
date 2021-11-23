@@ -28,22 +28,28 @@
               class="title-text"
             />
             <Label
-              :text="
-                '$' +
-                workshopOfficeService.workshop_office_service_price +
-                ' CLP'
-              "
+              :text="workshopOfficeService.workshop_office_service_estimated_time"
               row="1"
               col="1"
               class="caption-text"
             />
+            <!-- If the service has an active offer -->
+            <template v-if="workshopOfficeService.offer_discount !== 0">
+              <Label text="En oferta" row="2" col="1" class="caption-text" />
+              <Label
+                :text="'$' + workshopOfficeService.offer_price + ' CLP'"
+                row="1"
+                col="2"
+                class="meta-text"
+              />
+            </template>
             <Label
-              :text="
-                workshopOfficeService.workshop_office_service_estimated_time
-              "
-              row="2"
-              col="1"
-              class="caption-text"
+              :text="'$' + workshopOfficeService.workshop_office_service_price + ' CLP'"
+              row="0"
+              col="2"
+              :class="{
+                'text-line-through': workshopOfficeService.offer_discount !== 0,
+              }"
             />
           </GridLayout>
         </v-template>

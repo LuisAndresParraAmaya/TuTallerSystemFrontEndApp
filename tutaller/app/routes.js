@@ -32,6 +32,7 @@ import WorkshopOfficeServiceList from './components/WorkshopOfficeServiceList/Te
 import WorkshopOfficeService from './components/WorkshopOfficeService/Template.vue'
 import ReserveWorkshopOfficeAttention from './components/ReserveWorkshopOfficeAttention/Template.vue'
 import PayWorkshopOfficeService from './components/PayWorkshopOfficeService/Template.vue'
+import Payment from './components/Payment/Template.vue'
 import PaymentReceipt from './components/PaymentReceipt/Template.vue'
 import WorkshopServicePaymentReceipt from './components/WorkshopServicePaymentReceipt/Template.vue'
 import AddWorkshopOfficeServiceEvaluation from './components/AddWorkshopOfficeServiceEvaluation/Template.vue'
@@ -157,6 +158,9 @@ export const routes = {
     },
     '/PayWorkshopOfficeService': {
         component: PayWorkshopOfficeService,
+    },
+    '/Payment': {
+        component: Payment,
     },
     '/PaymentReceipt': {
         component: PaymentReceipt,
