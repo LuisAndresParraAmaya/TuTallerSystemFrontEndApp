@@ -1,6 +1,6 @@
 <template>
   <Page @loaded="getWorkshopOfficeEmployeeList">
-    <ActionBar title="Servicios automotrices">
+    <ActionBar :title="workshopOfficeWork.workshop_office_service_name">
       <NavigationButton
         @tap="goToPreviousPage"
         android.systemIcon="@drawable/ic_menu_back"
@@ -9,6 +9,26 @@
     <GridLayout rows="auto, *, auto" cols="*">
       <template row="0" col="0">
         <StackLayout>
+          <Label text="Taller" textWrap="true" class="paragraph font-bold" />
+          <Label
+            :text="workshopOfficeWork.workshop_name"
+            textWrap="true"
+            class="paragraph"
+          />
+          <Label textWrap="true" class="paragraph">
+            <FormattedString>
+              <Span text.decode="&#xf041; " class="fas" />
+              <Label
+                :text="
+                  workshopOfficeWork.workshop_office_address +
+                  ', ' +
+                  workshopOfficeWork.workshop_office_commune +
+                  ', ' +
+                  workshopOfficeWork.workshop_office_region
+                "
+              />
+            </FormattedString>
+          </Label>
           <GridLayout
             rows="auto"
             :columns="milestoneProgressCols"
@@ -46,13 +66,12 @@
             text="Ver ficha técnica"
             @tap="goToWorkshopOfficeWorkTechnicalReport"
             class="outline-btn"
-            :hidden="isShowTechnicalReportBtnHidden"
           />
           <Label text="Avances" textWrap="true" class="paragraph font-bold" />
         </StackLayout>
       </template>
       <ListView
-        for="workAdvance in workAdvanceList"
+        for="workshopOfficeWorkAdvance in workshopOfficeWorkAdvanceList"
         @itemTap="showWorkshopOfficeAdvance"
         row="1"
         col="0"
@@ -60,13 +79,17 @@
         <v-template>
           <GridLayout rows="60%" columns="60%, *">
             <Image
-              src="http://10.0.2.2:8080/img"
+              :src="
+                'http://10.0.2.2:8080/' + workshopOfficeWorkAdvance.image_name
+              "
               stretch="aspectFit"
               row="0"
               col="0"
             />
             <Label
-              :text="workAdvance.workshop_office_service_advance_description"
+              :text="
+                workshopOfficeWorkAdvance.workshop_office_service_advance_description
+              "
               row="0"
               col="1"
               class="caption-text"
