@@ -3,7 +3,6 @@ const mediaFilePicker = new mPicker.Mediafilepicker()
 const path = require('path')
 const fileSystemModule = require('@nativescript/core/file-system')
 import { SnackBar } from '@nativescript-community/ui-material-snackbar'
-import { ImageSource } from '@nativescript/core'
 import { validateImage } from '~/utils/validator'
 
 export default {
