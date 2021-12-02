@@ -4,31 +4,33 @@ const path = require('path')
 const fileSystemModule = require('@nativescript/core/file-system')
 import { SnackBar } from '@nativescript-community/ui-material-snackbar'
 import { validateImage } from '~/utils/validator'
+import { showSnackBarInsufficientPrivileges } from '~/utils/msg'
+import { ApplicationSettings } from '@nativescript/core'
 
 export default {
-    props: ['workshopOfficeId'],
+    props: ['workshopOfficeWorkId', 'workshopOfficeEmployeeList'],
     data() {
         return {
-            adNameInput: '',
-            adImageFile: '',
-            adImagePath: '',
-            adImageName: '',
-            adImageExt: '',
+            descriptionInput: '',
+            imageFile: '',
+            imagePath: '',
+            imageName: '',
+            imageExt: '',
 
-            adNameInputErr: '',
-            adImageInputErr: '',
+            descriptionInputErr: '',
+            imageInputErr: '',
 
-            isAddAdBtnTappable: true,
+            isAddAdvanceBtnTappable: true,
         }
     },
 
     methods: {
-        addWorkshopOfficeAd() {
-            if (this.validateFormAddWorkshopOfficeAd()) {
-                this.isAddAdBtnTappable = false
+        addWorkshopOfficeWorkAdvance() {
+            if (this.validateFormAddWorkshopOfficeWorkAdvance()) {
+                this.isAddAdvanceBtnTappable = false
 
-                let file = this.adImagePath
-                let url = 'http://10.0.2.2:8080/AddWorkshopOfficeAd'
+                let file = this.imagePath
+                let url = 'http://10.0.2.2:8080/AddWorkshopOfficeWorkAdvance'
                 let name = file.substr(file.lastIndexOf('/') + 1)
 
                 let bghttp = require('@nativescript/background-http')
@@ -42,16 +44,15 @@ export default {
                     description: 'Uploading' + name
                 }
                 let params = [
-                    { name: 'workshop_office_ad_name', value: this.adNameInput.trim() },
-                    { name: 'workshop_office_id', value: this.workshopOfficeId },
-                    { name: 'file', filename: file, mimeType: 'image/' + this.adImageExt }
+                    { name: 'workshop_office_service_advance_description', value: this.descriptionInput.trim() },
+                    { name: 'workshop_office_work_id', value: this.workshopOfficeWorkId },
+                    { name: 'file', filename: file, mimeType: 'image/' + this.imageExt }
                 ]
                 let task = session.multipartUpload(params, request)
-                task.on('error', error => {
-                    console.log('Error:', error)
+                task.on('error', () => {
                     const snackBar = new SnackBar()
                     snackBar.simple('Se ha producido un error al momento de realizar la acción. Inténtalo nuevamente.')
-                    this.isAddAdBtnTappable = true
+                    this.isAddAdvanceBtnTappable = true
                 })
                 task.on('responded', response => {
                     switch (JSON.parse(response.data).Response) {
@@ -59,22 +60,27 @@ export default {
                             this.$navigateBack()
                             break
                         case 'Operation Failed':
-                            this.isAddAdBtnTappable = true
+                            this.isAddAdvanceBtnTappable = true
                     }
                 })
             }
         },
 
-        validateFormAddWorkshopOfficeAd() {
+        validateFormAddWorkshopOfficeWorkAdvance() {
             let isValidationOK = true
-            //Null ad name input
-            if (this.adNameInput.trim() == '') {
-                this.adNameInputErr = 'Ingresa un nombre para el anuncio'
+            //Check if logged in user type is the technician
+            if (!this.workshopOfficeEmployeeList.some(item => item.user_rut == ApplicationSettings.getString('user')) || ApplicationSettings.getString('userType') != 4) {
+                showSnackBarInsufficientPrivileges()
                 isValidationOK = false
             }
-            //Null ad image input
-            if (this.adImagePath.trim() == '') {
-                this.adImageInputErr = 'Ingresa una imagen para el anuncio'
+            //Null description input
+            if (this.descriptionInput.trim() == '') {
+                this.descriptionInputErr = 'Ingresa una descripción para el avance'
+                isValidationOK = false
+            }
+            //Null image input
+            if (this.imagePath.trim() == '') {
+                this.imageInputErr = 'Ingresa una imagen para el avance'
                 isValidationOK = false
             }
             //Check if validation is OK
@@ -82,7 +88,7 @@ export default {
             else return false
         },
 
-        async selectAdImage() {
+        async selectImage() {
             var options = {
                 android: {
                     isCaptureMood: false,
@@ -104,10 +110,10 @@ export default {
                     const snackBar = new SnackBar()
                     snackBar.simple(imageValidationRes)
                 } else {//Validation OK
-                    this.adImagePath = imagePath
-                    this.adImageName = imageName
-                    this.adImageExt = imageExt
-                    this.onAdImageImgChange()
+                    this.imagePath = imagePath
+                    this.imageName = imageName
+                    this.imageExt = imageExt
+                    this.onImageImgChange()
                 }
             })
             mediaFilePicker.on('error', error => {
@@ -117,11 +123,11 @@ export default {
             })
         },
 
-        onAdNameTxtChange() {
-            this.adNameInputErr = ''
+        onDescriptionTxtChange() {
+            this.descriptionInputErr = ''
         },
-        onAdImageImgChange() {
-            this.adImageInputErr = ''
+        onImageImgChange() {
+            this.imageInputErr = ''
         },
 
         goToPreviousPage() {

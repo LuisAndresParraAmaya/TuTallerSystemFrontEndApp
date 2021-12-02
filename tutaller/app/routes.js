@@ -52,6 +52,7 @@ import ModifyPassword from './components/ModifyPassword/Template.vue'
 import FileSupportTicket from './components/FileSupportTicket/Template.vue'
 import WorkshopOfficeWorkList from './components/WorkshopOfficeWorkList/Template.vue'
 import WorkshopOfficeWork from './components/WorkshopOfficeWork/Template.vue'
+import AddWorkshopOfficeWorkAdvance from './components/AddWorkshopOfficeWorkAdvance/Template.vue'
 import WorkshopOfficeWorkAdvance from './components/WorkshopOfficeWorkAdvance/Template.vue'
 import AddWorkshopOfficeWorkTechnicalReport from './components/AddWorkshopOfficeWorkTechnicalReport/Template.vue'
 import WorkshopOfficeWorkTechnicalReport from './components/WorkshopOfficeWorkTechnicalReport/Template.vue'
@@ -218,6 +219,9 @@ export const routes = {
     },
     '/WorkshopOfficeWork': {
         component: WorkshopOfficeWork,
+    },
+    '/AddWorkshopOfficeWorkAdvance': {
+        component: AddWorkshopOfficeWorkAdvance,
     },
     '/WorkshopOfficeWorkAdvance': {
         component: WorkshopOfficeWorkAdvance,

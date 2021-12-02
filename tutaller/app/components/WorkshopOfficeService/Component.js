@@ -1,5 +1,5 @@
 export default {
-    props: ['workshopOfficeService', 'actualFrame'],
+    props: ['workshopOfficeService', 'workshopOfficeAttentionList', 'actualFrame'],
     data() {
         return {
 
@@ -8,7 +8,7 @@ export default {
 
     methods: {
         requestWorkshopService() {
-            this.$navigator.navigate('/ReserveWorkshopOfficeAttention', { props: { workshopOfficeService: this.workshopOfficeService } })
+            this.$navigator.navigate('/ReserveWorkshopOfficeAttention', { props: { workshopOfficeService: this.workshopOfficeService, workshopOfficeAttentionList: this.workshopOfficeAttentionList } })
         },
 
         goToPreviousPage() {

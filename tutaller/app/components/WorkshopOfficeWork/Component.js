@@ -15,7 +15,8 @@ export default {
 
             doServiceActionBtnText: '',
             isDoServiceActionBtnHidden: true,
-            isShowTechnicalReportBtnHidden: true
+            isShowTechnicalReportBtnHidden: true,
+            isGoToAddWorkshopOfficeWorkAdvancePageBtnHidden: true
         }
     },
     methods: {
@@ -154,18 +155,21 @@ export default {
                                     if (this.workshopOfficeEmployeeList.some(item => item.user_rut == ApplicationSettings.getString('user')) && ApplicationSettings.getString('userType') == 4) {
                                         this.doServiceActionBtnText = 'Confirmar recepción del vehículo'
                                         this.isDoServiceActionBtnHidden = false
+                                        this.isGoToAddWorkshopOfficeWorkAdvancePageBtnHidden = false
                                     }
                                     break
                                 case 'Inspección del vehículo':
                                     if (this.workshopOfficeEmployeeList.some(item => item.user_rut == ApplicationSettings.getString('user')) && ApplicationSettings.getString('userType') == 4) {
                                         this.doServiceActionBtnText = 'Realizar ficha técnica'
                                         this.isDoServiceActionBtnHidden = false
+                                        this.isGoToAddWorkshopOfficeWorkAdvancePageBtnHidden = false
                                     }
                                     break
                                 case 'Realización del servicio':
                                     if (this.workshopOfficeEmployeeList.some(item => item.user_rut == ApplicationSettings.getString('user')) && ApplicationSettings.getString('userType') == 4) {
                                         this.doServiceActionBtnText = 'Finalizar servicio'
                                         this.isDoServiceActionBtnHidden = false
+                                        this.isGoToAddWorkshopOfficeWorkAdvancePageBtnHidden = false
                                     }
                                     this.isShowTechnicalReportBtnHidden = false
                                     break
@@ -214,6 +218,11 @@ export default {
         //Go to the view to add a technical report for the workshop office work
         goToAddWorkshopOfficeWorkTechnicalReportPage() {
             this.$navigator.navigate('/AddWorkshopOfficeWorkTechnicalReport', { props: { workshopOfficeWorkId: this.workshopOfficeWork.workshop_office_work_id, workshopOfficeWorkMilestoneId: this.workshopOfficeCurrentMilestone.id, workshopOfficeEmployeeList: this.workshopOfficeEmployeeList }, frame: 'serviceNav' })
+        },
+        //Go to the view to add a workshop office work advance. Only the employee can add an advance
+        goToAddWorkshopOfficeWorkAdvancePage() {
+            if (this.workshopOfficeEmployeeList.some(item => item.user_rut == ApplicationSettings.getString('user')) && ApplicationSettings.getString('userType') == 4) this.$navigator.navigate('/AddWorkshopOfficeWorkAdvance', { props: { workshopOfficeWorkId: this.workshopOfficeWork.workshop_office_work_id, workshopOfficeEmployeeList: this.workshopOfficeEmployeeList }, frame: 'serviceNav' })
+            else showSnackBarInsufficientPrivileges()
         },
         goToPreviousPage() {
             this.$navigateBack();

@@ -1,12 +1,18 @@
 import { validateDatetime } from "~/utils/validator"
+import { translateWeekDay } from '~/utils/translators'
+import { formatTimeHM } from '~/utils/formatter'
+import { validateDatetimeAttention } from "~/utils/validator"
 
 export default {
-    props: ['workshopOfficeService'],
+    props: ['workshopOfficeService', 'workshopOfficeAttentionList'],
     data() {
         return {
             reservedDateInput: '',
             reservedTimeInput: '',
-            reservedDatetimeErr: ''
+            reservedDatetimeErr: '',
+
+            translateWeekDay: translateWeekDay,
+            formatTimeHM: formatTimeHM
         }
     },
 
@@ -25,6 +31,13 @@ export default {
             if (reservedDatetimeValidationRes !== null) {
                 this.reservedDatetimeErr = reservedDatetimeValidationRes
                 isValidationOK = false
+            } else {
+                //Attention date/time validation
+                let reservedDatetimeAttentionValidationRes = validateDatetimeAttention(this.reservedDateInput, this.reservedTimeInput, this.workshopOfficeAttentionList)
+                if (reservedDatetimeAttentionValidationRes !== null) {
+                    this.reservedDatetimeErr = reservedDatetimeAttentionValidationRes
+                    isValidationOK = false
+                }
             }
             //Check if validation is OK
             if (isValidationOK) return true

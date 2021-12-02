@@ -1,3 +1,7 @@
+import { translateWeekDay } from "./translators"
+import { formatTimeToHHMMSS } from '~/utils/formatter'
+import { weekdayList } from "./lists"
+
 export function validateRut(rut) {
     if (rut == '') return 'Ingresa el rut.'
     if (!/^[0-9]+[-|-]{1}[0-9kK]{1}$/.test(rut)) return 'Ingresa un rut valido.'
@@ -54,9 +58,11 @@ export function validateAttentionTime(isSwitchChecked, appertureTime, departureT
     if (isSwitchChecked && appertureTime == '' && departureTime == '') return 'Ingresa la hora de apertura y de cierre del día ' + day + '.'
     else if (isSwitchChecked && appertureTime == '') return 'Ingresa la hora de apertura del día ' + day + '.'
     else if (isSwitchChecked && departureTime == '') return 'Ingresa la hora de cierre del día ' + day + '.'
+    else if (isSwitchChecked && appertureTime >= departureTime) return 'Ingresa una hora de apertura que no sea mayor o igual a la de cierre'
     return null
 }
 
+//Validate a image, making sure it's a png, jpg or jpeg. Also, validates that it's not greater or equal than 5 MB and that the file name is less that 45 characters
 export function validateImage(name, ext, size) {
     if (ext !== 'png' && ext !== 'jpg' && ext !== 'jpeg') return 'Tipo de archivo no valido. Debe ser un archivo .png, .jpg o .jpeg.'
     else if (size >= 5242880) return 'Tamaño de archivo no valido. Debe ser inferior a 5MB.'
@@ -80,6 +86,22 @@ export function validateDatetime(date, time, minDatetime) {
             if (date.toDateString() == minDatetime.toDateString()) {
                 if (time < minDatetime) return 'La hora seleccionada debe ser superior a la de hoy.'
             }
+        }
+    }
+    return null
+}
+
+export function validateDatetimeAttention(selectedDate, selectedTime, attentionList) {
+    let selectedWeekday = weekdayList[selectedDate.getDay()]
+    let translatedSelectedWeekday = translateWeekDay(selectedWeekday).toLowerCase()
+    let selectedTimeHHMMSS = formatTimeToHHMMSS(selectedTime)
+
+    if (!attentionList.some(item => item.workshop_office_attention_day == selectedWeekday)) return 'La sucursal no atiende el día ' + translatedSelectedWeekday + '. Selecciona otro día.'
+
+    for (let i = 0; i < attentionList.length; i++) {
+        if (attentionList[i].workshop_office_attention_day == selectedWeekday) {
+            if (selectedTimeHHMMSS < attentionList[i].workshop_office_attention_aperture_time) return 'Ingresa una hora que sea superior al horario de apertura para el día ' + translatedSelectedWeekday + '.'
+            else if (selectedTimeHHMMSS > attentionList[i].workshop_office_attention_departure_time) return 'Ingresa una hora que sea inferior al horario de cierre para el día ' + translatedSelectedWeekday + '.'
         }
     }
     return null

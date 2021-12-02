@@ -38,6 +38,30 @@
               />
             </FormattedString>
           </Label>
+          <Label text="Horas" textWrap="true" class="paragraph font-bold" />
+          <template
+            v-for="workshopOfficeAttention in workshopOfficeAttentionList"
+          >
+            <Label
+              :key="workshopOfficeAttention"
+              :text="
+                translateWeekDay(
+                  workshopOfficeAttention.workshop_office_attention_day
+                ) +
+                ' ' +
+                formatTimeHM(
+                  workshopOfficeAttention.workshop_office_attention_aperture_time
+                ) +
+                ' - ' +
+                formatTimeHM(
+                  workshopOfficeAttention.workshop_office_attention_departure_time
+                )
+              "
+              textWrap="true"
+              class="paragraph"
+            >
+            </Label>
+          </template>
           <Label
             text="Teléfono de esta sucursal"
             textWrap="true"

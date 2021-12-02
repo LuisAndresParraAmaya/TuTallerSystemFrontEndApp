@@ -6,8 +6,8 @@
         android.systemIcon="@drawable/ic_menu_back"
       />
     </ActionBar>
-    <GridLayout rows="auto, *, auto" cols="*">
-      <template row="0" col="0">
+    <GridLayout rows="auto, *, auto">
+      <template row="0">
         <StackLayout>
           <Label text="Taller" textWrap="true" class="paragraph font-bold" />
           <Label
@@ -71,33 +71,41 @@
           <Label text="Avances" textWrap="true" class="paragraph font-bold" />
         </StackLayout>
       </template>
-      <ListView
-        for="workshopOfficeWorkAdvance in workshopOfficeWorkAdvanceList"
-        @itemTap="showWorkshopOfficeAdvance"
-        row="1"
-        col="0"
-      >
-        <v-template>
-          <GridLayout rows="60%" columns="60%, *">
-            <Image
-              :src="
-                'http://10.0.2.2:8080/' + workshopOfficeWorkAdvance.image_name
-              "
-              stretch="aspectFit"
-              row="0"
-              col="0"
-            />
-            <Label
-              :text="
-                workshopOfficeWorkAdvance.workshop_office_service_advance_description
-              "
-              row="0"
-              col="1"
-              class="caption-text"
-            />
-          </GridLayout>
-        </v-template>
-      </ListView>
+      <GridLayout rows="*" row="1">
+        <ListView
+          for="workshopOfficeWorkAdvance in workshopOfficeWorkAdvanceList"
+          @itemTap="showWorkshopOfficeAdvance"
+          row="0"
+        >
+          <v-template>
+            <GridLayout rows="60%" columns="60%, *">
+              <Image
+                :src="
+                  'http://10.0.2.2:8080/' + workshopOfficeWorkAdvance.image_name
+                "
+                stretch="aspectFit"
+                row="0"
+                col="0"
+              />
+              <Label
+                :text="
+                  workshopOfficeWorkAdvance.workshop_office_service_advance_description
+                "
+                row="0"
+                col="1"
+                class="caption-text"
+              />
+            </GridLayout>
+          </v-template>
+        </ListView>
+        <MDFloatingActionButton
+          src="res://outline_add_white_36"
+          @tap="goToAddWorkshopOfficeWorkAdvancePage"
+          row="0"
+          class="fab-btn"
+          :hidden="isGoToAddWorkshopOfficeWorkAdvancePageBtnHidden"
+        />
+      </GridLayout>
       <MDButton
         :text="doServiceActionBtnText"
         @tap="doServiceAction"

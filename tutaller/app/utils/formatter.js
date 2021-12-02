@@ -25,9 +25,29 @@ export function formatDateToDB(date) {
     return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
 }
 
+//Formats the time in the hh:mm format
+export function formatTimeHM(time) {
+    let minute = time.split(':', 1)[0]
+    let second = time.split(':', 2)[1]
+    return minute + ':' + second
+}
+
 //Formats the time to the format required in the DB (hh:mm)
 export function formatTimeToDB(time) {
     return time.getHours() + ':' + time.getMinutes()
+}
+
+//Formats the time to the hh:mm:ss format
+export function formatTimeToHHMMSS(time) {
+    let hour = time.getHours()
+    let minute = time.getMinutes()
+    let second = time.getSeconds()
+
+    if (hour < 10) hour = '0' + hour
+    if (minute < 10) minute = '0' + minute
+    if (second < 10) second = '0' + second
+
+    return hour + ':' + minute + ':' + second
 }
 
 //Returns the rating number, the rating number expressed in font awesome stars/half stars, and the number of total evaluations (if required, else just send a -1)

@@ -60,3 +60,23 @@ export function translateWorkStatus(status) {
     }
     return status
 }
+
+//Returns the translated week day (there are only seven)
+export function translateWeekDay(weekDay) {
+    switch (weekDay) {
+        case 'monday':
+            return 'Lunes'
+        case 'tuesday':
+            return 'Martes'
+        case 'wednesday':
+            return 'Miercoles'
+        case 'thursday':
+            return 'Jueves'
+        case 'friday':
+            return 'Viernes'
+        case 'saturday':
+            return 'Sábado'
+        case 'sunday':
+            return 'Domingo'
+    }
+}
