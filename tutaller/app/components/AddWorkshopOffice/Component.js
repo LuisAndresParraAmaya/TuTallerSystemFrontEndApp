@@ -120,7 +120,7 @@ export default {
         }
 
         if (workshopOfficeAttentionData.length !== 0) {
-          const data = { workshop_id: this.myWorkshop.workshop_id, commune_id: this.communeIdInput, workshop_suscription_id: 1, workshop_office_address: this.addressInput.trim(), workshop_office_phone: this.phoneInput.trim(), workshop_office_attention: workshopOfficeAttentionData }
+          const data = { workshop_id: this.myWorkshop.workshop_id, commune_id: this.communeIdInput, workshop_office_suscription_id: 1, workshop_office_address: this.addressInput.trim(), workshop_office_phone: this.phoneInput.trim(), workshop_office_attention: workshopOfficeAttentionData }
 
           fetch('http://10.0.2.2:8080/AddWorkshopOffice', {
             method: 'POST',
@@ -143,6 +143,10 @@ export default {
               switch (response.Response) {
                 case 'Office Attention Success':
                   this.$navigateBack()
+                  break
+                case 'Address already in use':
+                  this.addressInputErr = 'Ingresa una dirección que no se encuentre en uso'
+                  this.isAddWorkshopOfficeBtnTappable = true
                   break
                 default:
                   this.isAddWorkshopOfficeBtnTappable = true
