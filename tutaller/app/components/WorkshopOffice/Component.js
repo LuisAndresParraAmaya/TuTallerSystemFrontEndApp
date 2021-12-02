@@ -2,19 +2,24 @@ const he = require('he')
 import { ApplicationSettings } from '@nativescript/core'
 import { formatQualification } from '~/utils/formatter'
 import { SnackBar } from '@nativescript-community/ui-material-snackbar'
+import { translateWeekDay } from '~/utils/translators'
+import { formatTimeHM } from '~/utils/formatter'
 
 export default {
     props: ['workshopOffice'],
     data() {
         return {
             workshopOfficeEvaluationList: '',
+            workshopOfficeAttentionList: [],
             he: he,
             workshopOfficeEvaluationOptionsUser: ['Eliminar evaluación'],
             workshopOfficeEvaluationOptionsAdmin: ['Eliminar evaluación como administrador'],
             userType: '',
             userRut: '',
 
-            formatQualification: formatQualification
+            formatQualification: formatQualification,
+            translateWeekDay: translateWeekDay,
+            formatTimeHM: formatTimeHM
         }
     },
     methods: {
@@ -24,6 +29,7 @@ export default {
             this.userRut = ApplicationSettings.getString('user')
             this.getWorkshopOfficeInformation()
             this.getWorkshopOfficeEvaluationList()
+            this.getWorkshopOfficeAttentionList()
         },
 
         //Delete a evaluation from a workshop office from the user's POV, requiring the evaluation id and the Rut from the currently logged in user 
@@ -135,6 +141,37 @@ export default {
                 })
         },
 
+        getWorkshopOfficeAttentionList() {
+            const data = { workshop_office_id: this.workshopOffice.workshop_office_id }
+
+            fetch('http://10.0.2.2:8080/MyWorkshopOfficeAttention', {
+                method: 'POST',
+                body: JSON.stringify({ data }),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            }).then(res => res.json())
+                .catch(error => {
+                    console.error('Error:', error)
+                    alert({
+                        title: 'Error',
+                        message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
+                        okButtonText: 'OK'
+                    })
+                })
+                .then(response => {
+                    switch (response.Response) {
+                        default:
+                            for (let i = 0; i < response.response.length; i++) {
+                                this.$set(this.workshopOfficeAttentionList, i, response.response[i])
+                            }
+                            break
+                        case 'Attention Not Found':
+                            console.log('Attention not found')
+                    }
+                })
+        },
+
         //If the user selects an option from the DropDown that contains the evaluation options
         onWorkshopOfficeEvaluationOptionChange(event, evaluationId, evaluationUserRut, evaluationRating, evaluationReview) {
             //Clears the index for the DropDown that contains the evaluation options, so the text doesn't appear into it
@@ -155,9 +192,9 @@ export default {
             this.$navigator.navigate('/ModerateWorkshopOfficeEvaluation', { props: { evaluationId: evaluationId, evaluationRating: evaluationRating, evaluationReview: evaluationReview, evaluationUserRut: evaluationUserRut, workshopOffice: this.workshopOffice } })
             this.workshopOfficeEvaluationList = ''
         },
-        //Show the workshop office service list, requiring that office id. The actualframe allows to show content in that view according to the frame (navigator or accountNav)
+        //Show the workshop office service list, requiring that office id and the office attention list. The actualframe allows to show content in that view according to the frame (navigator or accountNav)
         goToWorkshopOfficeServiceListPage() {
-            this.$navigator.navigate('/WorkshopOfficeServiceList', { props: { workshopOfficeId: this.workshopOffice.workshop_office_id, actualFrame: 'navigator' } })
+            this.$navigator.navigate('/WorkshopOfficeServiceList', { props: { workshopOfficeId: this.workshopOffice.workshop_office_id, workshopOfficeAttentionList: this.workshopOfficeAttentionList, actualFrame: 'navigator' } })
         },
         //Show the workshop office employee list, requiring that office id
         goToWorkshopOfficeEmployeeListPage() {
