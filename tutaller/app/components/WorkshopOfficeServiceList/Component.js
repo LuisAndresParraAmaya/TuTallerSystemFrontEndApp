@@ -1,5 +1,5 @@
 export default {
-    props: ['myWorkshop', 'workshopOfficeId', 'actualFrame'],
+    props: ['myWorkshop', 'workshopOfficeId', 'workshopOfficeAttentionList', 'actualFrame'],
     data() {
         return {
             pageTitle: this.setPageTitle(),
@@ -31,13 +31,13 @@ export default {
                             this.workshopOfficeServiceList = response.response
                             break
                         case 'Services not found':
-                            console.log('fail')
+                            console.log('Services not found')
                     }
                 })
         },
 
         showWorkshopOfficeService(event) {
-            this.$navigator.navigate('/WorkshopOfficeService', { props: { workshopOfficeService: event.item, workshopOfficeId: this.workshopOfficeId, actualFrame: this.actualFrame }, frame: this.actualFrame })
+            this.$navigator.navigate('/WorkshopOfficeService', { props: { workshopOfficeService: event.item, workshopOfficeId: this.workshopOfficeId, workshopOfficeAttentionList: this.workshopOfficeAttentionList, actualFrame: this.actualFrame }, frame: this.actualFrame })
         },
 
         setPageTitle() {
