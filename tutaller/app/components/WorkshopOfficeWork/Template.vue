@@ -9,12 +9,12 @@
     <GridLayout rows="auto, *, auto">
       <template row="0">
         <StackLayout>
-          <Label text="Taller" textWrap="true" class="paragraph font-bold" />
-          <Label
-            :text="workshopOfficeWork.workshop_name"
-            textWrap="true"
-            class="paragraph"
-          />
+          <Label textWrap="true" class="paragraph">
+            <FormattedString>
+              <Label text="Taller: " class="font-bold" />
+              <Label :text="workshopOfficeWork.workshop_name" />
+            </FormattedString>
+          </Label>
           <Label textWrap="true" class="paragraph">
             <FormattedString>
               <Span text.decode="&#xf041; " class="fas" />
@@ -25,6 +25,18 @@
                   workshopOfficeWork.workshop_office_commune +
                   ', ' +
                   workshopOfficeWork.workshop_office_region
+                "
+              />
+            </FormattedString>
+          </Label>
+          <Label textWrap="true" class="paragraph">
+            <FormattedString>
+              <Label text="Cliente: " class="font-bold" />
+              <Label
+                :text="
+                  workshopOfficeWork.customer_name +
+                  ' ' +
+                  workshopOfficeWork.customer_last_name
                 "
               />
             </FormattedString>
@@ -56,9 +68,7 @@
             </template>
           </GridLayout>
           <Label
-            :text="
-              workshopOfficeCurrentMilestone.workshop_office_work_milestone_description
-            "
+            :text="workshopOfficeWorkCurrentStatusDescription"
             textWrap="true"
             class="paragraph"
           />
