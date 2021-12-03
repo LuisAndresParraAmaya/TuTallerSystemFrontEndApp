@@ -53,10 +53,13 @@ export function translateWorkStatus(status) {
     switch (status) {
         case 'working':
             return 'En progreso'
-        case 'confirmcompletion':
+        case 'confirmcompletiontechnician':
+        case 'confirmcompletioncustomer':
             return 'Esperando termino'
         case 'complete':
-            return 'Terminado'
+            return 'Finalizado'
+        case 'completeandevaluated':
+            return 'Finalizado y evaluado'
     }
     return status
 }

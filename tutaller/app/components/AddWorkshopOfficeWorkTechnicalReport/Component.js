@@ -1,5 +1,6 @@
 import { ApplicationSettings } from "@nativescript/core"
 import { showSnackBarInsufficientPrivileges } from "~/utils/msg"
+import { SnackBar } from "@nativescript-community/ui-material-snackbar"
 
 export default {
     props: ['workshopOfficeWorkId', 'workshopOfficeWorkMilestoneId', 'workshopOfficeEmployeeList'],
@@ -54,6 +55,13 @@ export default {
                             case 'Operation Success':
                                 this.completeWorkshopOfficeWorkMilestone()
                                 break
+                            case 'Workshop office work already has a technical report':
+                                alert({
+                                    title: 'Error',
+                                    message: 'A este trabajo ya se le ha ingresado la ficha técnica.',
+                                    okButtonText: 'OK'
+                                }).then(() => this.$navigateBack())
+                                break
                             case 'Operation Failed':
                                 console.log('Operation Failed')
                         }
@@ -88,8 +96,9 @@ export default {
                         case 'Operation Success':
                             this.$navigateBack()
                             break
-                        case 'Workshop milestone not found':
-                            console.log('Workshop milestone not found')
+                        case 'Workshop milestone already completed':
+                            const snackBar = new SnackBar()
+                            snackBar.simple('El hito solicitado ya se encuentra completado.')
                             this.isAddTechnicalReportBtnTappable = true
                             break
                         case 'No workshop milestone is pending':

@@ -29,7 +29,6 @@ export default {
                     switch (response.Response) {
                         case 'Operation Success':
                             this.workshopOfficeWorkTechnicalReport = response.WorkshopOfficeWorkTechnicalReport[0]
-                            console.log(this.workshopOfficeWorkTechnicalReport)
                             break
                         case 'Technical report not found':
                             console.log('Technical report not found')

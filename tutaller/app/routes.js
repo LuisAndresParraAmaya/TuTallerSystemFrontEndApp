@@ -35,7 +35,7 @@ import PayWorkshopOfficeService from './components/PayWorkshopOfficeService/Temp
 import Payment from './components/Payment/Template.vue'
 import PaymentReceipt from './components/PaymentReceipt/Template.vue'
 import WorkshopServicePaymentReceipt from './components/WorkshopServicePaymentReceipt/Template.vue'
-import AddWorkshopOfficeServiceEvaluation from './components/AddWorkshopOfficeServiceEvaluation/Template.vue'
+import AddWorkshopOfficeEvaluation from './components/AddWorkshopOfficeEvaluation/Template.vue'
 import FileWorkshopOfficeComplaint from './components/FileWorkshopOfficeComplaint/Template.vue'
 import ModerateWorkshopOfficeEvaluation from './components/ModerateWorkshopOfficeEvaluation/Template.vue'
 import Login from './components/Login/Template.vue'
@@ -56,6 +56,7 @@ import AddWorkshopOfficeWorkAdvance from './components/AddWorkshopOfficeWorkAdva
 import WorkshopOfficeWorkAdvance from './components/WorkshopOfficeWorkAdvance/Template.vue'
 import AddWorkshopOfficeWorkTechnicalReport from './components/AddWorkshopOfficeWorkTechnicalReport/Template.vue'
 import WorkshopOfficeWorkTechnicalReport from './components/WorkshopOfficeWorkTechnicalReport/Template.vue'
+import CompleteWorkshopOfficeWork from './components/CompleteWorkshopOfficeWork/Template.vue'
 
 export const routes = {
     '/WorkshopOfficeList': {
@@ -169,8 +170,8 @@ export const routes = {
     '/WorkshopServicePaymentReceipt': {
         component: WorkshopServicePaymentReceipt,
     },
-    '/AddWorkshopOfficeServiceEvaluation': {
-        component: AddWorkshopOfficeServiceEvaluation,
+    '/AddWorkshopOfficeEvaluation': {
+        component: AddWorkshopOfficeEvaluation,
     },
     '/FileWorkshopOfficeComplaint': {
         component: FileWorkshopOfficeComplaint
@@ -231,6 +232,9 @@ export const routes = {
     },
     '/WorkshopOfficeWorkTechnicalReport': {
         component: WorkshopOfficeWorkTechnicalReport,
+    },
+    '/CompleteWorkshopOfficeWork': {
+        component: CompleteWorkshopOfficeWork,
     }
 }
 
