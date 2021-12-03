@@ -76,6 +76,22 @@ export function formatQualification(rating, totalEvaluations) {
     return qualificationFormat
 }
 
+//Returns the qualification to number (1, 2, 3, 4 or 5)
+export function formatQualificationToNumber(rating) {
+    switch (rating) {
+        case '5 Estrellas':
+            return 5
+        case '4 Estrellas':
+            return 4
+        case '3 Estrellas':
+            return 3
+        case '2 Estrellas':
+            return 2
+        case '1 Estrella':
+            return 1
+    }
+}
+
 //Add the hyphen "-" to the Rut
 export function formatRut(rut) {
     return [rut.slice(0, 8), '-', rut.slice(8)].join('')
