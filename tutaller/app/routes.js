@@ -57,6 +57,10 @@ import WorkshopOfficeWorkAdvance from './components/WorkshopOfficeWorkAdvance/Te
 import AddWorkshopOfficeWorkTechnicalReport from './components/AddWorkshopOfficeWorkTechnicalReport/Template.vue'
 import WorkshopOfficeWorkTechnicalReport from './components/WorkshopOfficeWorkTechnicalReport/Template.vue'
 import CompleteWorkshopOfficeWork from './components/CompleteWorkshopOfficeWork/Template.vue'
+import FileWorkshopOfficeWorkDisputeCase from './components/FileWorkshopOfficeWorkDisputeCase/Template.vue'
+import WorkshopOfficeWorkDisputeCaseList from './components/WorkshopOfficeWorkDisputeCaseList/Template.vue'
+import WorkshopOfficeWorkDisputeCase from './components/WorkshopOfficeWorkDisputeCase/Template.vue'
+import ResolveWorkshopOfficeWorkDisputeCase from './components/ResolveWorkshopOfficeWorkDisputeCase/Template.vue'
 
 export const routes = {
     '/WorkshopOfficeList': {
@@ -235,6 +239,18 @@ export const routes = {
     },
     '/CompleteWorkshopOfficeWork': {
         component: CompleteWorkshopOfficeWork,
+    },
+    '/FileWorkshopOfficeWorkDisputeCase': {
+        component: FileWorkshopOfficeWorkDisputeCase,
+    },
+    '/WorkshopOfficeWorkDisputeCaseList': {
+        component: WorkshopOfficeWorkDisputeCaseList,
+    },
+    '/WorkshopOfficeWorkDisputeCase': {
+        component: WorkshopOfficeWorkDisputeCase,
+    },
+    '/ResolveWorkshopOfficeWorkDisputeCase': {
+        component: ResolveWorkshopOfficeWorkDisputeCase,
     }
 }
 
