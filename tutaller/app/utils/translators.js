@@ -56,10 +56,27 @@ export function translateWorkStatus(status) {
         case 'confirmcompletiontechnician':
         case 'confirmcompletioncustomer':
             return 'Esperando termino'
+        case 'caseopened':
+            return 'En disputa'
         case 'complete':
             return 'Finalizado'
         case 'completeandevaluated':
             return 'Finalizado y evaluado'
+        case 'cancelled':
+            return 'Cancelado'
+    }
+    return status
+}
+
+//Returns the translated service work dispute case status. If nothing applies, just return it untranslated.
+export function translateServiceWorkDisputeCaseStatus(status) {
+    switch (status) {
+        case 'pending':
+            return 'Pendiente'
+        case 'resolvedinfavorofcustomer':
+            return 'A favor del cliente'
+        case 'resolvedinfavorofoffice':
+            return 'A favor del taller'
     }
     return status
 }
