@@ -28,7 +28,9 @@
               class="title-text"
             />
             <Label
-              :text="workshopOfficeService.workshop_office_service_estimated_time"
+              :text="
+                workshopOfficeService.workshop_office_service_estimated_time
+              "
               row="1"
               col="1"
               class="caption-text"
@@ -44,7 +46,11 @@
               />
             </template>
             <Label
-              :text="'$' + workshopOfficeService.workshop_office_service_price + ' CLP'"
+              :text="
+                '$' +
+                workshopOfficeService.workshop_office_service_price +
+                ' CLP'
+              "
               row="0"
               col="2"
               :class="{
@@ -56,7 +62,7 @@
       </ListView>
       <MDFloatingActionButton
         v-show="actualFrame == 'accountNav'"
-        src="res://baseline_filter_list_white_36"
+        src="res://outline_add_white_36"
         @tap="goToAddWorkshopOfficeServicePage"
         row="1"
         class="fab-btn"

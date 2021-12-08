@@ -19,11 +19,6 @@
             textWrap="true"
             class="fas paragraph"
           />
-          <Label
-            :text="workshopOffice.workshop_description"
-            textWrap="true"
-            class="paragraph"
-          />
           <Label textWrap="true" class="paragraph">
             <FormattedString>
               <Span text.decode="&#xf041; " class="fas" />
@@ -63,7 +58,7 @@
             </Label>
           </template>
           <Label
-            text="Teléfono de esta sucursal"
+            text="Teléfono de la sucursal"
             textWrap="true"
             class="paragraph font-bold"
           />
@@ -84,6 +79,11 @@
               <Label :text="'+56 ' + workshopOffice.workshop_number" />
             </FormattedString>
           </Label>
+          <Label
+            :text="workshopOffice.workshop_description"
+            textWrap="true"
+            class="paragraph"
+          />
           <MDButton
             text="Escoger servicios"
             @tap="goToWorkshopOfficeServiceListPage"

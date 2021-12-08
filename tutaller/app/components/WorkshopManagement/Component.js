@@ -6,7 +6,7 @@ export default {
             userType: ApplicationSettings.getString('userType')
         }
     },
-    
+
     methods: {
         goToMyWorkshopList() {
             this.$navigator.navigate('/MyWorkshopList', { frame: 'accountNav' })
@@ -16,6 +16,9 @@ export default {
         },
         goToWorkshopPostulationListPage() {
             this.$navigator.navigate('/WorkshopPostulationList', { frame: 'accountNav' })
+        },
+        goToWorkshopOfficeWorkDisputeCaseListPage() {
+            this.$navigator.navigate('/WorkshopOfficeWorkDisputeCaseList', { frame: 'accountNav' })
         },
         goToPreviousPage() {
             this.$navigateBack()

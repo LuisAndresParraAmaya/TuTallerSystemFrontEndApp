@@ -108,7 +108,7 @@ export default {
 
         //Checks the workshop office work current status and changes the view content based on it
         checkWorkshopOfficeWorkStatus() {
-            if (this.isUserATechnician() && this.workshopOfficeWork.workshop_office_work_status !== ('complete' && 'completeandevaluated')) {
+            if (this.isUserATechnician() && this.workshopOfficeWork.workshop_office_work_status !== 'complete' && this.workshopOfficeWork.workshop_office_work_status !== 'completeandevaluated'  && this.workshopOfficeWork.workshop_office_work_status !== 'cancelled') {
                 this.isGoToAddWorkshopOfficeWorkAdvancePageBtnHidden = false
             } else this.isGoToAddWorkshopOfficeWorkAdvancePageBtnHidden = true
 
@@ -129,6 +129,11 @@ export default {
                     } else this.isDoServiceActionBtnHidden = true
                     this.isShowTechnicalReportBtnHidden = false
                     break
+                case 'caseopened':
+                    this.workshopOfficeWorkCurrentStatusDescription = 'El cliente ha abierto un caso de disputa, por lo que el administrador del taller automotriz debe revisar su correo.'
+                    this.isDoServiceActionBtnHidden = true
+                    this.isShowTechnicalReportBtnHidden = false
+                    break
                 case 'complete':
                     this.workshopOfficeWorkCurrentStatusDescription = 'El servicio se encuentra finalizado.'
                     if (this.isUserACustomer()) {
@@ -139,6 +144,11 @@ export default {
                     break
                 case 'completeandevaluated':
                     this.workshopOfficeWorkCurrentStatusDescription = 'El servicio se encuentra finalizado y el cliente ya lo ha evaluado.'
+                    this.isDoServiceActionBtnHidden = true
+                    this.isShowTechnicalReportBtnHidden = false
+                    break
+                case 'cancelled':
+                    this.workshopOfficeWorkCurrentStatusDescription = 'El servicio se ha cancelado, debido a que el caso de disputa se resolvió a favor del cliente, por lo que se le ha devuelto su dinero.'
                     this.isDoServiceActionBtnHidden = true
                     this.isShowTechnicalReportBtnHidden = false
             }
@@ -238,7 +248,8 @@ export default {
                                         }
                                         this.isShowTechnicalReportBtnHidden = false
                                 }
-                            } else this.getWorkshopOfficeWorkInfo()
+                            }
+                            this.getWorkshopOfficeWorkInfo()
                             break
                         case 'Work milestones not found':
                             console.log('Work milestones not found')

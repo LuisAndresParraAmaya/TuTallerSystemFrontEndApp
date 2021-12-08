@@ -88,7 +88,7 @@ export default {
         },
 
         goToFileWorkshopOfficeWorkDisputeCasePage() {
-            if (this.isUserACustomer()) this.$navigator.navigate('/FileWorkshopOfficeWorkDisputeCase', { props: { workshopOfficeWork: this.workshopOfficeWork } })
+            if (this.isUserACustomer()) this.$navigator.navigate('/FileWorkshopOfficeWorkDisputeCase', { props: { workshopOfficeWork: this.workshopOfficeWork }, frame: 'serviceNav' })
             else this.showSnackBarInsufficientPrivileges()
         },
         goToPreviousPage() {

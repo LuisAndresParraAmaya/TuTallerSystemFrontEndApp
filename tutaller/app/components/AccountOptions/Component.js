@@ -11,7 +11,7 @@ export default {
     },
     methods: {
         goToLoginPage() {
-            this.$navigator.modal('/Login', { props: {rootFrame: 'accountNav'}, id: 'modalLogin', frame: 'accountNav', fullscreen: true })
+            this.$navigator.modal('/Login', { props: { rootFrame: 'accountNav' }, id: 'modalLogin', frame: 'accountNav', fullscreen: true })
         },
         goToAccountManagementPage() {
             this.$navigator.navigate('/AccountManagement', { frame: 'accountNav' })

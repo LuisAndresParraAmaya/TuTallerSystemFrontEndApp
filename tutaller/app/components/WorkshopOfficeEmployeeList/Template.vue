@@ -54,7 +54,7 @@
         v-show="
           actualFrame == 'accountNav' && userType == 3 //3 = workshop administrator
         "
-        src="res://baseline_filter_list_white_36"
+        src="res://outline_add_white_36"
         @tap="goToAddWorkshopOfficeEmployeePage"
         row="1"
         class="fab-btn"
