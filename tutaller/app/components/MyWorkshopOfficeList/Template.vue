@@ -52,7 +52,7 @@
         </v-template>
       </ListView>
       <MDFloatingActionButton
-        src="res://baseline_filter_list_white_36"
+        src="res://outline_add_white_36"
         @tap="goToAddWorkshopOfficePage"
         row="1"
         class="fab-btn"
