@@ -15,6 +15,13 @@
           text="Listar talleres postulados"
           @tap="goToWorkshopPostulationListPage"
         />
+        <MDButton
+          v-if="
+            userType == 1 //1 = admin
+          "
+          text="Listar casos de disputa"
+          @tap="goToWorkshopOfficeWorkDisputeCaseListPage"
+        />
         <template v-else>
           <MDButton text="Mis talleres" @tap="goToMyWorkshopList" />
           <MDButton
