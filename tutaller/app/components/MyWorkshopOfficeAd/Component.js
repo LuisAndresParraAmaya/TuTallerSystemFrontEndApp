@@ -1,5 +1,5 @@
 import { inputType } from "@nativescript/core"
-import { translateAdStatus } from "~/utils/translators"
+import { translateActiveInactiveStatus } from "~/utils/translators"
 import { validateMoney } from "~/utils/validator"
 import { SnackBar } from "@nativescript-community/ui-material-snackbar"
 
@@ -7,7 +7,7 @@ export default {
     props: ['myWorkshopAd'],
     data() {
         return {
-            translateAdStatus: translateAdStatus,
+            translateActiveInactiveStatus: translateActiveInactiveStatus,
             isActivateAdTappable: true
         }
     },
