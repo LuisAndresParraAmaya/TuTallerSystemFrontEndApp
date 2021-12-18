@@ -108,7 +108,7 @@ export default {
 
         //Checks the workshop office work current status and changes the view content based on it
         checkWorkshopOfficeWorkStatus() {
-            if (this.isUserATechnician() && this.workshopOfficeWork.workshop_office_work_status !== 'complete' && this.workshopOfficeWork.workshop_office_work_status !== 'completeandevaluated'  && this.workshopOfficeWork.workshop_office_work_status !== 'cancelled') {
+            if (this.isUserATechnician() && this.workshopOfficeWork.workshop_office_work_status !== 'complete' && this.workshopOfficeWork.workshop_office_work_status !== 'completeandevaluated' && this.workshopOfficeWork.workshop_office_work_status !== 'cancelled') {
                 this.isGoToAddWorkshopOfficeWorkAdvancePageBtnHidden = false
             } else this.isGoToAddWorkshopOfficeWorkAdvancePageBtnHidden = true
 
@@ -167,11 +167,6 @@ export default {
             }).then(res => res.json())
                 .catch(error => {
                     console.error('Error:', error)
-                    alert({
-                        title: 'Error',
-                        message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
-                        okButtonText: 'OK'
-                    })
                 })
                 .then(response => {
                     switch (response.Response) {
@@ -202,11 +197,6 @@ export default {
             }).then(res => res.json())
                 .catch(error => {
                     console.error('Error:', error)
-                    alert({
-                        title: 'Error',
-                        message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
-                        okButtonText: 'OK'
-                    })
                 })
                 .then(response => {
                     switch (response.Response) {
@@ -302,12 +292,8 @@ export default {
                     'Content-Type': 'application/json'
                 },
             }).then(res => res.json())
-                .catch(() => {
-                    alert({
-                        title: 'Error',
-                        message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
-                        okButtonText: 'OK'
-                    })
+                .catch(error => {
+                    console.error('Error:', error)
                 })
                 .then(response => {
                     switch (response.Response) {
@@ -375,11 +361,6 @@ export default {
             }).then(res => res.json())
                 .catch(error => {
                     console.error('Error:', error)
-                    alert({
-                        title: 'Error',
-                        message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
-                        okButtonText: 'OK'
-                    })
                 })
                 .then(response => {
                     switch (response.Response) {
