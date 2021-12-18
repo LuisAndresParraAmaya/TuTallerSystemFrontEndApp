@@ -145,6 +145,16 @@ mdbutton {
   vertical-align: bottom;
 }
 
+.circle-btn {
+  width: 55;
+  height: 55;
+  margin: 15;
+  background-color: #E0E0E0;
+  color: #8C8C8C;
+  padding-left: 15em;
+  elevation: 0; //removes border shadow
+}
+
 // Text align
 .text-center {
   text-align: center;
