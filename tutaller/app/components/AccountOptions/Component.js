@@ -22,6 +22,9 @@ export default {
         goToSubscriptionManagementPage() {
             this.$navigator.navigate('/SubscriptionManagement', { frame: 'accountNav' })
         },
+        goToUsabilityQuestionnaireListPage() {
+            this.$navigator.navigate('/UsabilityQuestionnaireList', { frame: 'accountNav' })
+        },
         goToFileSupportTicketPage() {
             this.$navigator.navigate('/FileSupportTicket', { frame: 'accountNav' })
         },
