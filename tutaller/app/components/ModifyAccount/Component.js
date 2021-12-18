@@ -2,6 +2,7 @@ import { Dialogs, inputType } from '@nativescript/core'
 import { SnackBar } from '@nativescript-community/ui-material-snackbar'
 import { ApplicationSettings } from '@nativescript/core'
 import { formatRut } from '~/utils/formatter'
+import { calculateRutCheckDigit } from '~/utils/calculator'
 const validator = require('~/utils/validator')
 
 export default {
@@ -9,7 +10,7 @@ export default {
     return {
       phoneCountryCodeList: ['+56 Chile'],
 
-      rutInput: formatRut(ApplicationSettings.getString('user')),
+      rutInput: formatRut(calculateRutCheckDigit(formatRut(ApplicationSettings.getString('user')))),
       nameInput: ApplicationSettings.getString('userName'),
       lastNameInput: ApplicationSettings.getString('userLastName'),
       emailInput: ApplicationSettings.getString('userEmail'),
@@ -131,7 +132,7 @@ export default {
           }
         })
     },
-    
+
     onNameTxtChange() {
       this.nameInputErr = ''
     },
