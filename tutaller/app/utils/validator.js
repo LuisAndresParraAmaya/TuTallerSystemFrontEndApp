@@ -1,10 +1,12 @@
 import { translateWeekDay } from "./translators"
 import { formatTimeToHHMMSS } from '~/utils/formatter'
 import { weekdayList } from "./lists"
+import { calculateRutCheckDigit } from "./calculator"
 
 export function validateRut(rut) {
     if (rut == '') return 'Ingresa el rut.'
-    if (!/^[0-9]+[-|-]{1}[0-9kK]{1}$/.test(rut)) return 'Ingresa un rut valido.'
+    if (!/^[0-9]+[-|-]{1}[0-9kK]{1}$/.test(rut)) return 'Ingresa el rut con su cadena completa.'
+    else if (calculateRutCheckDigit(rut).toLowerCase() != rut.replace('-', '').toLowerCase()) return 'Ingresa un rut valido.'
     return null
 }
 
