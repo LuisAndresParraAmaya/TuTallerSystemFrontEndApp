@@ -8,33 +8,28 @@
     </ActionBar>
     <ScrollView>
       <StackLayout>
+        <Label text="Marca" textWrap="true" class="paragraph font-bold" />
         <Label
-          text="Marca"
-          textWrap="true"
-          class="paragraph font-bold"
-        />
-        <Label
-          :text="workshopOfficeWorkTechnicalReport.office_work_technical_report_brand"
+          :text="
+            workshopOfficeWorkTechnicalReport.office_work_technical_report_brand
+          "
           textWrap="true"
           class="paragraph"
         />
+        <Label text="Modelo" textWrap="true" class="paragraph font-bold" />
         <Label
-          text="Modelo"
-          textWrap="true"
-          class="paragraph font-bold"
-        />
-        <Label
-          :text="workshopOfficeWorkTechnicalReport.office_work_technical_report_model"
+          :text="
+            workshopOfficeWorkTechnicalReport.office_work_technical_report_model
+          "
           textWrap="true"
           class="paragraph"
         />
+        <Label text="Kilometraje" textWrap="true" class="paragraph font-bold" />
         <Label
-          text="Kilometraje"
-          textWrap="true"
-          class="paragraph font-bold"
-        />
-        <Label
-          :text="workshopOfficeWorkTechnicalReport.office_work_technical_report_km"
+          :text="
+            workshopOfficeWorkTechnicalReport.office_work_technical_report_km +
+            ' km'
+          "
           textWrap="true"
           class="paragraph"
         />
@@ -44,7 +39,9 @@
           class="paragraph font-bold"
         />
         <Label
-          :text="workshopOfficeWorkTechnicalReport.office_work_technical_report_ppu"
+          :text="
+            workshopOfficeWorkTechnicalReport.office_work_technical_report_ppu
+          "
           textWrap="true"
           class="paragraph"
         />
@@ -54,17 +51,17 @@
           class="paragraph font-bold"
         />
         <Label
-          :text="workshopOfficeWorkTechnicalReport.office_work_technical_report_fuel_type"
+          :text="
+            workshopOfficeWorkTechnicalReport.office_work_technical_report_fuel_type
+          "
           textWrap="true"
           class="paragraph"
         />
+        <Label text="Color" textWrap="true" class="paragraph font-bold" />
         <Label
-          text="Color"
-          textWrap="true"
-          class="paragraph font-bold"
-        />
-        <Label
-          :text="workshopOfficeWorkTechnicalReport.office_work_technical_report_color"
+          :text="
+            workshopOfficeWorkTechnicalReport.office_work_technical_report_color
+          "
           textWrap="true"
           class="paragraph"
         />
@@ -74,7 +71,9 @@
           class="paragraph font-bold"
         />
         <Label
-          :text="workshopOfficeWorkTechnicalReport.office_work_technical_report_engine"
+          :text="
+            workshopOfficeWorkTechnicalReport.office_work_technical_report_engine
+          "
           textWrap="true"
           class="paragraph"
         />
@@ -84,7 +83,9 @@
           class="paragraph font-bold"
         />
         <Label
-          :text="workshopOfficeWorkTechnicalReport.office_work_technical_report_chassis"
+          :text="
+            workshopOfficeWorkTechnicalReport.office_work_technical_report_chassis
+          "
           textWrap="true"
           class="paragraph"
         />
@@ -94,7 +95,9 @@
           class="paragraph font-bold"
         />
         <Label
-          :text="workshopOfficeWorkTechnicalReport.office_work_technical_report_description"
+          :text="
+            workshopOfficeWorkTechnicalReport.office_work_technical_report_description
+          "
           textWrap="true"
           class="paragraph"
         />
