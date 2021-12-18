@@ -37,8 +37,8 @@ export function translatePostulationStatus(status) {
     return status
 }
 
-//Returns the translated ad status. If nothing applies, just return it untranslated.
-export function translateAdStatus(status) {
+//Returns the translated active/inactive status. If nothing applies, just return it untranslated.
+export function translateActiveInactiveStatus(status) {
     switch (status) {
         case 'active':
             return 'Activo'
@@ -99,4 +99,15 @@ export function translateWeekDay(weekDay) {
         case 'sunday':
             return 'Domingo'
     }
+}
+
+//Returns the translated question type. If nothing applies, just return it untranslated.
+export function translateQuestionType(questionnaireQuestionType) {
+    switch (questionnaireQuestionType) {
+        case 'multiplechoice':
+            return 'Alternativas'
+        case 'essayquestion':
+            return 'Desarrollo'
+    }
+    return questionnaireQuestionType
 }

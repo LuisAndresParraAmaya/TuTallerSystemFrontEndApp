@@ -1,4 +1,4 @@
-import { deformatRut } from "~/utils/formatter"
+import { deformatRutNumber } from "~/utils/formatter"
 
 export default {
   props: ['workshopOfficeId'],
@@ -22,7 +22,7 @@ export default {
     addWorkshopOfficeEmployees() {
       if (this.validateFormAddWorkshopOfficeAd()) {
         this.isAddEmployeeBtnTappable = false
-        const data = { workshop_office_id: this.workshopOfficeId, user_rut: deformatRut(this.rutInput.trim()), workshop_office_employee_specialization: this.specializationInput.trim(), workshop_office_employee_experience: this.experienceInput.trim() }
+        const data = { workshop_office_id: this.workshopOfficeId, user_rut: deformatRutNumber(this.rutInput.trim()), workshop_office_employee_specialization: this.specializationInput.trim(), workshop_office_employee_experience: this.experienceInput.trim() }
 
         fetch('http://10.0.2.2:8080/AddWorkshopOfficeEmployee', {
           method: 'POST',

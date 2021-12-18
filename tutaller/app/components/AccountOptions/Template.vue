@@ -23,6 +23,11 @@
           text="Gestionar suscripciones"
           @tap="goToSubscriptionManagementPage"
         />
+        <MDButton
+          v-show="isLoggedIn && ApplicationSettings.getString('userType') == 1"
+          text="Gestionar cuestionarios"
+          @tap="goToUsabilityQuestionnaireListPage"
+        />
         <MDButton text="Soporte de TuTaller" @tap="goToFileSupportTicketPage" />
         <MDButton
           v-show="isLoggedIn"

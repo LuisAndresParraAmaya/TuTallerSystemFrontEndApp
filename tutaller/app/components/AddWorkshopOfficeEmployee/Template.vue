@@ -1,6 +1,6 @@
 <template>
   <Page>
-    <ActionBar title="Añadir empleados">
+    <ActionBar title="Añadir empleado">
       <NavigationButton
         @tap="goToPreviousPage"
         android.systemIcon="@drawable/ic_menu_back"

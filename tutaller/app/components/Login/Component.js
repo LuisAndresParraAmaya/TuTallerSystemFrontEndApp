@@ -18,7 +18,7 @@ export default {
   methods: {
     login() {
       if (this.validateFormLogin()) {
-        this.changeButtonsTappableStatus()
+        this.changeButtonsTappableStatus(false)
         const data = { user_email: this.emailInput.trim(), user_password: this.passwordInput }
 
         fetch('http://10.0.2.2:8080/Login', {
@@ -34,7 +34,7 @@ export default {
               title: 'Error',
               message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
               okButtonText: 'OK'
-            }).then(() => this.changeButtonsTappableStatus())
+            }).then(() => this.changeButtonsTappableStatus(true))
           })
           .then(response => {
             switch (response.Response) {
@@ -44,7 +44,7 @@ export default {
                 break
               case 'Login Failed':
                 this.passwordInputErr = 'La contraseña es incorrecta'
-                this.changeButtonsTappableStatus()
+                this.changeButtonsTappableStatus(true)
                 break
               case 'Account disabled':
                 //TODO
@@ -62,16 +62,16 @@ export default {
                   title: 'Error',
                   message: 'Tu cuenta ha estado desactivada durante más de 30 días y ya no se puede reactivar.',
                   okButtonText: 'OK'
-                }).then(() => this.changeButtonsTappableStatus())
+                }).then(() => this.changeButtonsTappableStatus(true))
             }
           })
       }
     },
 
-    changeButtonsTappableStatus() {
-      !this.isLoginBtnTappable
-      !this.isRecoveryBtnTappable
-      !this.isCreateBtnTappable
+    changeButtonsTappableStatus(status) {
+      this.isLoginBtnTappable = status
+      this.isRecoveryBtnTappable = status
+      this.isCreateBtnTappable = status
     },
 
     setSessionData(response) {
