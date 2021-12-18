@@ -61,6 +61,11 @@ import FileWorkshopOfficeWorkDisputeCase from './components/FileWorkshopOfficeWo
 import WorkshopOfficeWorkDisputeCaseList from './components/WorkshopOfficeWorkDisputeCaseList/Template.vue'
 import WorkshopOfficeWorkDisputeCase from './components/WorkshopOfficeWorkDisputeCase/Template.vue'
 import ResolveWorkshopOfficeWorkDisputeCase from './components/ResolveWorkshopOfficeWorkDisputeCase/Template.vue'
+import UsabilityQuestionnaireList from './components/UsabilityQuestionnaireList/Template.vue'
+import MyUsabilityQuestionnaire from './components/MyUsabilityQuestionnaire/Template.vue'
+import AddUsabilityQuestionnaire from './components/AddUsabilityQuestionnaire/Template.vue'
+import ShowUsabilityQuestionnaire from './components/ShowUsabilityQuestionnaire/Template.vue'
+import UsabilityQuestionnaire from './components/UsabilityQuestionnaire/Template.vue'
 
 export const routes = {
     '/WorkshopOfficeList': {
@@ -251,6 +256,21 @@ export const routes = {
     },
     '/ResolveWorkshopOfficeWorkDisputeCase': {
         component: ResolveWorkshopOfficeWorkDisputeCase,
-    }
+    },
+    '/UsabilityQuestionnaireList': {
+        component: UsabilityQuestionnaireList,
+    },
+    '/MyUsabilityQuestionnaire': {
+        component: MyUsabilityQuestionnaire,
+    },
+    '/AddUsabilityQuestionnaire': {
+        component: AddUsabilityQuestionnaire,
+    },
+    '/ShowUsabilityQuestionnaire': {
+        component: ShowUsabilityQuestionnaire,
+    },
+    '/UsabilityQuestionnaire': {
+        component: UsabilityQuestionnaire,
+    },
 }
 
