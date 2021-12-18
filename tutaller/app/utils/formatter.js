@@ -94,10 +94,11 @@ export function formatQualificationToNumber(rating) {
 
 //Add the hyphen "-" to the Rut
 export function formatRut(rut) {
-    return [rut.slice(0, 8), '-', rut.slice(8)].join('')
+    const checkDigitPos = rut.length - 1
+    return [rut.slice(0, checkDigitPos), '-', rut.slice(checkDigitPos)].join('')
 }
 
 //Only returns the numbers that pertains to the Rut
-export function deformatRut(rut) {
-    return rut.replace('-', '').replace("-", "").replace(/k/gi, '0')
+export function deformatRutNumber(rut) {
+    return rut.replace('-', '').replace(/k/gi, '0')
 }
