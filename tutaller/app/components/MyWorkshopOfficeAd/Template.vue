@@ -30,7 +30,7 @@
         />
         <Label text="Estado" textWrap="true" class="paragraph font-bold" />
         <Label
-          :text="translateAdStatus(myWorkshopAd.workshop_office_ad_status)"
+          :text="translateActiveInactiveStatus(myWorkshopAd.workshop_office_ad_status)"
           textWrap="true"
           class="paragraph"
         />
