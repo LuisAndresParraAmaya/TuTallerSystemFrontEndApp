@@ -182,9 +182,10 @@ export default {
         goToWorkshopOfficeEmployeeListPage() {
             this.$navigator.navigate('/WorkshopOfficeEmployeeList', { props: { workshopOfficeId: this.workshopOffice.workshop_office_id, actualFrame: 'navigator' } })
         },
-        //Go to the file complaint view for a workshop office, requiring the workshopOffice object (to get the workshop id, wokshop name, etc.)
+        //Go to the file complaint view for a workshop office, requiring the workshopOffice object (to get the workshop id, wokshop name, etc.). Also, user needs to be logged in to use the function
         goToFileWorkshopOfficeComplaintPage() {
-            this.$navigator.navigate('/FileWorkshopOfficeComplaint', { props: { workshopOffice: this.workshopOffice, actualFrame: 'navigator' } })
+            if (ApplicationSettings.getString('user') == undefined) this.$navigator.modal('/Login', { id: 'modalLogin', fullscreen: true })
+            else this.$navigator.navigate('/FileWorkshopOfficeComplaint', { props: { workshopOffice: this.workshopOffice, actualFrame: 'navigator' } })
         },
         goToPreviousPage() {
             this.$navigateBack();
