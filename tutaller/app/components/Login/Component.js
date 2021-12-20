@@ -46,15 +46,14 @@ export default {
                 this.passwordInputErr = 'La contraseña es incorrecta'
                 this.changeButtonsTappableStatus(true)
                 break
-              case 'Account disabled':
-                //TODO
+              case 'Reactivate Success':
                 alert({
                   title: 'Cuenta reactivada',
                   message: 'Has iniciado sesión dentro del periodo de los 30 días, por lo que tu cuenta ha sido reactivada.',
                   okButtonText: 'OK'
                 }).then(() => {
-                  // this.setSessionData(response)
-                  // this.closeModal()
+                  this.setSessionData(response)
+                  this.closeModal()
                 })
                 break
               case 'Account deleted':
