@@ -8,13 +8,13 @@ export default {
             regionList: ['Cualquiera'],
             communeObject: [],
             communeList: [],
-            qualificationList: ['5', '4,5 y más', '4 y más', '3,5 y más', '3 y más', '2,5 y más', '2 y más', '1,5 y más', '1 y más'],
+            qualificationList: ['5', '4,5 y más', '4 y más', '3,5 y más', '3 y más', '2,5 y más', '2 y más', '1,5 y más', '1 y más', '0 y más'],
 
             regionIdInput: undefined,
             regionInput: 'Cualquiera',
             communeIdInput: undefined,
             communeInput: 'Cualquiera',
-            qualificationInput: '1 y más',
+            qualificationInput: '0 y más',
 
             isFilterBtnTappable: true
         }
@@ -158,6 +158,8 @@ export default {
                     return 1.5
                 case '1 y más':
                     return 1
+                case '0 y más':
+                    return 0
             }
         },
 

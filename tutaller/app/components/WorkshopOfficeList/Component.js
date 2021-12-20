@@ -8,6 +8,7 @@ export default {
     props: ['filteredWorkshopOfficeList'],
     data() {
         return {
+            onFilter: '',
             actualWorkshopOfficeList: '',
             workshopOfficeList: '',
 
@@ -18,8 +19,14 @@ export default {
 
     methods: {
         onPageLoaded(event) {
+            //If the filter function was recently used, clear it when the page is loaded again
+            if (this.onFilter) {
+                this.onFilter = false
+                this.filteredWorkshopOfficeList = ''
+            }
+            //Get and load the workshop list from the back-end
             this.getWorkshopList()
-            //refresh ad image
+            //Refresh ad image
             event.object.getViewById('imgWorkshopOfficeAd').src = 'http://10.0.2.2:8080/img?t' + new Date().getTime()
             //Temporal solution to make the service tab in bottom navigation to update the WorkshopOfficeWorkList view (TODO)
             if (this.$navigator.paths.serviceNav == '/WorkshopOfficeWorkList') this.$navigator.navigate('/WorkshopOfficeWorkList', { frame: 'serviceNav' })
@@ -43,6 +50,7 @@ export default {
                         default:
                             this.actualWorkshopOfficeList = response.response
                             if (this.filteredWorkshopOfficeList) {
+                                this.onFilter = true
                                 this.workshopOfficeList = this.filteredWorkshopOfficeList
                             } else {
                                 this.workshopOfficeList = response.response

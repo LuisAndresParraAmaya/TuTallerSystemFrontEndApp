@@ -1,17 +1,13 @@
 <template>
   <Page @loaded="getOfferList">
-    <ActionBar :title="'Ofertas activas de '+titleType">
+    <ActionBar :title="'Ofertas activas de ' + titleType">
       <NavigationButton
         @tap="goToPreviousPage"
         android.systemIcon="@drawable/ic_menu_back"
       />
     </ActionBar>
     <GridLayout rows="auto, *">
-      <ListView
-        for="offer in offerList"
-        @itemTap="showOffer"
-        row="1"
-      >
+      <ListView for="offer in offerList" @itemTap="showOffer" row="1">
         <v-template>
           <GridLayout rows="*, *, *" columns="60%, *, auto">
             <Image
@@ -27,9 +23,19 @@
               col="1"
               class="title-text"
             />
-            <Label :text="offer.offer_discount+'% de descuento'" row="1" col="1" class="caption-text fas" />
             <Label
-              :text="'Valido hasta '+formatDate(offer.offer_valid_until_date)+' '+offer.offer_valid_until_time"
+              :text="offer.offer_discount + '% de descuento'"
+              row="1"
+              col="1"
+              class="caption-text fas"
+            />
+            <Label
+              :text="
+                'Valido hasta ' +
+                formatDate(offer.offer_valid_until_date) +
+                ' ' +
+                offer.offer_valid_until_time
+              "
               row="2"
               col="1"
               class="caption-text"
@@ -39,7 +45,7 @@
         </v-template>
       </ListView>
       <MDFloatingActionButton
-        src="res://baseline_filter_list_white_36"
+        src="res://outline_add_white_36"
         @tap="goToAddOfferPage"
         row="1"
         class="fab-btn"

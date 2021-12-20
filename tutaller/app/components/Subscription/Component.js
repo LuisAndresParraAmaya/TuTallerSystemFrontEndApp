@@ -14,7 +14,7 @@ export default {
 
     methods: {
         paySubscription() {
-            this.$navigator.navigate('/Payment', { props: { workshopOfficeId: this.myWorkshopOffice.id }, frame: 'accountNav' })
+            this.$navigator.navigate('/Payment', { props: { workshopOfficeId: this.myWorkshopOffice.id, price: this.subscription.offer_price }, frame: 'accountNav' })
         },
 
         goToPreviousPage() {
