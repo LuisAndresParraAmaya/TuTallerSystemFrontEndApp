@@ -29,7 +29,7 @@ export default {
                             this.myWorkshopOfficeAdList = response.response
                             break
                         case 'Ads not found':
-                            console.log('fail')
+                            console.log('Ads not found')
                     }
                 })
         },
