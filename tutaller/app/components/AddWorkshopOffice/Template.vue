@@ -8,6 +8,12 @@
     </ActionBar>
     <ScrollView>
       <StackLayout>
+        <Label
+          v-show="operationType == 'sendPostulation'"
+          text="Para hacer efectiva tu postulación, debes ingresar la sucursal principal de tu taller automotriz."
+          textWrap="true"
+          class="paragraph"
+        />
         <MDTextView
           id="txtRegion"
           v-model="regionInput"
@@ -311,8 +317,8 @@
         />
 
         <MDButton
-          text="Añadir sucursal"
-          @tap="addWorkshopOffice"
+          :text="addBtnLabel"
+          @tap="doButtonAction"
           :isEnabled="isAddWorkshopOfficeBtnTappable"
         />
       </StackLayout>

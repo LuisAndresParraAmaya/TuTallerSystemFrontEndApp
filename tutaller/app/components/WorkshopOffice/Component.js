@@ -52,11 +52,8 @@ export default {
                     }).then(res => res.json())
                         .catch(error => {
                             console.error('Error:', error)
-                            alert({
-                                title: 'Error',
-                                message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
-                                okButtonText: 'OK'
-                            })
+                            const snackBar = new SnackBar()
+                            snackBar.simple('No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.')
                         })
                         .then(response => {
                             switch (response.Response) {
@@ -85,11 +82,6 @@ export default {
             }).then(res => res.json())
                 .catch(error => {
                     console.error('Error:', error)
-                    alert({
-                        title: 'Error',
-                        message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
-                        okButtonText: 'OK'
-                    })
                 })
                 .then(response => {
                     switch (response.Response) {
@@ -115,11 +107,6 @@ export default {
             }).then(res => res.json())
                 .catch(error => {
                     console.error('Error:', error)
-                    alert({
-                        title: 'Error',
-                        message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
-                        okButtonText: 'OK'
-                    })
                 })
                 .then(response => {
                     switch (response.Response) {
@@ -153,11 +140,6 @@ export default {
             }).then(res => res.json())
                 .catch(error => {
                     console.error('Error:', error)
-                    alert({
-                        title: 'Error',
-                        message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
-                        okButtonText: 'OK'
-                    })
                 })
                 .then(response => {
                     switch (response.Response) {

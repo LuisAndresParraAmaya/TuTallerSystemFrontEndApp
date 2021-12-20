@@ -9,6 +9,16 @@
     <ScrollView>
       <StackLayout>
         <Label
+          text="Razón social del taller"
+          textWrap="true"
+          class="paragraph font-bold"
+        />
+        <Label
+          :text="workshopPostulation.workshop_business_name"
+          textWrap="true"
+          class="paragraph"
+        />
+        <Label
           text="Descripción del taller"
           textWrap="true"
           class="paragraph font-bold"
@@ -25,6 +35,32 @@
         />
         <Label
           :text="'+56 ' + workshopPostulation.workshop_number"
+          textWrap="true"
+          class="paragraph"
+        />
+        <Label
+          text="Dirección de la sucursal principal"
+          textWrap="true"
+          class="paragraph font-bold"
+        />
+        <Label
+          :text="
+            workshopPostulation.workshop_office_address +
+            ', ' +
+            workshopPostulation.workshop_office_commune +
+            ', ' +
+            workshopPostulation.workshop_office_region
+          "
+          textWrap="true"
+          class="paragraph"
+        />
+        <Label
+          text="Número de teléfono de la sucursal principal"
+          textWrap="true"
+          class="paragraph font-bold"
+        />
+        <Label
+          :text="'+56 ' + workshopPostulation.workshop_office_phone"
           textWrap="true"
           class="paragraph"
         />
@@ -56,6 +92,49 @@
         <Label textWrap="true" class="paragraph">{{
           formatDateTime(workshopPostulation.postulation_date_time)
         }}</Label>
+        <Label
+          text="Rut del postulante"
+          textWrap="true"
+          class="paragraph font-bold"
+        />
+        <Label
+          :text="
+            formatRut(
+              calculateRutCheckDigit(
+                formatRut(workshopPostulation.postulant_rut.toString())
+              )
+            )
+          "
+          textWrap="true"
+          class="paragraph"
+        />
+        <Label
+          text="Nombre y apellido del postulante"
+          textWrap="true"
+          class="paragraph font-bold"
+        />
+        <Label
+          :text="
+            workshopPostulation.postulant_name +
+            ' ' +
+            workshopPostulation.postulant_last_name
+          "
+          textWrap="true"
+          class="paragraph"
+        />
+        <Label
+          text="Foto de la cédula de identidad del postulante"
+          textWrap="true"
+          class="paragraph font-bold"
+        />
+        <Image
+          :src="
+            'http://10.0.2.2:8080/' +
+            workshopPostulation.postulation_user_identity_document_image
+          "
+          stretch="aspectFit"
+          class="paragraph"
+        />
         <GridLayout
           v-show="
             workshopPostulation.postulation_current_status == 'pending' //Only show the accept/reject buttons if the postulation is pending

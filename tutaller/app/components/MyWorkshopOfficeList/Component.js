@@ -54,7 +54,7 @@ export default {
                             this.$navigator.navigate('/MyWorkshopOffice', { props: { myWorkshopOffice: event.item, myWorkshopOfficeAttention: response.response }, frame: 'accountNav' })
                             break
                         case 'Attention Not Found':
-                            console.log('fail')
+                            console.log('Attention not found')
                     }
                 })
         },
@@ -69,7 +69,7 @@ export default {
         },
 
         goToAddWorkshopOfficePage() {
-            this.$navigator.navigate('/AddWorkshopOffice', { props: { myWorkshop: this.myWorkshop }, frame: 'accountNav' })
+            this.$navigator.navigate('/AddWorkshopOffice', { props: { myWorkshop: this.myWorkshop, operationType: 'addNormally' }, frame: 'accountNav' })
         },
         goToPreviousPage() {
             this.$navigateBack();

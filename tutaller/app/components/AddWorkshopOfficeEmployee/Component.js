@@ -60,9 +60,10 @@ export default {
 
     validateFormAddWorkshopOfficeAd() {
       let isValidationOK = true
-      //Null ad rut input
-      if (this.rutInput.trim() == '') {
-        this.rutInputErr = 'Ingresa el rut del empleado'
+      //Rut validation
+      let rutValidationRes = validator.validateRut(this.rutInput.trim())
+      if (rutValidationRes !== null) {
+        this.rutInputErr = rutValidationRes
         isValidationOK = false
       }
       //Null specialization input
@@ -76,11 +77,8 @@ export default {
         isValidationOK = false
       }
       //Check if validation is OK
-      if (isValidationOK) {
-        return true
-      } else {
-        return false
-      }
+      if (isValidationOK) return true
+      else return false
     },
 
     onRutTxtChange() {

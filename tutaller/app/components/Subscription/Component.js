@@ -2,7 +2,7 @@ import { translateSubscriptionName } from "~/utils/translators"
 import { translatePeriodicity } from "~/utils/translators"
 
 export default {
-    props: ['subscription'],
+    props: ['subscription', 'myWorkshopOffice'],
     data() {
         return {
             isPaySubscriptionBtnTappable: true,
@@ -14,7 +14,7 @@ export default {
 
     methods: {
         paySubscription() {
-
+            this.$navigator.navigate('/Payment', { props: { workshopOfficeId: this.myWorkshopOffice.id }, frame: 'accountNav' })
         },
 
         goToPreviousPage() {
