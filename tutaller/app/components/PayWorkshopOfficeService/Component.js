@@ -9,8 +9,8 @@ export default {
 
     methods: {
         payWorkshopService() {
-            this.addWorkshopOfficeWork()
-            //this.$navigator.navigate('/Payment')
+            //this.addWorkshopOfficeWork()
+            this.$navigator.navigate('/Payment')
         },
 
         addWorkshopOfficeWork() {

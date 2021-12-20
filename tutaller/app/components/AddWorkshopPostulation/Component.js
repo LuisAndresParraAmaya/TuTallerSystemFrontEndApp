@@ -1,7 +1,12 @@
+const mPicker = require('nativescript-mediafilepicker')
+const mediaFilePicker = new mPicker.Mediafilepicker()
+const path = require('path')
+const fileSystemModule = require('@nativescript/core/file-system')
 import { ApplicationSettings } from '@nativescript/core'
 import { SnackBar } from '@nativescript-community/ui-material-snackbar'
 import { validateName } from '~/utils/validator'
 import { validatePhone } from '~/utils/validator'
+import { validateImage } from '~/utils/validator'
 
 export default {
     data() {
@@ -12,13 +17,20 @@ export default {
             workshopPhoneInput: '',
             workshopPhoneCountryCodeInput: '',
             workshopDescriptionInput: '',
+            workshopBusinessNameInput: '',
             workshopPostulationMessage: '',
+            imageFile: '',
+            imagePath: '',
+            imageName: '',
+            imageExt: '',
 
             workshopNameInputErr: '',
             workshopPhoneInputErr: '',
             workshopPhoneCountryCodeInputErr: '',
             workshopDescriptionInputErr: '',
+            workshopBusinessNameInputErr: '',
             workshopPostulationMessageErr: '',
+            imageInputErr: '',
 
             isSendBtnTappable: true
         }
@@ -27,26 +39,21 @@ export default {
     methods: {
         sendPostulation() {
             if (this.validateFormSendPostulation()) {
-                this.isSendBtnTappable = false
-                const data = { user_rut: ApplicationSettings.getString('user'), workshop_name: this.workshopNameInput.trim(), workshop_number: this.workshopPhoneInput.trim(), workshop_description: this.workshopDescriptionInput.trim(), postulation_message: this.workshopPostulationMessage.trim() }
+                try {
+                    let params = [
+                        { name: 'user_rut', value: ApplicationSettings.getString('user') },
+                        { name: 'workshop_name', value: this.workshopNameInput.trim() },
+                        { name: 'workshop_number', value: this.workshopPhoneInput.trim() },
+                        { name: 'workshop_description', value: this.workshopDescriptionInput.trim() },
+                        { name: 'workshop_business_name', value: this.workshopBusinessNameInput.trim() },
+                        { name: 'postulation_message', value: this.workshopPostulationMessage.trim() },
+                        { name: 'file', filename: this.imagePath, mimeType: 'image/' + this.imageExt }
+                    ]
 
-                fetch('http://10.0.2.2:8080/SendPostulation', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ data })
-                }).then(res => res.json())
-                    .catch(error => console.error('Error:', error))
-                    .then(response => {
-                        switch (response.Response) {
-                            case 'Operation Success':
-                                this.$navigateBack()
-                                break
-                            case 'Operation Failed':
-                                this.isSendBtnTappable = true
-                        }
-                    })
+                    this.$navigator.navigate('/AddWorkshopOffice', { props: { paramsSendPostulation: params, operationType: 'sendPostulation' }, frame: 'accountNav' })
+                } catch (e) {
+                    console.error(e)
+                }
             }
         },
 
@@ -70,9 +77,19 @@ export default {
                 this.workshopDescriptionInputErr = 'Ingresa la descripción de tu taller.'
                 isValidationOK = false
             }
+            //Null workshop business name input validation
+            if (this.workshopBusinessNameInput.trim() == '') {
+                this.workshopBusinessNameInputErr = 'Ingresa la razón social de tu taller.'
+                isValidationOK = false
+            }
             //Null workshop message input validation
             if (this.workshopPostulationMessage.trim() == '') {
                 this.workshopPostulationMessageErr = 'Ingresa un mensaje para tu postulación.'
+                isValidationOK = false
+            }
+            //Null image input
+            if (this.imagePath.trim() == '') {
+                this.imageInputErr = 'Ingresa la foto de tu cédula de identidad.'
                 isValidationOK = false
             }
             //Check if validation is OK
@@ -90,6 +107,41 @@ export default {
                 })
         },
 
+        async selectImage() {
+            var options = {
+                android: {
+                    isCaptureMood: false,
+                    isNeedCamera: false,
+                    maxNumberFiles: 1,
+                    isNeedFolderList: true
+                }
+            }
+            mediaFilePicker.openImagePicker(options)
+            mediaFilePicker.on('getFiles', res => {
+                const imagePath = res.object.get('results')[0].file
+                const imageParsedPath = path.parse(imagePath)
+                const imageName = imageParsedPath.name
+                const imageExt = imageParsedPath.ext.split('.').pop()
+                const imageSize = fileSystemModule.File.fromPath(imagePath).size
+                //Image validation
+                let imageValidationRes = validateImage(imageName, imageExt, imageSize)
+                if (imageValidationRes !== null) {
+                    const snackBar = new SnackBar()
+                    snackBar.simple(imageValidationRes)
+                } else {//Validation OK
+                    this.imagePath = imagePath
+                    this.imageName = imageName
+                    this.imageExt = imageExt
+                    this.onImageImgChange()
+                }
+            })
+            mediaFilePicker.on('error', error => {
+                console.log('Error:', error)
+                const snackBar = new SnackBar()
+                snackBar.simple('Se ha producido un error para cargar la imagen. Inténtalo nuevamente.')
+            })
+        },
+
         onWorkshopNameTxtChange() {
             this.workshopNameInputErr = ''
         },
@@ -100,8 +152,14 @@ export default {
         onWorkshopDescriptionTxtChange() {
             this.workshopDescriptionInputErr = ''
         },
+        onWorkshopBusinessNameTxtChange() {
+            this.workshopBusinessNameInputErr = ''
+        },
         onWorkshopPostulationMessageTxtChange() {
             this.workshopPostulationMessageErr = ''
+        },
+        onImageImgChange() {
+            this.imageInputErr = ''
         },
 
         goToPreviousPage() {

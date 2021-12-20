@@ -8,7 +8,7 @@
     </ActionBar>
     <ListView for="myWorkshop in myWorkshopList" @itemTap="showMyWorkshop">
       <v-template>
-        <GridLayout columns="60%, *" rows="*, *">
+        <GridLayout columns="60%, *, auto" rows="*, *">
           <Image
             src="res://outline_car_repair_black_36"
             stretch="aspectFit"
@@ -28,6 +28,9 @@
             row="1"
             col="1"
           />
+          <Label row="0" col="2" rowSpan="2" class="caption-text">{{
+            translatePostulationStatus(myWorkshop.postulation_current_status)
+          }}</Label>
         </GridLayout>
       </v-template>
     </ListView>

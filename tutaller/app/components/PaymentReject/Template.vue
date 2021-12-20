@@ -3,12 +3,12 @@
     <ScrollView>
       <StackLayout>
         <Label
-          text="Compra realizada"
+          text="Operación fallida"
           textWrap="true"
           class="paragraph font-bold"
         />
         <Label
-          text="Te has suscrito exitosamente a TuTaller por 1 mes, el comprobante de pago ha sido enviado a su correo electronico."
+          text="Tu pago no fue recibido, intenta pagar nuevamente."
           textWrap="true"
           class="paragraph"
         />

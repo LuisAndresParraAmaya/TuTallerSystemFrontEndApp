@@ -1,9 +1,11 @@
 import { ApplicationSettings } from '@nativescript/core'
+import { translatePostulationStatus } from '~/utils/translators'
 
 export default {
   data() {
     return {
-      myWorkshopList: ''
+      myWorkshopList: '',
+      translatePostulationStatus: translatePostulationStatus
     }
   },
 

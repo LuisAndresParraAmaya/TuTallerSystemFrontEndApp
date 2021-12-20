@@ -1,5 +1,7 @@
 import { formatDateTime } from "~/utils/formatter"
 import { translatePostulationStatus } from "~/utils/translators"
+import { formatRut } from "~/utils/formatter"
+import { calculateRutCheckDigit } from "~/utils/calculator"
 
 export default {
     props: ['workshopPostulation'],
@@ -8,8 +10,11 @@ export default {
             workshopStatus: '',
             isAcceptPostulationTappable: true,
             isRejectPostulationTappable: true,
+
             formatDateTime: formatDateTime,
-            translatePostulationStatus: translatePostulationStatus
+            translatePostulationStatus: translatePostulationStatus,
+            formatRut: formatRut,
+            calculateRutCheckDigit: calculateRutCheckDigit
         }
     },
 
@@ -23,7 +28,7 @@ export default {
                 cancelButtonText: 'Cancelar'
             }).then(result => {
                 if (result) {
-                    const data = { id: this.workshopPostulation.id, user_rut: this.workshopPostulation.user_user_rut }
+                    const data = { id: this.workshopPostulation.id, user_rut: this.workshopPostulation.postulant_rut }
                     fetch('http://10.0.2.2:8080/AcceptWorkshopPostulation', {
                         method: 'POST',
                         body: JSON.stringify({ data }),

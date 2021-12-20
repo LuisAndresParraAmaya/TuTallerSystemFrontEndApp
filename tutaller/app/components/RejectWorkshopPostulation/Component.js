@@ -21,7 +21,7 @@ export default {
                     cancelButtonText: 'Cancelar'
                 }).then(result => {
                     if (result) {
-                        const data = { id: this.workshopPostulation.id, user_rut: this.workshopPostulation.user_user_rut, reject_reason: this.rejectReasonInput.trim() }
+                        const data = { id: this.workshopPostulation.id, user_rut: this.workshopPostulation.postulant_rut, reject_reason: this.rejectReasonInput.trim() }
                         fetch('http://10.0.2.2:8080/RejectWorkshopPostulation', {
                             method: 'POST',
                             body: JSON.stringify({ data }),

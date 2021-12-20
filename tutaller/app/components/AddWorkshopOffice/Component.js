@@ -3,7 +3,7 @@ const validator = require('~/utils/validator')
 import { SnackBar } from "@nativescript-community/ui-material-snackbar"
 
 export default {
-  props: ['myWorkshop'],
+  props: ['myWorkshop', 'operationType', 'paramsSendPostulation'],
   data() {
     return {
       regionObject: [],
@@ -58,6 +58,8 @@ export default {
       sundayApertureTime: '',
       sundayDepartureTime: '',
 
+      workshopOfficeAttentionData: [],
+
       regionInputErr: '',
       communeInputErr: '',
       addressInputErr: '',
@@ -73,91 +75,131 @@ export default {
 
       isCommuneInputHidden: true,
 
+      addBtnLabel: '',
+      addBtnTap: '',
       isAddWorkshopOfficeBtnTappable: true
     }
   },
 
   methods: {
-    addWorkshopOffice() {
-      if (this.validateFormAddWorkshopOffice()) {
-        this.isAddWorkshopOfficeBtnTappable = false
-        const workshopOfficeAttentionData = []
+    onPageLoaded() {
+      this.getRegionList()
+      this.getCommuneList()
+      this.determineContentBasedOnOperationType()
+    },
 
-        if (this.isMondayChecked) {
-          const mondayApertureTime = this.mondayApertureTimeInput.getHours() + ':' + this.mondayApertureTimeInput.getMinutes()
-          const mondayDepartureTime = this.mondayDepartureTimeInput.getHours() + ':' + this.mondayDepartureTimeInput.getMinutes()
-          workshopOfficeAttentionData.push({ workshop_office_attention_day: 'monday', workshop_office_attention_aperture_time: mondayApertureTime, workshop_office_attention_departure_time: mondayDepartureTime })
-        }
-        if (this.isTuesdayChecked) {
-          const tuesdayApertureTime = this.tuesdayApertureTimeInput.getHours() + ':' + this.tuesdayApertureTimeInput.getMinutes()
-          const tuesdayDepartureTime = this.tuesdayDepartureTimeInput.getHours() + ':' + this.tuesdayDepartureTimeInput.getMinutes()
-          workshopOfficeAttentionData.push({ workshop_office_attention_day: 'tuesday', workshop_office_attention_aperture_time: tuesdayApertureTime, workshop_office_attention_departure_time: tuesdayDepartureTime })
-        }
-        if (this.isWednesdayChecked) {
-          const wednesdayApertureTime = this.wednesdayApertureTimeInput.getHours() + ':' + this.wednesdayApertureTimeInput.getMinutes()
-          const wednesdayDepartureTime = this.wednesdayDepartureTimeInput.getHours() + ':' + this.wednesdayDepartureTimeInput.getMinutes()
-          workshopOfficeAttentionData.push({ workshop_office_attention_day: 'wednesday', workshop_office_attention_aperture_time: wednesdayApertureTime, workshop_office_attention_departure_time: wednesdayDepartureTime })
-        }
-        if (this.isThursdayChecked) {
-          const thursdayApertureTime = this.thursdayApertureTimeInput.getHours() + ':' + this.thursdayApertureTimeInput.getMinutes()
-          const thursdayDepartureTime = this.thursdayDepartureTimeInput.getHours() + ':' + this.thursdayDepartureTimeInput.getMinutes()
-          workshopOfficeAttentionData.push({ workshop_office_attention_day: 'thursday', workshop_office_attention_aperture_time: thursdayApertureTime, workshop_office_attention_departure_time: thursdayDepartureTime })
-        }
-        if (this.isFridayChecked) {
-          const fridayApertureTime = this.fridayApertureTimeInput.getHours() + ':' + this.fridayApertureTimeInput.getMinutes()
-          const fridayDepartureTime = this.fridayDepartureTimeInput.getHours() + ':' + this.fridayDepartureTimeInput.getMinutes()
-          workshopOfficeAttentionData.push({ workshop_office_attention_day: 'friday', workshop_office_attention_aperture_time: fridayApertureTime, workshop_office_attention_departure_time: fridayDepartureTime })
-        }
-        if (this.isSaturdayChecked) {
-          const saturdayApertureTime = this.saturdayApertureTimeInput.getHours() + ':' + this.saturdayApertureTimeInput.getMinutes()
-          const saturdayDepartureTime = this.saturdayDepartureTimeInput.getHours() + ':' + this.saturdayDepartureTimeInput.getMinutes()
-          workshopOfficeAttentionData.push({ workshop_office_attention_day: 'saturday', workshop_office_attention_aperture_time: saturdayApertureTime, workshop_office_attention_departure_time: saturdayDepartureTime })
-        }
-        if (this.isSundayChecked) {
-          const sundayApertureTime = this.sundayApertureTimeInput.getHours() + ':' + this.sundayApertureTimeInput.getMinutes()
-          const sundayDepartureTime = this.sundayDepartureTimeInput.getHours() + ':' + this.sundayDepartureTimeInput.getMinutes()
-          workshopOfficeAttentionData.push({ workshop_office_attention_day: 'sunday', workshop_office_attention_aperture_time: sundayApertureTime, workshop_office_attention_departure_time: sundayDepartureTime })
-        }
+    determineContentBasedOnOperationType() {
+      switch (this.operationType) {
+        case 'addNormally':
+          this.addBtnLabel = 'Añadir sucursal'
+          break
+        case 'sendPostulation':
+          this.addBtnLabel = 'Enviar postulación'
+      }
+    },
 
-        if (workshopOfficeAttentionData.length !== 0) {
-          const data = { workshop_id: this.myWorkshop.workshop_id, commune_id: this.communeIdInput, workshop_office_suscription_id: 1, workshop_office_address: this.addressInput.trim(), workshop_office_phone: this.phoneInput.trim(), workshop_office_attention: workshopOfficeAttentionData }
-
-          fetch('http://10.0.2.2:8080/AddWorkshopOffice', {
-            method: 'POST',
-            body: JSON.stringify({ data }),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }).then(res => res.json())
-            .catch(error => {
-              console.error('Error:', error)
-              alert({
-                title: 'Error',
-                message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
-                okButtonText: 'OK'
-              }).then(() => {
-                this.isAddWorkshopOfficeBtnTappable = true
-              })
-            })
-            .then(response => {
-              switch (response.Response) {
-                case 'Office Attention Success':
-                  this.$navigateBack()
-                  break
-                case 'Address already in use':
-                  this.addressInputErr = 'Ingresa una dirección que no se encuentre en uso'
-                  this.isAddWorkshopOfficeBtnTappable = true
-                  break
-                default:
-                  this.isAddWorkshopOfficeBtnTappable = true
-              }
-            })
-        } else {
-          const snackBar = new SnackBar()
-          snackBar.simple('Debes ingresar al menos un día para el horario de atención')
-          this.isAddWorkshopOfficeBtnTappable = true
+    doButtonAction() {
+      if (this.validateFormAddWorkshopOffice() && this.validateAndStoreTemporallyWorkshopOfficeAttentionData()) {
+        switch (this.operationType) {
+          case 'addNormally':
+            this.addWorkshopOffice(this.myWorkshop.workshop_id)
+            break
+          case 'sendPostulation':
+            this.sendPostulation()
         }
       }
+    },
+
+    validateAndStoreTemporallyWorkshopOfficeAttentionData() {
+      const workshopOfficeAttentionData = []
+
+      if (this.isMondayChecked) {
+        const mondayApertureTime = this.mondayApertureTimeInput.getHours() + ':' + this.mondayApertureTimeInput.getMinutes()
+        const mondayDepartureTime = this.mondayDepartureTimeInput.getHours() + ':' + this.mondayDepartureTimeInput.getMinutes()
+        workshopOfficeAttentionData.push({ workshop_office_attention_day: 'monday', workshop_office_attention_aperture_time: mondayApertureTime, workshop_office_attention_departure_time: mondayDepartureTime })
+      }
+      if (this.isTuesdayChecked) {
+        const tuesdayApertureTime = this.tuesdayApertureTimeInput.getHours() + ':' + this.tuesdayApertureTimeInput.getMinutes()
+        const tuesdayDepartureTime = this.tuesdayDepartureTimeInput.getHours() + ':' + this.tuesdayDepartureTimeInput.getMinutes()
+        workshopOfficeAttentionData.push({ workshop_office_attention_day: 'tuesday', workshop_office_attention_aperture_time: tuesdayApertureTime, workshop_office_attention_departure_time: tuesdayDepartureTime })
+      }
+      if (this.isWednesdayChecked) {
+        const wednesdayApertureTime = this.wednesdayApertureTimeInput.getHours() + ':' + this.wednesdayApertureTimeInput.getMinutes()
+        const wednesdayDepartureTime = this.wednesdayDepartureTimeInput.getHours() + ':' + this.wednesdayDepartureTimeInput.getMinutes()
+        workshopOfficeAttentionData.push({ workshop_office_attention_day: 'wednesday', workshop_office_attention_aperture_time: wednesdayApertureTime, workshop_office_attention_departure_time: wednesdayDepartureTime })
+      }
+      if (this.isThursdayChecked) {
+        const thursdayApertureTime = this.thursdayApertureTimeInput.getHours() + ':' + this.thursdayApertureTimeInput.getMinutes()
+        const thursdayDepartureTime = this.thursdayDepartureTimeInput.getHours() + ':' + this.thursdayDepartureTimeInput.getMinutes()
+        workshopOfficeAttentionData.push({ workshop_office_attention_day: 'thursday', workshop_office_attention_aperture_time: thursdayApertureTime, workshop_office_attention_departure_time: thursdayDepartureTime })
+      }
+      if (this.isFridayChecked) {
+        const fridayApertureTime = this.fridayApertureTimeInput.getHours() + ':' + this.fridayApertureTimeInput.getMinutes()
+        const fridayDepartureTime = this.fridayDepartureTimeInput.getHours() + ':' + this.fridayDepartureTimeInput.getMinutes()
+        workshopOfficeAttentionData.push({ workshop_office_attention_day: 'friday', workshop_office_attention_aperture_time: fridayApertureTime, workshop_office_attention_departure_time: fridayDepartureTime })
+      }
+      if (this.isSaturdayChecked) {
+        const saturdayApertureTime = this.saturdayApertureTimeInput.getHours() + ':' + this.saturdayApertureTimeInput.getMinutes()
+        const saturdayDepartureTime = this.saturdayDepartureTimeInput.getHours() + ':' + this.saturdayDepartureTimeInput.getMinutes()
+        workshopOfficeAttentionData.push({ workshop_office_attention_day: 'saturday', workshop_office_attention_aperture_time: saturdayApertureTime, workshop_office_attention_departure_time: saturdayDepartureTime })
+      }
+      if (this.isSundayChecked) {
+        const sundayApertureTime = this.sundayApertureTimeInput.getHours() + ':' + this.sundayApertureTimeInput.getMinutes()
+        const sundayDepartureTime = this.sundayDepartureTimeInput.getHours() + ':' + this.sundayDepartureTimeInput.getMinutes()
+        workshopOfficeAttentionData.push({ workshop_office_attention_day: 'sunday', workshop_office_attention_aperture_time: sundayApertureTime, workshop_office_attention_departure_time: sundayDepartureTime })
+      }
+
+      if (workshopOfficeAttentionData.length !== 0) {
+        this.workshopOfficeAttentionData = workshopOfficeAttentionData
+        return true
+      } else {
+        const snackBar = new SnackBar()
+        snackBar.simple('Debes ingresar al menos un día para el horario de atención')
+        return false
+      }
+    },
+
+    addWorkshopOffice(workshopId) {
+      this.isAddWorkshopOfficeBtnTappable = false
+
+      const data = { workshop_id: workshopId, commune_id: this.communeIdInput, workshop_office_suscription_id: 1, workshop_office_address: this.addressInput.trim(), workshop_office_phone: this.phoneInput.trim(), workshop_office_attention: this.workshopOfficeAttentionData }
+
+      fetch('http://10.0.2.2:8080/AddWorkshopOffice', {
+        method: 'POST',
+        body: JSON.stringify({ data }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+        .catch(error => {
+          console.error('Error:', error)
+          alert({
+            title: 'Error',
+            message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
+            okButtonText: 'OK'
+          }).then(() => {
+            this.isAddWorkshopOfficeBtnTappable = true
+          })
+        })
+        .then(response => {
+          switch (response.Response) {
+            case 'Office Attention Success':
+              switch (this.operationType) {
+                case 'addNormally':
+                  this.$navigateBack()
+                  break
+                case 'sendPostulation':
+                  this.$navigator.navigate('/AccountOptions', { frame: 'accountNav', clearHistory: true })
+              }
+              break
+            case 'Address already in use':
+              this.addressInputErr = 'Ingresa una dirección que no se encuentre en uso'
+              this.isAddWorkshopOfficeBtnTappable = true
+              break
+            default:
+              this.isAddWorkshopOfficeBtnTappable = true
+          }
+        })
     },
 
     validateFormAddWorkshopOffice() {
@@ -234,7 +276,41 @@ export default {
       }
     },
 
-    onPageLoaded() {
+    sendPostulation() {
+      this.isAddWorkshopOfficeBtnTappable = false
+
+      let file = this.paramsSendPostulation.filter(element => element.name == 'file')[0].filename
+      let url = 'http://10.0.2.2:8080/SendPostulation'
+      let name = file.substr(file.lastIndexOf('/') + 1)
+
+      let bghttp = require('@nativescript/background-http')
+      let session = bghttp.session('image-upload')
+      let request = {
+        url: url,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/octet-stream'
+        },
+        description: 'Uploading' + name
+      }
+      let task = session.multipartUpload(this.paramsSendPostulation, request)
+      task.on('error', () => {
+        const snackBar = new SnackBar()
+        snackBar.simple('Se ha producido un error al momento de realizar la acción. Inténtalo nuevamente.')
+        this.isAddWorkshopOfficeBtnTappable = true
+      })
+      task.on('responded', response => {
+        switch (JSON.parse(response.data).Response) {
+          case 'Operation Success':
+            this.addWorkshopOffice(JSON.parse(response.data).WorkshopId)
+            break
+          case 'Operation Failed':
+            this.isAddWorkshopOfficeBtnTappable = true
+        }
+      })
+    },
+
+    getRegionList() {
       fetch('http://10.0.2.2:8080/RegionList', {
         method: 'GET',
         headers: {
@@ -255,7 +331,9 @@ export default {
             this.regionList.push(element.region_name)
           })
         })
+    },
 
+    getCommuneList() {
       fetch('http://10.0.2.2:8080/CommuneList', {
         method: 'GET',
         headers: {
