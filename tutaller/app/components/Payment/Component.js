@@ -2,15 +2,15 @@ import { SnackBar } from "@nativescript-community/ui-material-snackbar"
 import { ApplicationSettings } from "@nativescript/core"
 
 export default {
-    props: ['workshopOfficeId'],
+    props: ['workshopOfficeId', 'price'],
     data() {
         return {
-            webPayViewUrl: ''
         }
     },
     methods: {
         realizePay(event) {
-            const data = { sessionId: this.workshopOfficeId, rut: ApplicationSettings.getString('user') }
+            const data = { sessionId: this.workshopOfficeId, amount: this.price, rut: ApplicationSettings.getString('user') }
+            console.log(data)
 
             fetch('http://10.0.2.2:8080/RealizePayMobile', {
                 method: 'POST',
@@ -25,17 +25,36 @@ export default {
                     snackBar.simple('No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.')
                 })
                 .then(response => {
-                    //this.webPayViewUrl = url
                     let url = response.url
                     let token = response.token
                     this.onWebViewStarted(event, url, token)
                 })
         },
 
+        confirmPaymentCompletion() {
+            const webPayView = this.$refs['webViewWebPay'].nativeView
+            console.log(webPayView)
+
+            let currentURL = webPayView.android.getUrl()
+            switch (currentURL) {
+                case 'http://10.0.2.2:3000/PaymentSuccess':
+                    if (this.workshopOfficeId !== undefined) this.$navigator.navigate('/AccountOptions', { frame: 'accountNav', clearHistory: true })
+                    break
+                case 'http://10.0.2.2:3000/PaymentReject':
+                    alert({
+                        title: 'Error',
+                        message: 'La transacción ha sido rechazada. Verifica la validez de la información respecto a tu método de pago utilizado e inténtalo nuevamente.',
+                        okButtonText: 'OK'
+                    }).then(() => this.goToPreviousPage())
+                    break
+                default:
+                    const snackBar = new SnackBar()
+                    snackBar.simple('Debes completar el proceso de compra para continuar.')
+            }
+        },
+
         async onWebViewStarted(event, url, token) {
             const webPayView = event.object.getViewById('webViewWebPay')
-
-            webPayView.android.setDisplayZoomControls(false)
 
             let htmlPost = "<!DOCTYPE html>" +
                 "<html>" +
@@ -56,8 +75,8 @@ export default {
             webPayView.android.getSettings().setCacheMode(android.webkit.WebSettings.LOAD_CACHE_ELSE_NETWORK)
         },
 
-        onWebViewClosed(event) {
-            const webPayView = event.object
+        onWebViewClosed() {
+            const webPayView = this.$refs['webViewWebPay'].nativeView
 
             //Delete cookies
             if (android.os.Build.VERSION.SDK_INT >= 21) android.webkit.CookieManager.getInstance().removeAllCookies(null)
@@ -68,6 +87,7 @@ export default {
         },
 
         goToPreviousPage() {
+            this.onWebViewClosed()
             this.$navigateBack()
         }
     }
