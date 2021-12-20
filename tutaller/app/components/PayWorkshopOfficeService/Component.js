@@ -9,8 +9,9 @@ export default {
 
     methods: {
         payWorkshopService() {
+            if (ApplicationSettings.getString('user') == undefined) this.$navigator.modal('/Login', { id: 'modalLogin', fullscreen: true })
+            else this.$navigator.navigate('/Payment')
             //this.addWorkshopOfficeWork()
-            this.$navigator.navigate('/Payment')
         },
 
         addWorkshopOfficeWork() {
