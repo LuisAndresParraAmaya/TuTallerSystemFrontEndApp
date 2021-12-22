@@ -9,6 +9,7 @@ export function calculateRutCheckDigit(rut) {
     return rutWithoutCheckDigit.toString() + checkDigit.toString()
 }
 
+//Calculate the distance between 2 points, using a determined unit (K or N)
 export function calculateDistance(latitude1, longitude1, latitude2, longitude2, unit) {
     if ((latitude1 == latitude2) && (longitude1 == longitude2)) return 0
     else {
