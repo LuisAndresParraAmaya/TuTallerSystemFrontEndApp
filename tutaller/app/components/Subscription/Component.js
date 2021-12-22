@@ -16,11 +16,11 @@ export default {
         paySubscription() {
             this.$navigator.navigate('/Payment', {
                 props: {
-                    itemId: this.myWorkshopOffice.workshop_office_id,
+                    itemId: this.subscription.id,
                     itemDescription: this.translateSubscriptionName(this.subscription.name),
                     price: this.subscription.offer_price,
                     operationType: 'paySubscription',
-                    buyerId: this.subscription.id,
+                    buyerId: this.myWorkshopOffice.workshop_office_id,
                     merchantName: 'TuTaller'
                 },
                 frame: 'accountNav'
