@@ -176,7 +176,7 @@ export default {
         },
         //Show the workshop office service list, requiring that office id and the office attention list. The actualframe allows to show content in that view according to the frame (navigator or accountNav)
         goToWorkshopOfficeServiceListPage() {
-            this.$navigator.navigate('/WorkshopOfficeServiceList', { props: { workshopOfficeId: this.workshopOffice.workshop_office_id, workshopOfficeAttentionList: this.workshopOfficeAttentionList, actualFrame: 'navigator' } })
+            this.$navigator.navigate('/WorkshopOfficeServiceList', { props: { workshopOffice: this.workshopOffice, workshopOfficeAttentionList: this.workshopOfficeAttentionList, actualFrame: 'navigator' } })
         },
         //Show the workshop office employee list, requiring that office id
         goToWorkshopOfficeEmployeeListPage() {

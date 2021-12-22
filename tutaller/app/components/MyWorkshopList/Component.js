@@ -1,5 +1,6 @@
 import { ApplicationSettings } from '@nativescript/core'
 import { translatePostulationStatus } from '~/utils/translators'
+import { SnackBar } from '@nativescript-community/ui-material-snackbar'
 
 export default {
   data() {
@@ -11,7 +12,18 @@ export default {
 
   methods: {
     showMyWorkshop(event) {
-      this.$navigator.navigate('/MyWorkshop', { props: { myWorkshop: event.item }, frame: 'accountNav' })
+      switch (event.item.postulation_current_status) {
+        case 'accepted':
+          this.$navigator.navigate('/MyWorkshop', { props: { myWorkshop: event.item }, frame: 'accountNav' })
+          break
+        case 'pending':
+          const snackBar = new SnackBar()
+          snackBar.simple('Para gestionar el taller debes esperar a que se apruebe la postulación.')
+          break
+        case 'rejected':
+          const snackBar2 = new SnackBar()
+          snackBar2.simple('No puedes gestionar un taller que haya sido rechazado.')
+      }
     },
 
     getMyWorkshopList() {

@@ -13,6 +13,7 @@
           hint="Nombre de la oferta"
           :error="nameInputErr"
           @textChange="onNameTxtChange"
+          maxLength="45"
         />
         <MDTextView
           v-model="discountInput"
@@ -32,7 +33,10 @@
           :minDate="new Date()"
           @dateChange="onValidUntilDateChange"
         />
-        <TimePickerField hint="Hora de expiración" @timeChange="onValidUntilTimeChange" />
+        <TimePickerField
+          hint="Hora de expiración"
+          @timeChange="onValidUntilTimeChange"
+        />
         <Label
           :text="validUntilErr"
           textWrap="true"

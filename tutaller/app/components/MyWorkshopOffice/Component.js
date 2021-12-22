@@ -10,7 +10,7 @@ export default {
             this.$navigator.navigate('/ModifyWorkshopOffice', { props: { myWorkshopOffice: this.myWorkshopOffice, myWorkshopOfficeAttention: this.myWorkshopOfficeAttention }, frame: 'accountNav' })
         },
         goToWorkshopOfficeServiceListPage() {
-            this.$navigator.navigate('/WorkshopOfficeServiceList', { props: { workshopOfficeId: this.myWorkshopOffice.workshop_office_id, actualFrame: 'accountNav' }, frame: 'accountNav' })
+            this.$navigator.navigate('/WorkshopOfficeServiceList', { props: { workshopOffice: this.myWorkshopOffice, actualFrame: 'accountNav' }, frame: 'accountNav' })
         },
         goToWorkshopOfficeEmployeeListPage() {
             this.$navigator.navigate('/WorkshopOfficeEmployeeList', { props: { workshopOfficeId: this.myWorkshopOffice.workshop_office_id, actualFrame: 'accountNav' }, frame: 'accountNav' })

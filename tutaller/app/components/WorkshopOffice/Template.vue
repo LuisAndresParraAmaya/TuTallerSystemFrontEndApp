@@ -102,14 +102,22 @@
             class="paragraph font-bold"
           />
         </StackLayout>
-        <ListView
-          for="workshopOfficeEvaluation in workshopOfficeEvaluationList"
-          row="1"
-          col="0"
-        >
-          <v-template>
-            <GridLayout rows="auto, auto, auto" columns="*">
-              <GridLayout rows="auto" columns="auto, *, auto" row="0" col="0">
+        <StackLayout row="1" col="0" class="paragraph">
+          <template
+            v-for="workshopOfficeEvaluation in workshopOfficeEvaluationList"
+          >
+            <GridLayout
+              :key="workshopOfficeEvaluation"
+              rows="30%, 30%, auto"
+              columns="*"
+            >
+              <GridLayout
+                rows="auto"
+                columns="25%, *, auto"
+                row="0"
+                col="0"
+                class="v-middle"
+              >
                 <Label text.decode="&#xf2bd;" row="0" col="0" class="fas" />
                 <Label
                   :text="
@@ -154,7 +162,7 @@
                 "
                 row="1"
                 col="0"
-                class="fas"
+                class="fas v-middle"
               />
               <Label
                 :text="workshopOfficeEvaluation.workshop_evaluation_review"
@@ -163,8 +171,8 @@
                 col="0"
               />
             </GridLayout>
-          </v-template>
-        </ListView>
+          </template>
+        </StackLayout>
       </GridLayout>
     </ScrollView>
   </Page>

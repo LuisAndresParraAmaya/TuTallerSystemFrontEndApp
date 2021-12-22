@@ -1,5 +1,5 @@
 export default {
-    props: ['myWorkshop', 'workshopOfficeId', 'workshopOfficeAttentionList', 'actualFrame'],
+    props: ['myWorkshop', 'workshopOffice', 'workshopOfficeAttentionList', 'actualFrame'],
     data() {
         return {
             pageTitle: this.setPageTitle(),
@@ -9,7 +9,7 @@ export default {
 
     methods: {
         getWorkshopOfficeServiceList() {
-            const data = { workshop_office_id: this.workshopOfficeId }
+            const data = { workshop_office_id: this.workshopOffice.workshop_office_id }
             fetch('http://10.0.2.2:8080/WorkshopOfficeServiceList', {
                 method: 'POST',
                 body: JSON.stringify({ data }),
@@ -32,7 +32,7 @@ export default {
         },
 
         showWorkshopOfficeService(event) {
-            this.$navigator.navigate('/WorkshopOfficeService', { props: { workshopOfficeService: event.item, workshopOfficeId: this.workshopOfficeId, workshopOfficeAttentionList: this.workshopOfficeAttentionList, actualFrame: this.actualFrame }, frame: this.actualFrame })
+            this.$navigator.navigate('/WorkshopOfficeService', { props: { workshopOffice: this.workshopOffice, workshopOfficeService: event.item, workshopOfficeId: this.workshopOfficeId, workshopOfficeAttentionList: this.workshopOfficeAttentionList, actualFrame: this.actualFrame }, frame: this.actualFrame })
         },
 
         setPageTitle() {
@@ -44,7 +44,7 @@ export default {
         },
 
         goToAddWorkshopOfficeServicePage() {
-            this.$navigator.navigate('/AddWorkshopOfficeService', { props: { workshopOfficeId: this.workshopOfficeId }, frame: 'accountNav' })
+            this.$navigator.navigate('/AddWorkshopOfficeService', { props: { workshopOffice: this.workshopOffice.workshop_office_id }, frame: 'accountNav' })
         },
         goToPreviousPage() {
             this.$navigateBack();

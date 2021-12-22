@@ -4,7 +4,7 @@ import { formatTimeHM } from '~/utils/formatter'
 import { validateDatetimeAttention } from "~/utils/validator"
 
 export default {
-    props: ['workshopOfficeService', 'workshopOfficeAttentionList'],
+    props: ['workshopOffice', 'workshopOfficeService', 'workshopOfficeAttentionList'],
     data() {
         return {
             reservedDateInput: '',
@@ -20,7 +20,7 @@ export default {
         reserveAttention() {
             if (this.validateFormReserveAttention()) {
                 const reservedDatetime = { reserved_date: this.reservedDateInput, reserved_time: this.reservedTimeInput }
-                this.$navigator.navigate('/PayWorkshopOfficeService', { props: { workshopOfficeService: this.workshopOfficeService, reservedDatetime: reservedDatetime } })
+                this.$navigator.navigate('/PayWorkshopOfficeService', { props: { workshopOffice: this.workshopOffice, workshopOfficeService: this.workshopOfficeService, reservedDatetime: reservedDatetime } })
             }
         },
 
