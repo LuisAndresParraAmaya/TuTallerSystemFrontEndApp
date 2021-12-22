@@ -1,50 +1,30 @@
 import { ApplicationSettings } from "@nativescript/core"
+import { formatTimeToDB, formatDateToDB } from "~/utils/formatter"
 
 export default {
-    props: ['workshopOfficeService', 'reservedDatetime'],
+    props: ['workshopOffice', 'workshopOfficeService', 'reservedDatetime'],
     data() {
         return {
+            formatDateToDB: formatDateToDB,
+            formatTimeToDB: formatTimeToDB
         }
     },
 
     methods: {
         payWorkshopService() {
             if (ApplicationSettings.getString('user') == undefined) this.$navigator.modal('/Login', { id: 'modalLogin', fullscreen: true })
-            else this.$navigator.navigate('/Payment')
-            //this.addWorkshopOfficeWork()
-        },
-
-        addWorkshopOfficeWork() {
-            const data = { workshop_office_service_id: this.workshopOfficeService.id, user_user_rut: ApplicationSettings.getString('user') }
-
-            fetch('http://10.0.2.2:8080/AddWorkshopOfficeWork', {
-                method: 'POST',
-                body: JSON.stringify({ data }),
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            }).then(res => res.json())
-                .catch(error => {
-                    console.error('Error:', error)
-                    alert({
-                        title: 'Error',
-                        message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
-                        okButtonText: 'OK'
-                    })
-                })
-                .then(response => {
-                    switch (response.Response) {
-                        case 'Operation Success':
-                            console.log(new Date())
-                            this.$navigator.navigate('/PaymentReceipt', { props: { workshopOfficeService: this.workshopOfficeService } })
-                            break
-                        case 'Invalid user rut or service':
-                            console.log('Invalid user rut or service')
-                            break
-                        case 'Milestone adding failed':
-                            console.log('Milestone adding failed')
+            else {
+                this.$navigator.navigate('/Payment', {
+                    props: {
+                        itemId: this.workshopOfficeService.id,
+                        itemDescription: this.workshopOfficeService.workshop_office_service_name + ', agendado para el ' + this.formatDateToDB(this.reservedDatetime.reserved_date) + ' ' + this.formatTimeToDB(this.reservedDatetime.reserved_time),
+                        price: this.workshopOfficeService.offer_price,
+                        operationType: 'payWorkshopService',
+                        buyerId: 0,
+                        merchantName: this.workshopOffice.workshop_name + ', sucursal de ' + this.workshopOffice.workshop_office_address + ', ' + this.workshopOffice.workshop_office_commune + ', ' + this.workshopOffice.workshop_office_region
                     }
                 })
+            }
         },
 
         goToPreviousPage() {

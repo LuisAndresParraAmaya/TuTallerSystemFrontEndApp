@@ -16,44 +16,25 @@ export default {
         activateWorkshopOfficeAd() {
             this.isActivateAdTappable = false
             prompt({
-                title: 'Ingresa el monto que quieres pujar',
+                title: 'Ingresa el monto en CLP que quieres pujar',
                 message: 'El anuncio estará activo durante 24 horas.',
                 inputType: inputType.number,
                 okButtonText: 'Confirmar',
                 cancelButtonText: 'Cancelar'
             }).then(bidInput => {
                 if (bidInput.result) {
-                    if (this.validateFormActivateWorkshopOfficeAd(bidInput.text)) {
-                        const data = { id: this.myWorkshopAd.id, workshop_office_ad_bid: bidInput.text }
-                        fetch('http://10.0.2.2:8080/AdvertiseWorkShopOfficeAd', {
-                            method: 'POST',
-                            body: JSON.stringify({ data }),
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        }).then(res => res.json())
-                            .catch(error => {
-                                console.error('Error:', error)
-                                alert({
-                                    title: 'Error',
-                                    message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
-                                    okButtonText: 'OK'
-                                }).then(() => this.isActivateAdTappable = true)
-                            })
-                            .then(response => {
-                                switch (response.Response) {
-                                    case 'Operation Success':
-                                        this.$navigateBack()
-                                        break
-                                    case 'Ad already activated':
-                                        const snackBar = new SnackBar()
-                                        snackBar.simple('Para efectuar otra puja al mismo anuncio, debes esperar 24 horas desde su activación.')
-                                        this.isActivateAdTappable = true
-                                        break
-                                    case 'Operation Failed':
-                                        this.isActivateAdTappable = true
-                                }
-                            })
+                    const bid = bidInput.text
+                    if (this.validateFormActivateWorkshopOfficeAd(bid)) {
+                        this.$navigator.navigate('/Payment', {
+                            props: {
+                                itemId: this.myWorkshopAd.id,
+                                itemDescription: this.myWorkshopAd.workshop_office_ad_name,
+                                price: bid,
+                                operationType: 'payWorkshopAd',
+                                buyerId: 0,
+                                merchantName: 'TuTaller'
+                            }, frame: 'accountNav'
+                        })
                     } else {
                         this.isActivateAdTappable = true
                     }

@@ -65,6 +65,7 @@
           secure="true"
           hint="Contraseña"
           helper="Como mínimo debe contener 1 letra en minúscula, 1 letra en mayúscula, 1 número y debe ser de 8 caracteres."
+          maxLength="65"
           :error="passwordInputErr"
           @textChange="onPasswordTxtChange"
         />
@@ -72,6 +73,7 @@
           v-model="confirmPasswordInput"
           secure="true"
           hint="Confirmar contraseña"
+          maxLength="65"
           :error="confirmPasswordInputErr"
           @textChange="onConfirmPasswordTxtChange"
         />

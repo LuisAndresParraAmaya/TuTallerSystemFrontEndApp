@@ -1,4 +1,5 @@
 import { deformatRutNumber } from "~/utils/formatter"
+import { validateRut } from "~/utils/validator"
 
 export default {
   props: ['workshopOfficeId'],
@@ -14,7 +15,9 @@ export default {
       specializationInputErr: '',
       experienceInputErr: '',
 
-      isAddEmployeeBtnTappable: true
+      isAddEmployeeBtnTappable: true,
+
+      validateRut: validateRut
     }
   },
 
@@ -61,7 +64,7 @@ export default {
     validateFormAddWorkshopOfficeAd() {
       let isValidationOK = true
       //Rut validation
-      let rutValidationRes = validator.validateRut(this.rutInput.trim())
+      let rutValidationRes = this.validateRut(this.rutInput.trim())
       if (rutValidationRes !== null) {
         this.rutInputErr = rutValidationRes
         isValidationOK = false

@@ -50,6 +50,7 @@
           class="paragraph"
         />
         <MDButton
+          v-show="myWorkshopAd.workshop_office_ad_status == 'inactive'"
           text="Activar"
           @tap="activateWorkshopOfficeAd"
           :isEnabled="isActivateAdTappable"

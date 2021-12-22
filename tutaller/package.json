@@ -24,6 +24,7 @@
     "nativescript-sqlite": "^2.8.6",
     "nativescript-vue": "~2.9.0",
     "nativescript-vue-navigator": "^1.2.0",
+    "nativescript-webview-interface": "^1.4.4",
     "path": "^0.12.7",
     "v-mask": "^2.3.0"
   },

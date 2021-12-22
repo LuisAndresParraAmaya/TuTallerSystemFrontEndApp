@@ -1,5 +1,6 @@
 import { ApplicationSettings } from '@nativescript/core'
 import { validateEmail } from '~/utils/validator'
+import { SnackBar } from '@nativescript-community/ui-material-snackbar'
 
 export default {
   props: ['rootFrame'],
@@ -46,15 +47,9 @@ export default {
                 this.passwordInputErr = 'La contraseña es incorrecta'
                 this.changeButtonsTappableStatus(true)
                 break
-              case 'Reactivate Success':
-                alert({
-                  title: 'Cuenta reactivada',
-                  message: 'Has iniciado sesión dentro del periodo de los 30 días, por lo que tu cuenta ha sido reactivada.',
-                  okButtonText: 'OK'
-                }).then(() => {
-                  this.setSessionData(response)
-                  this.closeModal()
-                })
+              case 'Reactivate Required':
+                this.setSessionData(response)
+                this.reactivateAccount(response.user_rut)
                 break
               case 'Account deleted':
                 alert({
@@ -65,6 +60,44 @@ export default {
             }
           })
       }
+    },
+
+    reactivateAccount(userRut) {
+      const data = { user_rut: userRut }
+
+      fetch('http://10.0.2.2:8080/ReactivateAccount', {
+        method: 'POST',
+        body: JSON.stringify({ data }),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      }).then(res => res.json())
+        .catch(error => {
+          console.error('Error:', error)
+          alert({
+            title: 'Error',
+            message: 'No se pudo realizar la acción. Comprueba la red e inténtalo de nuevo.',
+            okButtonText: 'OK'
+          }).then(() => this.changeButtonsTappableStatus(true))
+        })
+        .then(response => {
+          switch (response.Response) {
+            case 'Operation Success':
+              alert({
+                title: 'Cuenta reactivada',
+                message: 'Has iniciado sesión dentro del periodo de los 30 días, por lo que tu cuenta ha sido reactivada.',
+                okButtonText: 'OK'
+              }).then(() => {
+                this.closeModal()
+              })
+              break
+            case 'User not found':
+              const snackBar = new SnackBar()
+              snackBar.simple('No se logró encontrar un usuario asociado a tu Rut. Inténtalo más tarde.')
+              this.changeButtonsTappableStatus(true)
+              ApplicationSettings.clear()
+          }
+        })
     },
 
     changeButtonsTappableStatus(status) {
