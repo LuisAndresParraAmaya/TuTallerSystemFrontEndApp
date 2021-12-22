@@ -40,6 +40,7 @@ export default {
                 })
         },
 
+        //Start the webview, sending a URL post to WebPay. Also, listening to the changes according to the new URL redirects
         async onWebViewStarted(url, token) {
             const webPayView = this.$refs['webViewWebPay'].nativeView
 
@@ -160,6 +161,7 @@ export default {
                 })
         },
 
+        //When the user wants to stop the webview, clearing its cookies and cache
         onWebViewClosed() {
             const webPayView = this.$refs['webViewWebPay'].nativeView
 
