@@ -1,5 +1,5 @@
 export default {
-    props: ['workshopOfficeId'],
+    props: ['workshopOffice'],
     data() {
         return {
             serviceNameInput: '',
@@ -20,7 +20,7 @@ export default {
         addWorkshopOfficeService() {
             if (this.validateFormAddWorkshopOfficeService()) {
                 this.isAddServiceBtnTappable = false
-                const data = { workshop_office_id: this.workshopOfficeId, offer_id: 1, workshop_office_service_name: this.serviceNameInput.trim(), workshop_office_service_price: this.servicePriceInput.trim(), workshop_office_service_estimated_time: this.serviceEstimatedTimeInput.trim(), workshop_office_service_description: this.serviceDescriptionInput.trim() }
+                const data = { workshop_office_id: this.workshopOffice, offer_id: 1, workshop_office_service_name: this.serviceNameInput.trim(), workshop_office_service_price: this.servicePriceInput.trim(), workshop_office_service_estimated_time: this.serviceEstimatedTimeInput.trim(), workshop_office_service_description: this.serviceDescriptionInput.trim() }
 
                 fetch('http://10.0.2.2:8080/AddWorkshopOfficeService', {
                     method: 'POST',
